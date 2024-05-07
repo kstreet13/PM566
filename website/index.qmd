@@ -1,0 +1,11 @@
+---
+title: "Intro to PHDS"
+---
+
+## PM 566: Introduction to Health Data Science 
+
+**Term**: Fall 2023
+
+**Time**: Friday 9am - 12:55pm
+
+**Location**: SSB 114

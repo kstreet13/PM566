@@ -1,0 +1,205 @@
+[
+  {
+    "objectID": "schedule.html",
+    "href": "schedule.html",
+    "title": "Schedule",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "schedule.html#quarto",
+    "href": "schedule.html#quarto",
+    "title": "Schedule",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "schedule.html#running-code",
+    "href": "schedule.html#running-code",
+    "title": "Schedule",
+    "section": "Running Code",
+    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+  },
+  {
+    "objectID": "syllabus.html",
+    "href": "syllabus.html",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Term: Fall 2023\nTime: Friday 9am - 12:55pm\nLocation: SSB 114\nUnits: 4"
+  },
+  {
+    "objectID": "syllabus.html#pm-566-introduction-to-health-data-science",
+    "href": "syllabus.html#pm-566-introduction-to-health-data-science",
+    "title": "Syllabus",
+    "section": "",
+    "text": "Term: Fall 2023\nTime: Friday 9am - 12:55pm\nLocation: SSB 114\nUnits: 4"
+  },
+  {
+    "objectID": "syllabus.html#course-overview",
+    "href": "syllabus.html#course-overview",
+    "title": "Syllabus",
+    "section": "Course Overview",
+    "text": "Course Overview\nThis course serves as an introduction to data science with a focus on the acquisition and analysis of real-life data. Students will learn the toolsets needed to 1) create workable and reproducible datasets by accessing, scraping, sampling and cleaning data; 2) conduct exploratory data analysis and data visualization; 3) apply statistical tools to learn from data; and 4) build functions and basic apps. Coding languages R and Python will be used."
+  },
+  {
+    "objectID": "syllabus.html#learning-objectives",
+    "href": "syllabus.html#learning-objectives",
+    "title": "Syllabus",
+    "section": "Learning Objectives",
+    "text": "Learning Objectives\nThrough this course, students will become familiar with the techniques used in data science, applied to health-related datasets. Students will learn:\n\nProgramming in R, and associated tools Markdown, Git\nData visualization – summarizing data through interpretable summaries\nData collection – data scraping, wrangling, cleaning, and sampling\nExploratory data analysis – generating hypotheses and building intuition\nBasic statistical algorithms\nBuilding software packages and apps\n\nPrerequisite(s): None\nRecommended Preparation: Undergraduate course in statistics and programming"
+  },
+  {
+    "objectID": "syllabus.html#course-notes",
+    "href": "syllabus.html#course-notes",
+    "title": "Syllabus",
+    "section": "Course Notes",
+    "text": "Course Notes\nLecture notes presented in class will be posted on GitHub."
+  },
+  {
+    "objectID": "syllabus.html#technological-proficiency-and-hardwaresoftware-required",
+    "href": "syllabus.html#technological-proficiency-and-hardwaresoftware-required",
+    "title": "Syllabus",
+    "section": "Technological Proficiency and Hardware/Software Required",
+    "text": "Technological Proficiency and Hardware/Software Required\nComputation using R (downloaded from http://cran.r-project.org), and development tools including Git (https://github.com/) and Markdown will be used throughout the semester."
+  },
+  {
+    "objectID": "syllabus.html#readings-and-supplementary-materials",
+    "href": "syllabus.html#readings-and-supplementary-materials",
+    "title": "Syllabus",
+    "section": "Readings and Supplementary Materials",
+    "text": "Readings and Supplementary Materials\n\nR Programming for Data Science, 2019. Roger Peng. https://bookdown.org/rdpeng/rprogdatascience/"
+  },
+  {
+    "objectID": "syllabus.html#supplementary-references",
+    "href": "syllabus.html#supplementary-references",
+    "title": "Syllabus",
+    "section": "Supplementary References",
+    "text": "Supplementary References\n\nR for Data Science, 2017. Garrett Grolemund and Hadley Wickham. http://r4ds.had.co.nz/\nExploratory Data Analysis with R, 2020. Roger Peng. https://bookdown.org/rdpeng/exdata/\nMastering Software Development in R, 2017. Roger Peng, Sean Kross, Brooke Anderson. https://bookdown.org/rdpeng/RProgDA/\nR Packages, 2023. Hadley Wickham and Jennifer Bryan. https://r-pkgs.org/\nModern Data Science with R, 2023. Benjamin S. Baumer, Daniel T. Kaplan, and Nicholas J. Horton. https://mdsr-book.github.io/mdsr3e/"
+  },
+  {
+    "objectID": "syllabus.html#description-and-assessment-of-assignments",
+    "href": "syllabus.html#description-and-assessment-of-assignments",
+    "title": "Syllabus",
+    "section": "Description and Assessment of Assignments",
+    "text": "Description and Assessment of Assignments\nAssignments: There will be 5 assignments given throughout the semester, approximately 1 every 2 weeks. Students may discuss the problems with one another, however, individual solutions must be submitted and copying will not be tolerated. All assignments must be completed in Quarto or R Markdown, and submitted through the Github classes portal of the course. Late assignments will be penalized by 20% for each day past the due date.\nFinal Project: The final project will be to write a report for an analysis applied to a real-world dataset and to create a website that includes interactive visualizations to display data/results. The source code, website files, and PDF report will be uploaded to GitHub.\nLabs: Lab attendance is mandatory and participation in the lab is required and counts as part of the overall lab grade."
+  },
+  {
+    "objectID": "syllabus.html#grading-breakdown",
+    "href": "syllabus.html#grading-breakdown",
+    "title": "Syllabus",
+    "section": "Grading Breakdown",
+    "text": "Grading Breakdown\n\n\n\nAssignment\n% of Grade\n\n\n\n\nLabs\n20%\n\n\nHomework (5)\n30%\n\n\nMidterm Exam\n20%\n\n\nFinal Project\n30%\n\n\nTOTAL\n100%"
+  },
+  {
+    "objectID": "syllabus.html#assignment-submission-policy",
+    "href": "syllabus.html#assignment-submission-policy",
+    "title": "Syllabus",
+    "section": "Assignment Submission Policy",
+    "text": "Assignment Submission Policy\nAssignments shall be submitted on the Github classroom portal of the course. Late homework assignments will not be accepted without penalty, except when verifiable extenuating circumstances can be demonstrated."
+  },
+  {
+    "objectID": "syllabus.html#schedule",
+    "href": "syllabus.html#schedule",
+    "title": "Syllabus",
+    "section": "Schedule",
+    "text": "Schedule\nAs the weeks go by, consult the Schedule Page for more information on weekly topics, problem sets, readings, and other materials. The schedule is likely to change as we go. Links to readings, assignments, and other materials from class will be posted on that page."
+  },
+  {
+    "objectID": "syllabus.html#academic-integrity",
+    "href": "syllabus.html#academic-integrity",
+    "title": "Syllabus",
+    "section": "Academic Integrity",
+    "text": "Academic Integrity\nThe University of Southern California is foremost a learning community committed to fostering successful scholars and researchers dedicated to the pursuit of knowledge and the transmission of ideas. Academic misconduct is in contrast to the university’s mission to educate students through a broad array of first-rank academic, professional, and extracurricular programs and includes any act of dishonesty in the submission of academic work (either in draft or final form).\nThis course will follow the expectations for academic integrity as stated in the USC Student Handbook. All students are expected to submit assignments that are original work and prepared specifically for the course/section in this academic term. You may not submit work written by others or “recycle” work prepared for other courses without obtaining written permission from the instructor(s). Students suspected of engaging in academic misconduct will be reported to the Office of Academic Integrity.\nOther violations of academic misconduct include, but are not limited to, cheating, plagiarism, fabrication (e.g., falsifying data), knowingly assisting others in acts of academic dishonesty, and any act that gains or is intended to gain an unfair academic advantage.\nThe impact of academic dishonesty is far-reaching and is considered a serious offense against the university and could result in outcomes such as failure on the assignment, failure in the course, suspension, or even expulsion from the university.\nFor more information about academic integrity see the student handbook or the Office of Academic Integrity’s website, and university policies on Research and Scholarship Misconduct.\n\nStatement on the use of Artificial Intelligence\nGenerative artificial intelligence (AI) may be used under the direction and rules specified by the course instructor in specific circumstances as outlined in the syllabus. The student is responsible for the quality and content of all written assignments. Unless otherwise indicated by the course instructor, generative AI may be used to create an initial literature review, document outline and/or to organize material toward a first draft of a class paper, proofreading, or grammatical accuracy; however the final content of the written document and critical thinking of the ideas presented in the document must represent the student’s individual work and ideas learned through course content and/or research conducted from sources outside of the generative AI system. The student must include an annotation on all materials submitted that explicitly documents how AI was used to generate the document and properly reference both the sources and the AI tools such as ChatGPT (OpenAI, 2023). The student must review the information in the document and edit for accuracy, completeness, proper grammar, and demonstrate that the wording accurately reflects the student’s understanding and purpose in writing the text. Students should be aware that text generated solely from AI generators may include factual errors, bias, and may contain incomplete or inaccurate reference information, in addition to furthering appropriating knowledge produced by historically marginalized scholars without proper crediting. If you have any questions on whether a specific AI tool is allowed for any aspect of your work in this class, please ask your instructor for guidance. Failure to ensure agreement with your instructor on use of AI, prior to doing so, may result in a zero score. (NOTE: instructors have sophisticated tools to determine AI plagiarism.)"
+  },
+  {
+    "objectID": "syllabus.html#students-and-disability-accommodations",
+    "href": "syllabus.html#students-and-disability-accommodations",
+    "title": "Syllabus",
+    "section": "Students and Disability Accommodations:",
+    "text": "Students and Disability Accommodations:\nUSC welcomes students with disabilities into all of the University’s educational programs. The Office of Student Accessibility Services (OSAS) is responsible for the determination of appropriate accommodations for students who encounter disability-related barriers. Once a student has completed the OSAS process (registration, initial appointment, and submitted documentation) and accommodations are determined to be reasonable and appropriate, a Letter of Accommodation (LOA) will be available to generate for each course. The LOA must be given to each course instructor by the student and followed up with a discussion. This should be done as early in the semester as possible as accommodations are not retroactive. More information can be found at http://osas.usc.edu. You may contact OSAS at (213) 740-0776 or via email at osasfrontdesk@usc.edu."
+  },
+  {
+    "objectID": "syllabus.html#support-systems",
+    "href": "syllabus.html#support-systems",
+    "title": "Syllabus",
+    "section": "Support Systems:",
+    "text": "Support Systems:\nCounseling and Mental Health - (213) 740-9355 – 24/7 on call\nhttps://studenthealth.usc.edu/counseling/\nFree and confidential mental health treatment for students, including short-term psychotherapy, group counseling, stress fitness workshops, and crisis intervention.\nNational Suicide Prevention Lifeline - dial 988 – 24/7 on call\nhttp://www.suicidepreventionlifeline.org\nProvides free and confidential emotional support to people in suicidal crisis or emotional distress 24 hours a day, 7 days a week.\nRelationship and Sexual Violence Prevention Services (RSVP) - (213) 740-9355(WELL), press “0” after hours – 24/7 on call\nhttps://studenthealth.usc.edu/sexual-assault\nFree and confidential therapy services, workshops, and training for situations related to gender-based harm.\nOffice for Equity, Equal Opportunity, and Title IX (EEO-TIX) - (213) 740-5086\nhttp://eeotix.usc.edu\nInformation about how to get help or help someone affected by harassment or discrimination, rights of protected classes, reporting options, and additional resources for students, faculty, staff, visitors, and applicants.\nReporting Incidents of Bias or Harassment - (213) 740-5086 or (213) 821-8298\nhttp://usc-advocate.symplicity.com/care_report\nAvenue to report incidents of bias, hate crimes, and microaggressions to the Office for Equity, Equal Opportunity, and Title for appropriate investigation, supportive measures, and response.\nThe Office of Student Accessibility Services (OSAS) - (213) 740-0776\nhttp://osas.usc.edu\nOSAS ensures equal access for students with disabilities through providing academic accommodations and auxiliary aids in accordance with federal laws and university policy.\nUSC Campus Support and Intervention - (213) 821-4710\nhttp://campussupport.usc.edu\nAssists students and families in resolving complex personal, financial, and academic issues adversely affecting their success as a student.\nDiversity, Equity and Inclusion - (213) 740-2101\nhttp://diversity.usc.edu\nInformation on events, programs and training, the Provost’s Diversity and Inclusion Council, Diversity Liaisons for each academic school, chronology, participation, and various resources for students.\nUSC Emergency - UPC: (213) 740-4321, HSC: (323) 442-1000 – 24/7 on call\nhttp://dps.usc.edu, http://emergency.usc.edu\nEmergency assistance and avenue to report a crime. Latest updates regarding safety, including ways in which instruction will be continued if an officially declared emergency makes travel to campus infeasible.\nUSC Department of Public Safety - UPC: (213) 740-6000, HSC: (323) 442-1200 – 24/7 on call\nhttp://dps.usc.edu\nNon-emergency assistance or information.\nOffice of the Ombuds - (213) 821-9556 (UPC) / (323-442-0382 (HSC)\nhttp://ombuds.usc.edu\nA safe and confidential place to share your USC-related issues with a University Ombuds who will work with you to explore options or paths to manage your concern.\nOccupational Therapy Faculty Practice - (323) 442-3340 or\notfp@med.usc.edu, http://chan.usc.edu/otfp\nConfidential Lifestyle Redesign services for USC students to support health promoting habits and routines that enhance quality of life and academic performance."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Intro to PHDS",
+    "section": "",
+    "text": "Term: Fall 2023\nTime: Friday 9am - 12:55pm\nLocation: SSB 114"
+  },
+  {
+    "objectID": "index.html#pm-566-introduction-to-health-data-science",
+    "href": "index.html#pm-566-introduction-to-health-data-science",
+    "title": "Intro to PHDS",
+    "section": "",
+    "text": "Term: Fall 2023\nTime: Friday 9am - 12:55pm\nLocation: SSB 114"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "The Plain Person’s Guide to Plain Text Social Science: Why you should write data-based reports using plain-text tools.\nMarkdown tutorial: An interactive tutorial to practice using Markdown.\nMarkdown cheatsheet: Useful one-page reminder of Markdown syntax."
+  },
+  {
+    "objectID": "references.html#markdown",
+    "href": "references.html#markdown",
+    "title": "References",
+    "section": "",
+    "text": "The Plain Person’s Guide to Plain Text Social Science: Why you should write data-based reports using plain-text tools.\nMarkdown tutorial: An interactive tutorial to practice using Markdown.\nMarkdown cheatsheet: Useful one-page reminder of Markdown syntax."
+  },
+  {
+    "objectID": "references.html#helpers-and-templates",
+    "href": "references.html#helpers-and-templates",
+    "title": "References",
+    "section": "Helpers and Templates",
+    "text": "Helpers and Templates\n\nRMarkdown Cheatsheet An overview of Markdown and RMarkdown conventions.\nRStudio Cheatsheets Other quick guides, including a more comprehensive RMarkdown reference and a information about using RStudio’s IDE, and some of the main tools in R."
+  },
+  {
+    "objectID": "references.html#guides",
+    "href": "references.html#guides",
+    "title": "References",
+    "section": "Guides",
+    "text": "Guides\n\nR Style Guide. Write readable code.\nJenny Bryan’s Stat 545. Notes and tutorials for a Data Analysis course taught by Jennifer Bryan at the University of British Columbia. Lots of useful material.\nknitr demos Documentation and examples for knitr by its author, Yihui Xie. There is also a knitr book covering the same ground in more detail.\nRmarkdown documentation from the makers of RStudio. Lots of good examples.\nPlain Person’s Guide The git repository for this project.\nKarl Broman’s Tutorials and Guides Accurate and concise guides to many of the tools and topics described here, including getting started with reproducible research, using git and GitHub, and working with knitr.\nMakefiles for OCR and converting Shapefiles. Some further examples of Makefiles in the data-analysis pipeline, by Lincoln Mullen"
+  },
+  {
+    "objectID": "references.html#tools",
+    "href": "references.html#tools",
+    "title": "References",
+    "section": "Tools",
+    "text": "Tools\n\nApple’s Developer Tools Unix toolchain. Install directly with xcode-select --install, or just try to use e.g. git from the terminal and have OS X prompt you to install the tools.\nHomebrew package manager. A convenient way to install several of the tools here, including Emacs and Pandoc.\nR. A platform for statistical computing.\nknitr. Reproducible plain-text documents from within R.\nPython and SciPy. Python is a general-purpose programming language increasingly used in data manipulation and analysis.\nRStudio. An IDE for R. The most straightforward way to get into using R and RMarkdown.\nTeX and LaTeX. A typesetting and document preparation system. You can write files in .tex format directly, but it is more useful to just have it available in the background for other tools to use. The MacTeX Distribution is the one to install for macOS.\nPandoc. Converts plain-text documents to and from a wide variety of formats. Can be installed with Homebrew. Be sure to also install pandoc-citeproc for processing citations and bibliographies, and pandoc-crossref for producing cross-references and labels.\nGit. Version control system. Installs with Apple’s Developer Tools, or get the latest version via Homebrew.\nGNU Make. You tell make what the steps are to create the pieces of a document or program. As you edit and change the various pieces, it automatically figures out which pieces need to be updated and recompiled, and issues the commands to do that. See Karl Broman’s Minimal Make for a short introduction. Make will be installed automatically with Apple’s developer tools.\nlintr and flycheck. Tools that nudge you to write neater code.\nZotero. A citation manager that incorporates PDF storage, annotation, and other features. Zotero is free to use and can export to BibTeX/BibLaTeX files."
+  },
+  {
+    "objectID": "references.html#paid-applications-and-services",
+    "href": "references.html#paid-applications-and-services",
+    "title": "References",
+    "section": "Paid Applications and Services",
+    "text": "Paid Applications and Services\n\nBackblaze. Secure off-site backup.\nGitHub. Host public Git repositories for free. Pay to host private ones. Also a source for publicly available code (e.g. R packages and utilities) written by other people.\nMarked 2. Live HTML previewing of Markdown documents. Mac OS X only.\nSublime Text. Python-based text editor.\nMendeley, and Papers are additional citation managers that incorporate PDF storage, annotation, and other features. Mendeley has a premium tier. Papers is a paid application after a trial period. I haven’t used either of these, so I can’t confirm whether or not they export to BibTeX/BibLaTeX files. Papers can supposedly output citation keys in pandoc’s format, among several others."
+  },
+  {
+    "objectID": "references.html#data",
+    "href": "references.html#data",
+    "title": "References",
+    "section": "Data",
+    "text": "Data\nMany of these websites have API to download the data. We recommend you using APIs to get data.\n\nHealth and Biological data\n\nCDC National Center for Health Statistics\nNIH Cancer Surveillance\nWorld Health Organization WHO data\nUniProt data\nThe Gene Ontology Project\nGene Expression Omnibus Data\nUS Center for Disease Control and Prevention Data\nCalifornia Health and Human Services Open Data Portal\nCovid Data CovidTracker\nUSC Sustainability Data\nBureau of Transportation Statistics\n\n\n\nAcademic Publications and related\n\nFigshare data repository\nZenodo data repository\nHarvard Dataverse\nElsevier Developers API\n\n\n\nGovernment data\n\nUS Open Data Initiative DATA.GOV\nCensus Data Explorer and National Historical Geographic Information System (NHGIS)\nBureau of Economic Analysis\nBureau of Labor Statistics\nHousing data Zillow\nBureau of Justice Statistics National Center for Education Statistics: The Nation’s Report Card\nLos Angeles city data\nLos Angeles crime data\n\n\n\nOther data\n\nWorld Bank open data\nInter-university Consortium for Political and Social Research (ICPSR)\nFiveThirtyEight open data\nKaggle datasets\nLiterally all of Wikipedia\n\n\n\nSocial Networks\n\nTwitter Developers API (probably broken?)\nGitHub Developers API\nInstagram Developers API\nLinkedIn Developers API"
+  },
+  {
+    "objectID": "slides/week1.html#r-in-the-terminal",
+    "href": "slides/week1.html#r-in-the-terminal",
+    "title": "Welcome!",
+    "section": "R in the terminal",
+    "text": "R in the terminal"
+  },
+  {
+    "objectID": "slides/week1.html#r-rstudio",
+    "href": "slides/week1.html#r-rstudio",
+    "title": "Welcome!",
+    "section": "R + RStudio",
+    "text": "R + RStudio"
+  }
+]

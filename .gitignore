@@ -5,11 +5,15 @@
 *.gz
 blogdown/
 public/
+website/_site/
+website/.quarto/
 .DS_Store
 static/**/*.zip
 *_cache/
+*_files/
 static/rmarkdown-libs/
 .httr-oauth
 .*
 vegayon-noaa-api-token.txt
 ncbi-api-key.txt
+

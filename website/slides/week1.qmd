@@ -3,6 +3,7 @@ title: "Welcome!"
 subtitle: "PM 566: Introduction to Health Data Science"
 format:
   revealjs:
+    theme: default
     fig-width: 7
     fig-align: center
 ---

@@ -4,7 +4,7 @@ title: "Syllabus"
 
 ## PM 566: Introduction to Health Data Science 
 
-**Term**: Fall 2023
+**Term**: Fall 2024
 
 **Time**: Friday 9am - 12:55pm
 

@@ -18,14 +18,14 @@
     "href": "index.html",
     "title": "Intro to PHDS",
     "section": "",
-    "text": "Term: Fall 2023\nTime: Friday 9am - 12:55pm\nLocation: SSB 114"
+    "text": "This page brought to you by https://example.com"
   },
   {
     "objectID": "index.html#pm-566-introduction-to-health-data-science",
     "href": "index.html#pm-566-introduction-to-health-data-science",
     "title": "Intro to PHDS",
-    "section": "",
-    "text": "Term: Fall 2023\nTime: Friday 9am - 12:55pm\nLocation: SSB 114"
+    "section": "PM 566: Introduction to Health Data Science",
+    "text": "PM 566: Introduction to Health Data Science\nTerm: Fall 2024\nTime: Friday 9am - 12:55pm\nLocation: SSB 114"
   },
   {
     "objectID": "syllabus.html",
@@ -138,5 +138,68 @@
     "title": "Schedule",
     "section": "",
     "text": "Week 1"
+  },
+  {
+    "objectID": "references.html",
+    "href": "references.html",
+    "title": "References",
+    "section": "",
+    "text": "R. A platform for statistical computing.\nRStudio. An IDE for R. The most straightforward way to get into using R and Quarto.\nR Style Guide. Write readable code.\nRStudio Cheatsheets Other quick guides, including information about using RStudio’s IDE and some of the main tools in R."
+  },
+  {
+    "objectID": "references.html#r",
+    "href": "references.html#r",
+    "title": "References",
+    "section": "",
+    "text": "R. A platform for statistical computing.\nRStudio. An IDE for R. The most straightforward way to get into using R and Quarto.\nR Style Guide. Write readable code.\nRStudio Cheatsheets Other quick guides, including information about using RStudio’s IDE and some of the main tools in R."
+  },
+  {
+    "objectID": "references.html#quarto",
+    "href": "references.html#quarto",
+    "title": "References",
+    "section": "Quarto",
+    "text": "Quarto\n\nQuarto An integrated, open-source publishing system. Generalizes and expands upon a lot of the functionality of RMarkdown.\nQuarto Guide Comprehensive guide to creating a wide range of documents and presentations with Quarto."
+  },
+  {
+    "objectID": "references.html#git-github",
+    "href": "references.html#git-github",
+    "title": "References",
+    "section": "Git / GitHub",
+    "text": "Git / GitHub\n\nGit. Version control system. Installs with Apple’s Developer Tools, or get the latest version via Homebrew.\nGitHub. Host public Git repositories for free. Pay to host private ones. Also a source for publicly available code (e.g. R packages and utilities) written by other people.\nGitHub Docs Tutorials for performing various actions using git and GitHub, from beginner to advanced."
+  },
+  {
+    "objectID": "references.html#markdown-r-markdown",
+    "href": "references.html#markdown-r-markdown",
+    "title": "References",
+    "section": "Markdown / R Markdown",
+    "text": "Markdown / R Markdown\n\nMarkdown tutorial: An interactive tutorial to practice using Markdown.\nMarkdown cheatsheet: Useful one-page reminder of Markdown syntax.\nR Markdown Cheatsheet An overview of Markdown and RMarkdown conventions.\nR Markdown documentation from the makers of RStudio. Lots of good examples."
+  },
+  {
+    "objectID": "references.html#data-science",
+    "href": "references.html#data-science",
+    "title": "References",
+    "section": "Data Science",
+    "text": "Data Science\n\nViridical Data Science Great book on the practice of data science by Bin Yu and Rebecca Barter.\nJenny Bryan’s Stat 545. Notes and tutorials for a Data Analysis course taught by Jennifer Bryan at the University of British Columbia. Lots of useful material.\nThe Plain Person’s Guide to Plain Text Social Science: Why you should write data-based reports using plain-text tools.\nKarl Broman’s Tutorials and Guides Accurate and concise guides to many of the tools and topics described here, including getting started with reproducible research, using git and GitHub, and working with knitr.\nMakefiles for OCR and converting Shapefiles. Some further examples of Makefiles in the data-analysis pipeline, by Lincoln Mullen"
+  },
+  {
+    "objectID": "references.html#tools",
+    "href": "references.html#tools",
+    "title": "References",
+    "section": "Tools",
+    "text": "Tools\n\nApple’s Developer Tools Unix toolchain. Install directly with xcode-select --install, or just try to use e.g. git from the terminal and have OS X prompt you to install the tools.\nHomebrew package manager. A convenient way to install several of the tools here, including Emacs and Pandoc.\nR. A platform for statistical computing.\nPython and SciPy. Python is a general-purpose programming language increasingly used in data manipulation and analysis.\nRStudio. An IDE for R. The most straightforward way to get into using R and RMarkdown.\nTeX and LaTeX. A typesetting and document preparation system. You can write files in .tex format directly, but it is more useful to just have it available in the background for other tools to use. The MacTeX Distribution is the one to install for macOS.\nPandoc. Converts plain-text documents to and from a wide variety of formats. Can be installed with Homebrew. Be sure to also install pandoc-citeproc for processing citations and bibliographies, and pandoc-crossref for producing cross-references and labels.\nGit. Version control system. Installs with Apple’s Developer Tools, or get the latest version via Homebrew.\nGitHub. Host public Git repositories for free. Pay to host private ones. Also a source for publicly available code (e.g. R packages and utilities) written by other people.\nGNU Make. You tell make what the steps are to create the pieces of a document or program. As you edit and change the various pieces, it automatically figures out which pieces need to be updated and recompiled, and issues the commands to do that. See Karl Broman’s Minimal Make for a short introduction. Make will be installed automatically with Apple’s developer tools.\nlintr and flycheck. Tools that nudge you to write neater code.\nZotero. A citation manager that incorporates PDF storage, annotation, and other features. Zotero is free to use and can export to BibTeX/BibLaTeX files."
+  },
+  {
+    "objectID": "references.html#paid-applications-and-services",
+    "href": "references.html#paid-applications-and-services",
+    "title": "References",
+    "section": "Paid Applications and Services",
+    "text": "Paid Applications and Services\n\nBackblaze. Secure off-site backup.\nMarked 2. Live HTML previewing of Markdown documents. Mac OS X only.\nSublime Text. Python-based text editor.\nMendeley, and Papers are additional citation managers that incorporate PDF storage, annotation, and other features. Mendeley has a premium tier. Papers is a paid application after a trial period. I haven’t used either of these, so I can’t confirm whether or not they export to BibTeX/BibLaTeX files. Papers can supposedly output citation keys in pandoc’s format, among several others."
+  },
+  {
+    "objectID": "references.html#data",
+    "href": "references.html#data",
+    "title": "References",
+    "section": "Data",
+    "text": "Data\nMany of these websites offer publicly available datasets that can be used for research or class projects.\n\nHealth and Biological data\n\nCDC National Center for Health Statistics\nNIH Cancer Surveillance\nWorld Health Organization WHO data\nUniProt data\nThe Gene Ontology Project\nGene Expression Omnibus Data\nUS Center for Disease Control and Prevention Data\nCalifornia Health and Human Services Open Data Portal\nCovid Data CovidTracker\nUSC Sustainability Data\nBureau of Transportation Statistics\n\n\n\nAcademic Publications and related\n\nFigshare data repository\nZenodo data repository\nHarvard Dataverse\nElsevier Developers API\n\n\n\nGovernment data\n\nUS Open Data Initiative DATA.GOV\nCensus Data Explorer and National Historical Geographic Information System (NHGIS)\nBureau of Economic Analysis\nBureau of Labor Statistics\nHousing data Zillow\nBureau of Justice Statistics National Center for Education Statistics: The Nation’s Report Card\nLos Angeles city data\nLos Angeles crime data\n\n\n\nOther data\n\nWorld Bank open data\nInter-university Consortium for Political and Social Research (ICPSR)\nFiveThirtyEight open data\nKaggle datasets\nLiterally all of Wikipedia\n\n\n\nSocial Networks\n\nTwitter Developers API (probably broken?)\nGitHub Developers API\nInstagram Developers API\nLinkedIn Developers API"
   }
 ]

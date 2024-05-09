@@ -11,6 +11,13 @@ website:
       - syllabus.qmd
       - schedule.qmd
       - references.qmd
+  page-footer: 
+    left:
+      University of Southern California <br>
+      Department of Population and Public Health Sciences
+    right:
+      LICENSE <br>
+      View the source at GitHub.
       
 format:
   html:

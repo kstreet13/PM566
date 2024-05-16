@@ -14,37 +14,42 @@ title: "Syllabus"
 
 ## Course Overview
 
-This course serves as an introduction to data science with a focus on the acquisition and analysis of real-life data. Students will learn the toolsets needed to 1) create workable and reproducible datasets by accessing, scraping, sampling and cleaning data; 2) conduct exploratory data analysis and data visualization; 3) apply statistical tools to learn from data; and 4) build functions and basic apps. Coding languages R and Python will be used.
+This course serves as an introduction to data science with a focus on the acquisition and analysis of real-life data. Students will learn the tools needed to:
+1. Create usable and reproducible datasets by accessing, scraping, and cleaning data
+2. Conduct exploratory data analysis and visualization
+3. Identify scientific questions that can be answered with a given dataset
+4. Write functional code in the R programming language, build basic apps, and construct a website
 
 ## Learning Objectives
 
-Through this course, students will become familiar with the techniques used in data science, applied to health-related datasets. Students will learn:
+Through this course, students will become familiar with the techniques used in data science and apply them to health-related datasets. Students will learn:
 
-- Programming in R, and associated tools Markdown, Git
-- Data visualization – summarizing data through interpretable summaries
-- Data collection – data scraping, wrangling, cleaning, and sampling
-- Exploratory data analysis – generating hypotheses and building intuition
-- Basic statistical algorithms
-- Building software packages and apps
+- Programming in R and associated tools including Quarto, Git, and SQL
+- Data visualization – selecting appropriate plots to gain insight from data
+- Data collection – web scraping, data wrangling, and database management
+- Exploratory data analysis – generating hypotheses while building intuition and understanding of a dataset
+- Basic computational algorithms, including simulation strategies
+- Building interactive tools and websites
 
 **Prerequisite(s):** None
 
-**Recommended Preparation:** Undergraduate course in statistics and programming
+**Recommended Preparation:** Familiarity with programming, particularly in the R language
 
-## Course Notes
+## Course Slides
 
-Lecture notes presented in class will be posted on GitHub.
+Lecture slides presented in class are available on the course website.
 
 ## Technological Proficiency and Hardware/Software Required 
 
-Computation using R (downloaded from http://cran.r-project.org), and development tools including Git (https://github.com/) and Markdown will be used throughout the semester.
+The R language (http://cran.r-project.org) will be used throughout the semester and we recommend using the R Studio IDE for coding (https://posit.co/download/rstudio-desktop/). Additionally, if they do not already have one, students will be required to create a GitHub account (https://github.com/).
 
 ## Readings and Supplementary Materials
 
-1. R Programming for Data Science, 2019. Roger Peng. https://bookdown.org/rdpeng/rprogdatascience/
+There are no required readings for this course.
 
 ## Supplementary References
 
+1. - R Programming for Data Science, 2019. Roger Peng. https://bookdown.org/rdpeng/rprogdatascience/
 1. R for Data Science, 2017. Garrett Grolemund and Hadley Wickham. http://r4ds.had.co.nz/
 1. Exploratory Data Analysis with R, 2020. Roger Peng. https://bookdown.org/rdpeng/exdata/
 1. Mastering Software Development in R, 2017. Roger Peng, Sean Kross, Brooke Anderson. https://bookdown.org/rdpeng/RProgDA/
@@ -55,9 +60,9 @@ Computation using R (downloaded from http://cran.r-project.org), and development
 
 **Assignments:** There will be 5 assignments given throughout the semester, approximately 1 every 2 weeks. Students may discuss the problems with one another, however, individual solutions must be submitted and copying will not be tolerated. All assignments must be completed in Quarto or R Markdown, and submitted through the Github classes portal of the course. Late assignments will be penalized by 20% for each day past the due date.
 
-**Final Project:** The final project will be to write a report for an analysis applied to a real-world dataset and to create a website that includes interactive visualizations to display data/results. The source code, website files, and PDF report will be uploaded to GitHub.
+**Final Project:** The final project will be to write a report for an analysis applied to a real-world dataset and to create a website that includes interactive visualizations to display the data and results. The source code, website files, and PDF report will be uploaded to GitHub.
 
-**Labs:** Lab attendance is mandatory and participation in the lab is required and counts as part of the overall lab grade.
+**Labs:** There will be weekly lab assignments which are graded for completion. Each week, there will be class time devoted to working on that week's lab. Completing the weekly labs will count as part of the overall grade.
 
 ## Grading Breakdown
 
@@ -71,6 +76,7 @@ Computation using R (downloaded from http://cran.r-project.org), and development
 
 ## Assignment Submission Policy
 
+///////////////////////////////////////////
 Assignments shall be submitted on the Github classroom portal of the course. Late homework assignments will not be accepted without penalty, except when verifiable extenuating circumstances can be demonstrated.
 
 ## Schedule

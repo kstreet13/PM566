@@ -32,6 +32,7 @@ title: References
 ## Data Science
 
 - [Viridical Data Science](https://vdsbook.com/) Great book on the practice of data science by Bin Yu and Rebecca Barter.
+- [R Programming for Data Science](https://bookdown.org/rdpeng/rprogdatascience/) Book on using R for data science, by Roger Peng.
 - [Jenny Bryan's Stat 545](http://stat545-ubc.github.io/topics.html). Notes and tutorials for a Data Analysis course taught by [Jennifer Bryan](http://www.stat.ubc.ca/~jenny/) at the University of British Columbia. Lots of useful material.
 -  [The Plain Person’s Guide to Plain Text Social Science](http://plain-text.co/): Why you should write data-based reports using plain-text tools.
 - [Karl Broman's Tutorials and Guides](http://kbroman.org/pages/tutorials) Accurate and concise guides to many of the tools and topics described here, including [getting started with reproducible research](http://kbroman.org/steps2rr), [using git and GitHub](http://kbroman.org/github_tutorial), and [working with knitr](http://kbroman.org/knitr_knutshell).

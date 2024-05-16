@@ -149,7 +149,7 @@ Following break we will run lab 01
 
 The lab exercises can be found at: 
 
-Website -> Schedule -> `{r} fontawesome::fa("chalkboard-teacher")` -> Lab Exercise
+Website -> Schedule -> <i class="fa-solid fa-chalkboard-teacher"></i> -> Lab Exercise
 
 https://uscbiostats.github.io/PM566/labs/lab-01/01-lab.html
 

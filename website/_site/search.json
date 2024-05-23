@@ -144,14 +144,14 @@
     "href": "references.html",
     "title": "References",
     "section": "",
-    "text": "R. A platform for statistical computing.\nRStudio. An IDE for R. The most straightforward way to get into using R and Quarto.\nR Style Guide. Write readable code.\nRStudio Cheatsheets Other quick guides, including information about using RStudio’s IDE and some of the main tools in R."
+    "text": "R. A platform for statistical computing.\nRStudio. An IDE for R. The most straightforward way to get into using R and Quarto.\nR Graphics Cookbook. Complete guide to plotting data with ggplot.\nR Style Guide. Write readable code.\nRStudio Cheatsheets Other quick guides, including information about using RStudio’s IDE and some of the main tools in R."
   },
   {
     "objectID": "references.html#r",
     "href": "references.html#r",
     "title": "References",
     "section": "",
-    "text": "R. A platform for statistical computing.\nRStudio. An IDE for R. The most straightforward way to get into using R and Quarto.\nR Style Guide. Write readable code.\nRStudio Cheatsheets Other quick guides, including information about using RStudio’s IDE and some of the main tools in R."
+    "text": "R. A platform for statistical computing.\nRStudio. An IDE for R. The most straightforward way to get into using R and Quarto.\nR Graphics Cookbook. Complete guide to plotting data with ggplot.\nR Style Guide. Write readable code.\nRStudio Cheatsheets Other quick guides, including information about using RStudio’s IDE and some of the main tools in R."
   },
   {
     "objectID": "references.html#quarto",
@@ -179,7 +179,7 @@
     "href": "references.html#data-science",
     "title": "References",
     "section": "Data Science",
-    "text": "Data Science\n\nViridical Data Science Great book on the practice of data science by Bin Yu and Rebecca Barter.\nJenny Bryan’s Stat 545. Notes and tutorials for a Data Analysis course taught by Jennifer Bryan at the University of British Columbia. Lots of useful material.\nThe Plain Person’s Guide to Plain Text Social Science: Why you should write data-based reports using plain-text tools.\nKarl Broman’s Tutorials and Guides Accurate and concise guides to many of the tools and topics described here, including getting started with reproducible research, using git and GitHub, and working with knitr.\nMakefiles for OCR and converting Shapefiles. Some further examples of Makefiles in the data-analysis pipeline, by Lincoln Mullen"
+    "text": "Data Science\n\nViridical Data Science Great book on the practice of data science by Bin Yu and Rebecca Barter.\nR Programming for Data Science Book on using R for data science, by Roger Peng.\nJenny Bryan’s Stat 545. Notes and tutorials for a Data Analysis course taught by Jennifer Bryan at the University of British Columbia. Lots of useful material.\nThe Plain Person’s Guide to Plain Text Social Science: Why you should write data-based reports using plain-text tools.\nKarl Broman’s Tutorials and Guides Accurate and concise guides to many of the tools and topics described here, including getting started with reproducible research, using git and GitHub, and working with knitr.\nMakefiles for OCR and converting Shapefiles. Some further examples of Makefiles in the data-analysis pipeline, by Lincoln Mullen"
   },
   {
     "objectID": "references.html#tools",

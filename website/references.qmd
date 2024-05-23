@@ -6,6 +6,7 @@ title: References
 
 - [R](http://r-project.org). A platform for statistical computing.
 - [RStudio](http://rstudio.com). An IDE for R. The most straightforward way to get into using R and Quarto.
+- [R Graphics Cookbook](https://r-graphics.org/). Complete guide to plotting data with `ggplot`.
 - [R Style Guide](http://adv-r.had.co.nz/Style.html). Write readable code. 
 - [RStudio Cheatsheets](https://rstudio.com/resources/cheatsheets/) Other quick guides, including information about using RStudio's IDE and some of the main tools in R.
 

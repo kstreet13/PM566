@@ -201,5 +201,82 @@
     "title": "References",
     "section": "Data",
     "text": "Data\nMany of these websites offer publicly available datasets that can be used for research or class projects.\n\nHealth and Biological data\n\nCDC National Center for Health Statistics\nNIH Cancer Surveillance\nWorld Health Organization WHO data\nUniProt data\nThe Gene Ontology Project\nGene Expression Omnibus Data\nUS Center for Disease Control and Prevention Data\nCalifornia Health and Human Services Open Data Portal\nCovid Data CovidTracker\nUSC Sustainability Data\nBureau of Transportation Statistics\n\n\n\nAcademic Publications and related\n\nFigshare data repository\nZenodo data repository\nHarvard Dataverse\nElsevier Developers API\n\n\n\nGovernment data\n\nUS Open Data Initiative DATA.GOV\nCensus Data Explorer and National Historical Geographic Information System (NHGIS)\nBureau of Economic Analysis\nBureau of Labor Statistics\nHousing data Zillow\nBureau of Justice Statistics National Center for Education Statistics: The Nation’s Report Card\nLos Angeles city data\nLos Angeles crime data\n\n\n\nOther data\n\nWorld Bank open data\nInter-university Consortium for Political and Social Research (ICPSR)\nFiveThirtyEight open data\nKaggle datasets\nLiterally all of Wikipedia\n\n\n\nSocial Networks\n\nTwitter Developers API (probably broken?)\nGitHub Developers API\nInstagram Developers API\nLinkedIn Developers API"
+  },
+  {
+    "objectID": "labs/01-lab.html",
+    "href": "labs/01-lab.html",
+    "title": "Lab 01 - Hello R!",
+    "section": "",
+    "text": "Get acquainted with R and RStudio, which we will be using throughout the course to analyze data.\nAppreciate the value of visualization in exploring the relationship between variables.\nStart using R for building plots and calculating summary statistics."
+  },
+  {
+    "objectID": "labs/01-lab.html#download-r",
+    "href": "labs/01-lab.html#download-r",
+    "title": "Lab 01 - Hello R!",
+    "section": "1 Download R",
+    "text": "1 Download R\n\nIf you don’t have R installed.\nGo to the CRAN and download R, make sure you get the version that matches your operating system.\n\n\nIf you have R installed\nIf you have R installed run the following code\n\nR.version\n\n               _                           \nplatform       aarch64-apple-darwin20      \narch           aarch64                     \nos             darwin20                    \nsystem         aarch64, darwin20           \nstatus                                     \nmajor          4                           \nminor          3.2                         \nyear           2023                        \nmonth          10                          \nday            31                          \nsvn rev        85441                       \nlanguage       R                           \nversion.string R version 4.3.2 (2023-10-31)\nnickname       Eye Holes                   \n\n\nThis should tell you what version of R you are currently using. If your R version is lower then 4.3.0, I would strongly recommend updating. In general, it is a good idea to keep your R version up to date, unless you have a project right now that depends on a specific version of R."
+  },
+  {
+    "objectID": "labs/01-lab.html#download-rstudio",
+    "href": "labs/01-lab.html#download-rstudio",
+    "title": "Lab 01 - Hello R!",
+    "section": "1.2 Download RStudio",
+    "text": "1.2 Download RStudio\nWe recommend using RStudio as your IDE if you don’t already have it installed. You can go to the RStudio website to download and install the software. Once it is installed, open RStudio and use it to complete the rest of this lab."
+  },
+  {
+    "objectID": "labs/01-lab.html#start-a-new-project",
+    "href": "labs/01-lab.html#start-a-new-project",
+    "title": "Lab 01 - Hello R!",
+    "section": "Start a new Project",
+    "text": "Start a new Project\nRStudio Projects are a great way to stay organized and keep all of your work on a particular topic in one place. Project files keep track of things like the R objects you are using and which files you have open, so that you can quickly jump in and out of different work environments.\nWe’re going to start a new Project called PM566labs. If you want to keep all of your materials for this class in one place, you may want to open Finder (MacOS) or File Explorer (Windows) and create a new folder (directory) for this class.\nIn the top right of the RStudio window, you should see a drop-down menu that says “Project: (None)”. Click on this and then “New Project…”, which will open up a dialogue box. If you had already created a PM566labs directory, you could choose the “Existing Directory” option to associate this Project with that directory. Since we haven’t done that, we’ll use the “New Directory” option, then select the generic Project type, “New Project”. Give your new directory the name PM566labs and use the “Browse” button to choose where you want to save it on your computer, then click “Create Project”. Now in the top right, you should see “PM566labs” next to the R Project logo."
+  },
+  {
+    "objectID": "labs/01-lab.html#create-a-quarto-document",
+    "href": "labs/01-lab.html#create-a-quarto-document",
+    "title": "Lab 01 - Hello R!",
+    "section": "Create a Quarto document",
+    "text": "Create a Quarto document\nWe will use Quarto documents a lot in this course because they are fully reproducible and allow us to seamlessly integrate code and text. We expect you to use Quarto for all homework assignments and (almost) all labs.\nIn the top left, you will see a “New File” icon (a white “plus” sign in a green circle over a blank document) that leads to a drop-down menu. Click on this and then select “Quarto document…”, which will open up a dialogue box. You can leave most of the settings on their defaults for now, just give your document a title (like “Lab 1”) and an author (yourself) and click “Create”. RStudio may ask you if you would like to install a package that is required, and if so, click “Install”.\nThis will open the default Quarto document, which already contains some example content. Read through it, then remove this content. Please do not hand in assignments that contain the default content, as I have seen it plenty of times! Set up new sections in your document titled “Question 1” through “Question 5”. This document will serve as the template for your responses to this lab. Under each section title, add an R code chunk via “Insert…”, “Executable Cell”, “R”. Alternatively, you can switch to the “Source” editor (in the top left of the Editor pane) and add an R chunk by typing the following:\n```{r}\n```\nThis will create an R code chunk and any code you add inside of it will be executed when you Render the document.\nSave your Quarto markdown (qmd) file as lab-01.qmd and see what happens when you click “Render”."
+  },
+  {
+    "objectID": "labs/01-lab.html#yaml",
+    "href": "labs/01-lab.html#yaml",
+    "title": "Lab 01 - Hello R!",
+    "section": "YAML",
+    "text": "YAML\nOpen the Quarto (qmd) file in your project, make sure the author name is your name, and Render the document."
+  },
+  {
+    "objectID": "labs/01-lab.html#question-1",
+    "href": "labs/01-lab.html#question-1",
+    "title": "Lab 01 - Hello R!",
+    "section": "Question 1",
+    "text": "Question 1\n\nBased on the help file, how many rows and how many columns does the datasaurus_dozen file have? What are the variables included in the data frame? Add your responses to your lab report, with relevant code in the associated R code chunk, and free-form text outside of the code chunk.\n\nLet’s take a look at what these datasets are. To start, we can make a frequency table of the dataset variable:\n\ntable(datasaurus_dozen$dataset)\n\n\n      away   bullseye     circle       dino       dots    h_lines high_lines \n       142        142        142        142        142        142        142 \nslant_down   slant_up       star    v_lines wide_lines    x_shape \n       142        142        142        142        142        142 \n\n\nHere, we used the $ operator to access a specific column (variable) of the dataset. Then we used the table function to summarize that variable. table is great for quickly summarizing categorical variables, but it’s not very useful for summarizing continuous variables, where most unique values are only present once. For continuous variables, try the summary function.\nThe original Datasaurus (dino) was created by Alberto Cairo in this great blog post. The other Dozen were generated using simulated annealing and the process is described in the paper Same Stats, Different Graphs: Generating Datasets with Varied Appearance and Identical Statistics through Simulated Annealing by Justin Matejka and George Fitzmaurice. In the paper, the authors simulate a variety of datasets with the same summary statistics as the Datasaurus, but with very different distributions."
+  },
+  {
+    "objectID": "labs/01-lab.html#question-2",
+    "href": "labs/01-lab.html#question-2",
+    "title": "Lab 01 - Hello R!",
+    "section": "Question 2",
+    "text": "Question 2\n\nPlot y vs. x for the dino dataset. Then, calculate the correlation coefficient between x and y for just this dataset.\n\nBelow is the code you will need to complete this exercise. Basically, the answer is already given, but you need to include relevant bits in your Quarto document and successfully Render it and view the results.\nWe’re going to start by subsetting our data down to just the dino dataset.\n\ndino_data &lt;- datasaurus_dozen[datasaurus_dozen$dataset == 'dino', ]\n\nThere is a lot going on here, so let’s slow down and unpack it a bit.\nThe first thing to note is the assignment operator: &lt;-. This special symbol is used to create a new object or assign a new value to an existing one. In this case, we’re creating a new object called dino_data.\nThe second important feature is the set of square brackets: []. When these come immediately after the name of an object, they can be used for subsetting that object. In this case, we want to subset (take a smaller piece of) the datasaurus_dozen data.frame. Since this is a two-dimensional object, we can subset it by either rows or columns, or both. The comma (,) separates our row subset from our column subset. In this case, we only want to subset by row and keep all the columns, so there is nothing after the comma.\nIn R (as in Python and many other programming languages), we can check whether or not two values are equal by using the == operator. Here, we again use the $ to access the dataset variable and we check if it is equal to the value 'dino'. If it is, this comparison will return TRUE and we will keep that row. If it isn’t, this comparison will return FALSE and we will not keep that row.\nNext, we need to visualize these data. We will use the ggplot function for this. Its first argument is the data you’re visualizing. Next we define the aesthetic mappings. In other words, the columns of the data that get mapped to certain aesthetic features of the plot, e.g. the x axis will represent the variable called x and the y axis will represent the variable called y. Then, we add another layer to this plot where we define which geometric shapes we want to use to represent each observation in the data. In this case we want these to be points,m hence geom_point.\n\nplot(dino_data$x, dino_data$y)\n\n\n\n\n\n\n\n# ggplot(data = dino_data, mapping = aes(x = x, y = y)) +\n#   geom_point()\n\nIf this seems like a lot, it is. And you will learn about the philosophy of building data visualizations in layers in detail in the upcoming class. For now, follow along with the code that is provided.\nFor the second part of these exercises, we need to calculate a summary statistic: the correlation coefficient. Correlation coefficient, often referred to as \\(r\\) in statistics, measures the linear association between two variables. You will see that some of the pairs of variables we plot do not have a linear relationship between them. This is exactly why we want to visualize first: visualize to assess the form of the relationship, and calculate \\(r\\) only if relevant. In this case, calculating a correlation coefficient really doesn’t make sense since the relationship between x and y is definitely not linear – it’s dinosaurial!\nBut, for illustrative purposes, let’s calculate correlation coefficient between x and y.\nStart with dino_data and calculate a summary statistic that we will call r as the correlation between x and y.\n\ndino_data %&gt;%\n  summarize(r = cor(x, y))\n# cor(dino_data$x, dino_data$y)"
+  },
+  {
+    "objectID": "labs/01-lab.html#question-3",
+    "href": "labs/01-lab.html#question-3",
+    "title": "Lab 01 - Hello R!",
+    "section": "Question 3",
+    "text": "Question 3\n\nPlot y vs. x for the star dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between x and y for this dataset. How does this value compare to the r of dino?"
+  },
+  {
+    "objectID": "labs/01-lab.html#question-4",
+    "href": "labs/01-lab.html#question-4",
+    "title": "Lab 01 - Hello R!",
+    "section": "Question 4",
+    "text": "Question 4\n\nPlot y vs. x for the circle dataset. You can (and should) reuse code we introduced above, just replace the dataset name with the desired dataset. Then, calculate the correlation coefficient between x and y for this dataset. How does this value compare to the r of dino?\n\nFacet by the dataset variable, placing the plots in a 3 column grid, and don’t add a legend."
+  },
+  {
+    "objectID": "labs/01-lab.html#question-5",
+    "href": "labs/01-lab.html#question-5",
+    "title": "Lab 01 - Hello R!",
+    "section": "Question 5",
+    "text": "Question 5\n\nFinally, let’s plot all datasets at once. In order to do this we will make use of facetting.\n\n\nggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+\n  geom_point()+\n  facet_wrap(~ dataset, ncol = 3) +\n  theme(legend.position = \"none\")\n# layout(matrix(1:16, ncol=4))\n# for(i in 1:length(unique(datasaurus_dozen$dataset))){\n#   dset_name &lt;- unique(datasaurus_dozen$dataset)[i]\n#   subset &lt;- datasaurus_dozen[datasaurus_dozen$dataset == dset_name, ]\n#   plot(subset$x, subset$y, main = dset_name, col = i)\n# }\n# layout(1)\n\nAnd we can use the group_by function to generate all correlation coefficients.\n\ndatasaurus_dozen %&gt;%\n  group_by(dataset) %&gt;%\n  summarize(r = cor(x, y))\n# sapply(unique(datasaurus_dozen$dataset), function(ds){\n#     subset &lt;- datasaurus_dozen[datasaurus_dozen$dataset == ds, ]\n#     cor(subset$x, subset$y)\n# })\n\nYou’re done with the data analysis exercises, but we’d like you to do two more things:\nResize your figures:\nAdd the fields fig-width and fig-height to the YAML header of your document. These will allow you to specify the size (in inches) of any figures generated by the code chunks in your report.\nYou can also use different figure sizes for different figures. If you are in the Visual editor mode, switch to Source mode. Notice that each R chunk starts and ends with three backticks. Click on the gear icon in the top right of a code chunk and select “Use custom figure size” in the pop-up menu. Set the height and width of the figures and hit Apply when done. Then, render your document and see how you like the new sizes. Change and render again and again until you’re happy with all the figure sizes. Note that changing the figure sizes added new options to these chunks: fig.width and fig.height. You can change them by defining different values directly in your Quarto document as well.\nChange the look of your report:\nIf you have time you can explore the different ways you can add styling to your document. Try adding a theme field to the YAML header and see if you can find valid names of different themes.\nHere is a Quarto cheatsheet and a general markdown cheatsheet\n\nThis set of lab exersices have been adopted from Mine Çetinkaya-Rundel’s class Introduction to Data Science."
   }
 ]

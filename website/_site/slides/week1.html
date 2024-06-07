@@ -8,7 +8,7 @@
 <link href="../site_libs/quarto-html/light-border.css" rel="stylesheet">
 <link href="../site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
-  <meta name="generator" content="quarto-1.4.553">
+  <meta name="generator" content="quarto-1.4.554">
 
   <title>PM 566 - Welcome!</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -372,29 +372,23 @@ Announcements + Grading</p>
 <section>
 <section id="what-is-data-science" class="title-slide slide level1 center">
 <h1>What is data science?</h1>
-<ul>
-<li>Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge.</li>
-</ul>
-<p>–</p>
 
-<img data-src="img/data-science.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+</section>
+<section class="slide level2">
+
+
+<img data-src="https://vdsbook.com/Figures-External/intro/venn_diagram.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section class="slide level2">
 
 
 <img data-src="img/data-science-drew-conway.jpg" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section class="slide level2">
 
-</section></section>
-<section>
-<section id="data-science-can-be-really-cool" class="title-slide slide level1 center">
-<h1>Data science can be really cool</h1>
-<figure align="center">
-<img src="https://imgs.xkcd.com/comics/regular_expressions.png" style="width:450px">
-<figcaption>
-Source: https://xkcd.com/208/
-</figcaption>
-</figure>
-</section>
+<ul>
+<li>Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge.</li>
+</ul>
+
+<img data-src="img/data-science.png" class="quarto-figure quarto-figure-center r-stretch"></section>
 <section class="slide level2">
 
 
@@ -406,11 +400,11 @@ Source: https://xkcd.com/208/
 <section>
 <section id="what-is-this-course" class="title-slide slide level1 center">
 <h1>What is this course?</h1>
-<p>This course is a introduction to the world of data science with a focus on application in the health sciences.</p>
-<p>–</p>
-<p>The course will teach data science skills that are easily transferable, with examples done in R.</p>
-<p>–</p>
-<p>You can use any language/tool you prefer. But we can only guarantee help if you are using R and RStudio.</p>
+<ul>
+<li><p>This course is a introduction to the world of data science with a focus on application in the health sciences.</p></li>
+<li><p>The course will teach data science skills that are easily transferable, with examples done in R.</p></li>
+<li><p>You can use any language/tool you prefer. But we can only guarantee help if you are using R and RStudio.</p></li>
+</ul>
 </section>
 <section class="slide level2">
 
@@ -424,6 +418,77 @@ Source: https://xkcd.com/208/
 <li>hypothesis tests</li>
 <li>p values</li>
 </ul>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section>
+<section id="what-isnt-this-course-1" class="title-slide slide level1 center">
+<h1>What ISN’T this course?</h1>
+<p>Data does not exist in a vacuum. In order to gain new insights from data, you must start with a baseline understanding of the subject. “Domain knowledge” or “subject matter expertise” is <em>critical</em>, but it is not the purpose of this class.</p>
+<p>This course will focus on applications in Public Health, but the skills you learn will be widely transferable.</p>
+</section>
+<section class="slide level2">
+
+
+<img data-src="https://vdsbook.com/Figures-External/intro/venn_diagram.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section class="slide level2">
+
+</section></section>
+<section id="what-is-a-computer" class="title-slide slide level1 center">
+<h1>What is a computer?</h1>
+
+<img data-src="https://upload.wikimedia.org/wikipedia/commons/e/e5/ENIAC-changing_a_tube.jpg" class="quarto-figure quarto-figure-center r-stretch"></section>
+
+<section>
+<section id="file-structure" class="title-slide slide level1 center">
+<h1>File Structure</h1>
+
+<img data-src="https://upload.wikimedia.org/wikipedia/commons/f/f3/Standard-unix-filesystem-hierarchy.svg" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section class="slide level2">
+
+</section></section>
+<section id="file-structure-1" class="title-slide slide level1 center">
+<h1>File Structure</h1>
+<p>Before computers had graphics and mice, there were only text-based interfaces, called command lines, that let you interact with the directories and files on the computer.</p>
+<p>The modern “Desktop” is actually just a directory on your computer!</p>
+<ul>
+<li>MacOS/Linux: <code>/Users/&lt;username&gt;/Desktop</code></li>
+<li>Windows: <code>C:\Users\&lt;username&gt;\Desktop</code></li>
+</ul>
+<p>The route from the root directory to any specific file or directory is called the “path”.</p>
+</section>
+
+<section>
+<section id="file-structure-2" class="title-slide slide level1 center">
+<h1>File Structure</h1>
+<p>Whenever you run a program on your computer, you are running it in a specific location (directory). If you want to access another file on your computer, you’ll need to know the path to that file. Paths can be either relative or absolute.</p>
+<p>How to get from my <code>Desktop</code> directory to my <code>Documents</code> directory via:</p>
+<ul>
+<li>absolute path: <code>/Users/kstreet/Desktop</code></li>
+<li>relative path: <code>../Desktop/</code></li>
+</ul>
+</section>
+<section class="slide level2">
+
+</section></section>
+<section id="file-structure-3" class="title-slide slide level1 center">
+<h1>File Structure</h1>
+<p>Special symbols:</p>
+<ul>
+<li><code>.</code> Current directory</li>
+<li><code>..</code> Parent directory (one step up the hierarchy)</li>
+<li><code>~</code> Home directory</li>
+</ul>
+<p>We won’t have to use the command line too much in this class, but understanding file paths will be very important!</p>
+</section>
+
+<section>
+<section id="carc" class="title-slide slide level1 center">
+<h1>CARC</h1>
+<p>At USC, the Center for Advanced Research Computing (CARC) provides students and faculty with high-performance computing capabilities. The interface for working on CARC is entirely text based, meaning it operates via a command line.</p>
+
+<img data-src="https://www.carc.usc.edu/images/CARC-cyberinfrastructure.png" class="quarto-figure quarto-figure-center r-stretch"><p><a href="https://www.carc.usc.edu/">https://www.carc.usc.edu/</a></p>
 </section>
 <section class="slide level2">
 

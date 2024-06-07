@@ -45,26 +45,20 @@ collection of knowledge about
 
 # What is data science?
 
-- Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge.
+---
 
---
-
-
-![](img/data-science.png){fig-align="center"}
+![](https://vdsbook.com/Figures-External/intro/venn_diagram.png){fig-align="center"}
 
 ---
 
 ![](img/data-science-drew-conway.jpg){fig-align="center"}
 
-
 ---
 
-# Data science can be really cool
+- Data science is an exciting discipline that allows you to turn raw data into understanding, insight, and knowledge.
 
-<figure align="center">
-<img src="https://imgs.xkcd.com/comics/regular_expressions.png" style="width:450px">
-<figcaption>Source: https://xkcd.com/208/</figcaption>
-</figure>
+![](img/data-science.png){fig-align="center"}
+
 
 ---
 
@@ -80,15 +74,11 @@ and [here](https://www.glassdoor.com/research/job-market-report/)
 
 # What is this course?
 
-This course is a introduction to the world of data science with a focus on application in the health sciences.
+ - This course is a introduction to the world of data science with a focus on application in the health sciences.
 
---
+ - The course will teach data science skills that are easily transferable, with examples done in R.
 
-The course will teach data science skills that are easily transferable, with examples done in R.
-
---
-
-You can use any language/tool you prefer. But we can only guarantee help if you are using R and RStudio.
+ - You can use any language/tool you prefer. But we can only guarantee help if you are using R and RStudio.
 
 ---
 
@@ -99,6 +89,71 @@ This is not a formal statistics class. You will not be expected to know or use:
 - parametric distributions
 - hypothesis tests
 - p values
+
+---
+
+# What ISN'T this course?
+
+Data does not exist in a vacuum. In order to gain new insights from data, you must start with a baseline understanding of the subject. "Domain knowledge" or "subject matter expertise" is *critical*, but it is not the purpose of this class.
+
+This course will focus on applications in Public Health, but the skills you learn will be widely transferable.
+
+---
+
+![](https://vdsbook.com/Figures-External/intro/venn_diagram.png){fig-align="center"}
+
+---
+
+# What is a computer?
+
+![](https://upload.wikimedia.org/wikipedia/commons/e/e5/ENIAC-changing_a_tube.jpg){fig-align="center"}
+
+
+# File Structure
+
+![](https://upload.wikimedia.org/wikipedia/commons/f/f3/Standard-unix-filesystem-hierarchy.svg){fig-align="center"}
+---
+
+# File Structure
+
+Before computers had graphics and mice, there were only text-based interfaces, called command lines, that let you interact with the directories and files on the computer.
+
+The modern "Desktop" is actually just a directory on your computer!
+
+ - MacOS/Linux: `/Users/<username>/Desktop`
+ - Windows: `C:\Users\<username>\Desktop`
+
+The route from the root directory to any specific file or directory is called the "path".
+
+
+# File Structure
+
+Whenever you run a program on your computer, you are running it in a specific location (directory). If you want to access another file on your computer, you'll need to know the path to that file. Paths can be either relative or absolute.
+
+How to get from my `Desktop` directory to my `Documents` directory via:
+
+ - absolute path: `/Users/kstreet/Desktop`
+ - relative path: `../Desktop/`
+
+---
+# File Structure
+
+Special symbols:
+
+ - `.` Current directory
+ - `..` Parent directory (one step up the hierarchy)
+ - `~` Home directory
+
+We won't have to use the command line too much in this class, but understanding file paths will be very important!
+
+
+# CARC
+
+At USC, the Center for Advanced Research Computing (CARC) provides students and faculty with high-performance computing capabilities. The interface for working on CARC is entirely text based, meaning it operates via a command line.
+
+![](https://www.carc.usc.edu/images/CARC-cyberinfrastructure.png){fig-align="center"}
+
+[https://www.carc.usc.edu/](https://www.carc.usc.edu/)
 
 
 ---

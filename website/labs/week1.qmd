@@ -1,5 +1,5 @@
 ---
-title: "Lab 01 - Hello R!"
+title: "Lab 1 - Hello R!"
 link-citations: true
 ---
 
@@ -49,7 +49,7 @@ We recommend using RStudio as your IDE if you don't already have it installed. Y
 
 RStudio is comprised of four panes.
 
-![](/PM566/assignment-img/rstudio-anatomy.png)
+![](rstudio-anatomy.png)
 
 - On the bottom left is the Console, this is where you can write code that will be evaluated. Try typing `2 + 2` here and hit enter, what do you get?
 
@@ -75,7 +75,7 @@ We will use Quarto documents a lot in this course because they are fully reprodu
 
 In the top left, you will see a "New File" icon (a white "plus" sign in a green circle over a blank document) that leads to a drop-down menu. Click on this and then select "Quarto document...", which will open up a dialogue box. You can leave most of the settings on their defaults for now, just give your document a title (like "Lab 1") and an author (yourself) and click "Create". RStudio may ask you if you would like to install a package that is required, and if so, click "Install".
 
-This will open the default Quarto document, which already contains some example content. Read through it, then remove this content. Please do not hand in assignments that contain the default content, as I have seen it plenty of times! Set up new sections in your document titled "Question 1" through "Question 5". This document will serve as the template for your responses to this lab. Under each section title, add an R code chunk via "Insert...", "Executable Cell", "R". Alternatively, you can switch to the "Source" editor (in the top left of the Editor pane) and add an R chunk by typing the following:
+This will open the default Quarto document, which already contains some example content. Read through it, then remove this content. Please do not hand in assignments that contain the default content, as I have seen it plenty of times! Set up new sections in your document titled "Question 1" through "Question 6". This document will serve as the template for your responses to this lab. Under each section title, add an R code chunk via "Insert...", "Executable Cell", "R". Alternatively, you can switch to the "Source" editor (in the top left of the Editor pane) and add an R chunk by typing the following:
 
 ` ```{r} `
 
@@ -103,18 +103,24 @@ install.packages("datasauRus")
 ```
 
 
-We encourage you to work interactively on this lab (and future assignments) by running code directly in your Console pane. However, you should note that Quarto documents are Rendered in their own unique environment, separate from your interactive session. So you will also need to include the line `library(datasauRus)` inside an R code chunk if you want your document use this package.
+We encourage you to work interactively on this lab (and future assignments) by running code directly in your Console pane. Try breaking down complex or unfamiliar lines of code into smaller, executable pieces to get a sense for how the code works. You may also want to open a new tab in the Editor windown that is just an R Script, where you can play around with pieces of code before adding them to the final product that is your Quarto document.
+
+However, you should note that Quarto documents are Rendered in their own unique environment, separate from your interactive session. So while you should run `library(datasauRus)` in your Console, you will also need to include it inside an R code chunk if you want your Quarto document to use this package. Similarly, if you create a variable called `var` while running code in the Console, Quarto won't have acess to it, so you will need to re-create that variable inside a code chunk.
 
 # Warm up
 
 Before we introduce the data, let's warm up with some simple exercises.
 
-The top portion of your Quarto file (between the three dashed lines) is called YAML. It stands for "YAML Ain't Markup Language". It is a human-friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.
 
 ## YAML
 
-Open the Quarto (`qmd`) file in your project, make sure the author name is your name, and Render the document.
+The top portion of your Quarto file (between the three dashed lines) is called YAML. It stands for "YAML Ain't Markup Language". It is a human-friendly data serialization standard for all programming languages. All you need to know is that this area is called the YAML (we will refer to it as such) and that it contains meta information about your document.
 
+Open the Quarto (`qmd`) file in your project, make sure the author name is your name. You can add additional lines to the YAML section to control more aspects of your document. For example, you can set the output to be a PDF or HTML document by adding either `format: pdf` or `format: html`.
+
+Regardless of what output format you choose, add another line to the YAML header that reads `embed-resources: true`. This tells Quarto that you want to produce a "stand-alone" document that contains all images directly in the document. If you don't do this, Quarto will often create a separate directory (called `<document>_files`) that contains these images and your output will depend on this outside directory.
+
+When you're done, click "Render" to compile the document.
 
 # Data
 
@@ -127,7 +133,7 @@ To find out more about the dataset, type the following in your Console: `?datasa
 
 Let's take a look at what these datasets are. To start, we can make a *frequency table* of the dataset variable:
 
-```{r}
+```{r, eval=FALSE}
 table(datasaurus_dozen$dataset)
 ```
 Here, we used the `$` operator to access a specific column (variable) of the dataset. Then we used the `table` function to summarize that variable. `table` is great for quickly summarizing categorical variables, but it's not very useful for summarizing continuous variables, where most unique values are only present once. For continuous variables, try the `summary` function.
@@ -162,7 +168,7 @@ In R (as in Python and many other programming languages), we can check whether o
 
 Next, we need to visualize these data. We will use the `plot` function for this, which is R's most basic plotting function. If you provide the `plot` function with two numeric vectors, it will plot them in a scatter plot. Let's see what happens when we plot the `x` and `y` variables from our `dino_data` object:
 
-```{r fig.fullwidth=TRUE}
+```{r eval=FALSE}
 plot(dino_data$x, dino_data$y)
 # ggplot(data = dino_data, mapping = aes(x = x, y = y)) +
 #   geom_point()
@@ -194,51 +200,69 @@ cor(dino_data$x, dino_data$y)
 
 
 ## Question 5
-5. Finally, let's plot all datasets at once. In order to do this we will make use of the `layout` function. This function allows you to put multiple plots in the same plotting window. We will create a 4x4 matrix containing the values 1 through 16 and pass this to `layout`, which lets it know where we want each plot to go (we only have 13 datasets, so there will be a few empty spots at the end). This may be too many plots for a small viewing window, so if you get the error message `Error in plot.new() : figure margins too large`, try making your plotting window larger.
+Now let's plot all 13 datasets at once. In order to do this we will make use of the `layout` function. This function allows you to put multiple plots in the same plotting window. We will create a 4x4 matrix containing the values 1 through 16 and pass this to `layout`, which lets it know where we want each plot to go (we only have 13 datasets, so there will be a few empty spots at the end). This may be too many plots for a small viewing window, so if you get the error message `Error in plot.new() : figure margins too large`, try making your plotting window larger.
 
-Then we use a `for` loop
+Then we use a `for` loop to perform a set of actions over every `unique` value of the `dataset` variable. This creates a new object, called `name`, that takes on each of those unique values, but it only exists within the context (interior) of the loop. Then we subset and plot the data, as we have before.
 
-```{r all-viz, eval=FALSE, fig.fullwidth=TRUE}
+```{r all-viz, eval=FALSE}
 layout(matrix(1:16, nrow=4, ncol=4))
 for(name in unique(datasaurus_dozen$dataset)){
   subset <- datasaurus_dozen[datasaurus_dozen$dataset == name, ]
   plot(subset$x, subset$y, main = name)
 }
 layout(1)
+```
+
+```{r ggall-viz, eval=FALSE}
 # ggplot(datasaurus_dozen, aes(x = x, y = y, color = dataset))+
 #   geom_point()+
 #   facet_wrap(~ dataset, ncol = 3) +
 #   theme(legend.position = "none")
 ```
 
+The second call to `layout` will reset the plotting window, so that the next plot will take up the entire window, rather than 1/16th of it.
+
+**Optional**:If you really want to maximize the plotting area of this figure, you can also adjust the plotting margins via the `par` function (short for "graphical `par`ameters"). The setting for margins is called `mar` and it takes a vector of length 4, specifying the bottom, left, top, and right margins, in order (the units are lines of text). You can set each margin to a value of 2 with `par(mar = c(2,2,2,2))` and then reset to the default values with `par(mar = c(5,4,4,2) + 0.1)`.
 
 
-```{r first-10-r, eval=FALSE}
-datasaurus_dozen %>%
-  group_by(dataset) %>%
-  summarize(r = cor(x, y))
-# sapply(unique(datasaurus_dozen$dataset), function(ds){
-#     subset <- datasaurus_dozen[datasaurus_dozen$dataset == ds, ]
-#     cor(subset$x, subset$y)
-# })
+## Question 6
+
+Finally, we want to calculate the correlation between the `x` and `y` variables for all 13 datasets. Like before, we will use a loop, but this time, since we want to return a specific value every time through the loop, we will use the `sapply` function. `sapply` is useful way to apply a function to every element of a vector. In this case, we provide the vector of `unique` dataset names (like before) and then our own custom `function`. This function subsets the data as before, and then `return`s the correlation coefficient as the output of the function.
+
+```{r all-r, eval=FALSE}
+sapply(unique(datasaurus_dozen$dataset), function(name){
+    subset <- datasaurus_dozen[datasaurus_dozen$dataset == name, ]
+    return(cor(subset$x, subset$y))
+})
 ```
 
-You're done with the data analysis exercises, but we'd like you to do two more things:
+```{r ggall-r, eval=FALSE}
+# datasaurus_dozen |>
+#   group_by(dataset) |>
+#   summarize(r = cor(x, y))
+```
+
+You're now done with the data analysis exercises, but we'd like you to do two more things:
 
 
 **Resize your figures:** 
 
 Add the fields `fig-width` and `fig-height` to the YAML header of your document. These will allow you to specify the size (in inches) of any figures generated by the code chunks in your report.
 
-You can also use different figure sizes for different figures. If you are in the Visual editor mode, switch to Source mode. Notice that each R chunk starts and ends with three backticks. Click on the gear icon in the top right of a code chunk and select "Use custom figure size" in the pop-up menu. Set the height and width of the figures and hit Apply when done. Then, render your document and see how you like the new sizes. Change and render again and again until you're happy with all the figure sizes. Note that changing the figure sizes added new options to these chunks: `fig.width` and `fig.height`. You can change them by defining different values directly in your Quarto document as well.
+You can also use different figure sizes for different figures. If you are in the Visual editor mode, switch to Source mode. Notice that each R chunk starts and ends with three backticks. Click on the gear icon in the top right of a code chunk and select "Use custom figure size" in the pop-up menu. Set the height and width of the figures and hit Apply when done. Then, render your document and see how you like the new sizes. Try making the plot for Question 5 larger, until you are happy with its size. Note that changing the figure sizes added new options to these chunks: `fig.width` and `fig.height`. You can change them by defining different values directly in your Quarto document as well.
 
 
 **Change the look of your report:** 
 
-If you have time you can explore the different ways you can add styling to your document. Try adding a `theme` field to the YAML header and see if you can find valid names of different themes.
+If you have time, you can explore the different ways you can add styling to your document. Try adding a `theme` field to the YAML header and see if you can find valid names of different themes.
 
-Here is a Quarto [cheatsheet](https://rstudio.github.io/cheatsheets/quarto.pdf)
-and a general [markdown cheatsheet](https://www.markdownguide.org/cheat-sheet/)
+Here is a Quarto [cheatsheet](https://rstudio.github.io/cheatsheets/quarto.pdf) and a general [markdown cheatsheet](https://www.markdownguide.org/cheat-sheet/) that shows some of the many cool features you can make use of in a Quarto document.
+
+
+# Submitting your lab
+Since we have not covered GitHub yet, for this week (and ONLY this week) you may email me a fully rendered PDF or HTML version of your completed lab at kelly(dot)street(at)usc(dot)edu.
+
+
 
 ---
 

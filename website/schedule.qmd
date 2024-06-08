@@ -2,4 +2,12 @@
 title: "Schedule"
 ---
 
-[Week 1](slides/week1.qmd)
+| Week | Date | Topic | Slides | Lab | Assignment |
+|:--:|:---:|:-----------------------|:--:|:--:|:--:|
+| 1 | 8-23 | Introduction to Data Science and R | [Slides](slides/week1.qmd) | [Lab](labs/week1.qmd) |  |
+| 2 | 8-30 | Version Control & Reproducible Research | Slides | Lab |  |
+| 3 | 9-?? | Exploratory data analysis | Slides | Lab |  |
+| 4 | 9-?? | Data visualization	 | Slides | Lab | HW1 |
+
+
+

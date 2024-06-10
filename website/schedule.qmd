@@ -4,8 +4,8 @@ title: "Schedule"
 
 | Week | Date | Topic | Slides | Lab | Assignment |
 |:--:|:---:|:-----------------------|:--:|:--:|:--:|
-| 1 | 8-23 | Introduction to Data Science and R | [Slides](slides/week1.qmd) | [Lab](labs/week1.qmd) |  |
-| 2 | 8-30 | Version Control & Reproducible Research | Slides | Lab |  |
+| 1 | 8-23 | Introduction to Data Science and R | [Slides](slides/week1.qmd) | [Lab](labs/lab1.qmd) |  |
+| 2 | 8-30 | Version Control & Reproducible Research | [Slides](slides/week2.qmd) | [Lab](labs/lab2.qmd) |  |
 | 3 | 9-?? | Exploratory data analysis | Slides | Lab |  |
 | 4 | 9-?? | Data visualization	 | Slides | Lab | HW1 |
 

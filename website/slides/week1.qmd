@@ -197,11 +197,21 @@ Over 16,000 packages added to CRAN
 
 # Break time
 
-Following break we will run lab 01
+Following break we will run Lab 1
+
+
+# Dataset
+
+![](img/datasaurus1.png)
 
 ---
 
-# First Lab 
+# Dataset
+
+![](img/datasaurus2.png)
+
+# First Lab
+
 
 The lab exercises can be found at: 
 

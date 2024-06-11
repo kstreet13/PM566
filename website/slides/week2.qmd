@@ -9,6 +9,12 @@ format:
     fig-align: center
 ---
 
+```{r, include=FALSE}
+library(knitr)
+opts_chunk$set(
+  echo = TRUE)
+```
+
 # Part I: Intro
 
 ---

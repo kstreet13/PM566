@@ -6,9 +6,14 @@ format:
     theme: default
     fig-width: 7
     fig-align: center
+engine: knitr
 ---
 
-
+```{r, include=FALSE}
+library(knitr)
+opts_chunk$set(
+  echo = TRUE)
+```
 
 # Instructor
 
@@ -17,7 +22,6 @@ Kelly Street
 - Assistant Professor of Biostatistics
 - Department of Population and Public Health Sciences
 - Office hours: Wednesday 2pm, SSB 202V
-
 
 ---
 
@@ -126,6 +130,7 @@ The modern "Desktop" is actually just a directory on your computer!
 
 The route from the root directory to any specific file or directory is called the "path".
 
+---
 
 # File Structure
 
@@ -137,6 +142,7 @@ How to get from my `Desktop` directory to my `Documents` directory via:
  - relative path: `../Desktop/`
 
 ---
+
 # File Structure
 
 Special symbols:
@@ -147,6 +153,7 @@ Special symbols:
 
 We won't have to use the command line too much in this class, but understanding file paths will be very important!
 
+---
 
 # CARC
 

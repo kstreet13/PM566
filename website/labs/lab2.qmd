@@ -40,16 +40,16 @@ like to contribute to[^githubmanualfork]:
 [^githubmanualfork]: For more details, take a look at the [Forking Projects](https://guides.github.com/activities/forking/) article in GitHub guides.
 
 
-Once you "Fork" a project, GitHub will:
+Once you "Fork" a project, GitHub will automatically:
 
 1. Create a copy (using `git clone`) of that project in your account.
 
 2. Set up a pipeline to generate pull requests for the original repository.
 
 
-Once you have a copy of the project in your account, you can proceede by
-"downloading it" to your computer using the `git clone` command. For example, if
-your github user name is `statsnerd` and the original repository is `PM566-whoami`, you could use the following in your command line
+Once you have a copy of the project in your account, you can procede by
+"downloading it" to your computer using the `git clone` command. You will need to copy the URL from **your version** of the repository, available under the "Code" button. For example, if
+your github user name is `statsnerd` and the repository name is `PM566-whoami`, you could use the following in your command line
 
 ```shell
 cd where/you/want/to/download/the/thing
@@ -93,13 +93,13 @@ git commit -a -m "[A short but meaningful message]"
 git push
 ```
 
-You are now one step closer to make your first "pull request". We will see how
+You have now updated your online version of the `PM566-whoami` repo and are one step closer to make your first Pull Request. We will see how
 that happens in the next part.
 
 
 ## Step 3: Do the pull request
 
-This is the final step. Overall, pull requests (PR) are as complex as the proposed
+This is the final step. Overall, pull requests (PRs) are as complex as the proposed
 changes are. The PR that you are about to make should go smoothly, yet, any time
 that you make a new PR, the changes should be able to be `merged` in the original
 repository without conflicts. Conflicts may only appear if the proposed changes
@@ -133,4 +133,6 @@ For more information, check out [Creating a pull request from a fork
 ](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request-from-a-fork)
 on GitHub.
 
+## Submitting your lab
 
+Once you have created a Pull Request and it has been accepted, you should see your text on the [**original repository**](https://github.com/USCbiostats/PM566-whoami) (not just your personal forked copy). If you can see your text on the USCbiostats version, then congratulations, you're done with Lab 2!

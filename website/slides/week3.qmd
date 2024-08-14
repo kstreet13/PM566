@@ -65,14 +65,17 @@ EDA may involve some statistical summaries, but it does *not* include formal sta
 
 The goal of EDA is to better understand your data. Let's use the **checklist**:
 
-1.  Formulate a question
-2.  Read in the data
-3.  Check the dimensions and headers and footers of the data
-4.  Check the variable types in the data
-5.  Inspect the distributions of some/all of the variables
+1.  Read in the data
+2.  Check the size of the data
+3.  Examine the variables and their types
+4.  Look at the top and bottom of the data
+5.  Check your expectations
 6.  Validate with an external source
-7.  Compute summary statistics to begin answering the question
-8.  Make exploratory graphs
+7.  Formulate a (simple) question
+8.  Try the easy solution first
+9.  Challenge your solution
+
+(adapted from [Exploratory Data Analysis with R](https://bookdown.org/rdpeng/exdata/exploratory-data-analysis-checklist.html#follow-up-questions) by Roger D. Peng)
 
 ---
 

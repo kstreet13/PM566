@@ -992,5 +992,397 @@
     "title": "Welcome!",
     "section": "r stuff",
     "text": "r stuff\n\nsummary(1:10)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   1.00    3.25    5.50    5.50    7.75   10.00"
+  },
+  {
+    "objectID": "slides/week4.html#acknowledgment",
+    "href": "slides/week4.html#acknowledgment",
+    "title": "Data Visualization",
+    "section": "Acknowledgment",
+    "text": "Acknowledgment\nThese slides were originally developed by Meredith Franklin (and Paul Marjoram) and modified by George G. Vega Yon."
+  },
+  {
+    "objectID": "slides/week4.html#background",
+    "href": "slides/week4.html#background",
+    "title": "Data Visualization",
+    "section": "Background",
+    "text": "Background\n\nThis lecture provides an introduction to ggplot2, an R package that provides vastly better graphics options than R’s default plots, histograms, etc.\nThis section is based on chapter 3 of “R for Data Science”"
+  },
+  {
+    "objectID": "slides/week4.html#background-1",
+    "href": "slides/week4.html#background-1",
+    "title": "Data Visualization",
+    "section": "Background",
+    "text": "Background\nggplot2 is part of the Tidyverse. The tidyverse is…“an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.” (https://www.tidyverse.org/)\n\nlibrary(tidyverse)\nlibrary(data.table)"
+  },
+  {
+    "objectID": "slides/week4.html#ggplot2",
+    "href": "slides/week4.html#ggplot2",
+    "title": "Data Visualization",
+    "section": "ggplot2",
+    "text": "ggplot2\nggplot2 is designed on the principle of adding layers."
+  },
+  {
+    "objectID": "slides/week4.html#ggplot2-1",
+    "href": "slides/week4.html#ggplot2-1",
+    "title": "Data Visualization",
+    "section": "ggplot2",
+    "text": "ggplot2\n\nWith ggplot2 a plot is initiated with the function ggplot()\nThe first argument of ggplot() is the dataset to use in the graph\nLayers are added to ggplot() with +\nLayers include geom functions such as point, lines, etc\nEach geom function takes a mapping argument, which is always paired with aes()\nThe aes() mapping takes the x and y axes of the plot\n\n\nggplot(data = data) +\n    geom_function(mapping = aes(mappings))"
+  },
+  {
+    "objectID": "slides/week4.html#data",
+    "href": "slides/week4.html#data",
+    "title": "Data Visualization",
+    "section": "Data",
+    "text": "Data\nContinuing with the weather data from last week, let’s take the daily averages at each site, keeping some of the variables. Let’s also create a new variable for region (east and west), categorize elevation, and create a multi-category variable for visibility for exploratory purposes.\n\n# Reading the data, filtering, and replacing NAs\nmet &lt;- fread(file.path('..','..','data','met_all.gz'))\nmet &lt;- met[met$temp &gt; -10][elev == 9999.0, elev := NA]\n\n# Creating an aggregated version of the dataset\nmet_avg &lt;- met[,.(\n  temp     = mean(temp,na.rm=TRUE),\n  rh       = mean(rh,na.rm=TRUE),\n  wind.sp  = mean(wind.sp,na.rm=TRUE),\n  vis.dist = mean(vis.dist,na.rm=TRUE),\n  lat      = mean(lat),\n  lon      = mean(lon), \n  elev     = mean(elev,na.rm=TRUE)\n), by=c(\"USAFID\", \"day\")]"
+  },
+  {
+    "objectID": "slides/week4.html#basic-scatterplot",
+    "href": "slides/week4.html#basic-scatterplot",
+    "title": "Data Visualization",
+    "section": "Basic Scatterplot",
+    "text": "Basic Scatterplot\n\nplot(met_avg$temp, met_avg$rh)"
+  },
+  {
+    "objectID": "slides/week4.html#basic-scatterplot-2",
+    "href": "slides/week4.html#basic-scatterplot-2",
+    "title": "Data Visualization",
+    "section": "Basic Scatterplot 2",
+    "text": "Basic Scatterplot 2\n\ngeom_point() adds a layer of points to your plot, to create a scatterplot.\nggplot2 comes with many geom functions that each add a different type of layer to a plot.\nEach geom function in ggplot2 takes a mapping argument. This defines how variables in your dataset are mapped to visual properties.\nThe mapping argument is always paired with aes(), and the x and y arguments of aes() specify which variables to map to the x and y axes. ggplot2 looks for the mapped variables in the data argument, in this case, met_avg\nOne common problem when creating ggplot2 graphics is to put the + in the wrong place: it has to come at the end of the line, not the start."
+  },
+  {
+    "objectID": "slides/week4.html#coloring-by-a-variable---using-aesthetics",
+    "href": "slides/week4.html#coloring-by-a-variable---using-aesthetics",
+    "title": "Data Visualization",
+    "section": "Coloring by a variable - using aesthetics",
+    "text": "Coloring by a variable - using aesthetics\nYou can map the colors of your points to the class variable to reveal the region of data (west or east). ggplot2 chooses colors, and adds a legend, automatically.\n\nggplot(data = met_avg) + \n  geom_point(mapping = aes(x = temp, y = rh, color = region))\n\n\n\n\n\n\n\n\nWe see that humidity in the east is generally higher than in the west and that the hottest temperatures are in the west."
+  },
+  {
+    "objectID": "slides/week4.html#controlling-point-transparency-using-the-alpha-aesthetic",
+    "href": "slides/week4.html#controlling-point-transparency-using-the-alpha-aesthetic",
+    "title": "Data Visualization",
+    "section": "Controlling point transparency using the “alpha” aesthetic",
+    "text": "Controlling point transparency using the “alpha” aesthetic\n\nggplot(data = met_avg) + \n  geom_point(mapping = aes(x = temp, y = rh, alpha = 0.3))"
+  },
+  {
+    "objectID": "slides/week4.html#controlling-point-shape",
+    "href": "slides/week4.html#controlling-point-shape",
+    "title": "Data Visualization",
+    "section": "Controlling point shape:",
+    "text": "Controlling point shape:\n\nggplot(data = met_avg) + \n  geom_point(mapping = aes(x = temp, y = rh, shape = region))\n\n\nNote that, by default, ggplot uses up to 6 shapes. If there are more, some of your data is not plotted!! (At least it warns you.)"
+  },
+  {
+    "objectID": "slides/week4.html#summary-of-aesthetics",
+    "href": "slides/week4.html#summary-of-aesthetics",
+    "title": "Data Visualization",
+    "section": "Summary of aesthetics",
+    "text": "Summary of aesthetics\n\n\n\ncode\ndescription\n\n\n\n\nx\nposition on x-axis\n\n\ny\nposition on y-axis\n\n\nshape\nshape\n\n\ncolor\ncolor of element borders\n\n\nfill\ncolor inside of elements\n\n\nsize\nsize\n\n\nalpha\ntransparency\n\n\nlinetype\ntype of line"
+  },
+  {
+    "objectID": "slides/week4.html#facets-1",
+    "href": "slides/week4.html#facets-1",
+    "title": "Data Visualization",
+    "section": "Facets 1",
+    "text": "Facets 1\nFacets are particularly useful for categorical variables.\n\nmet_avg[!is.na(region)] %&gt;% \n  ggplot() + \n  geom_point(mapping = aes(x = temp, y = rh, color=region)) + \n  facet_wrap(~ region, nrow = 1)"
+  },
+  {
+    "objectID": "slides/week4.html#facets-2",
+    "href": "slides/week4.html#facets-2",
+    "title": "Data Visualization",
+    "section": "Facets 2",
+    "text": "Facets 2\nOr you can facet on two variables…\n\nmet_avg[!is.na(region) & !is.na(elev_cat)] %&gt;% \n  ggplot() + \n  geom_point(mapping = aes(x = temp, y = rh)) + \n  facet_grid(region ~ elev_cat)"
+  },
+  {
+    "objectID": "slides/week4.html#geometric-objects-1",
+    "href": "slides/week4.html#geometric-objects-1",
+    "title": "Data Visualization",
+    "section": "Geometric objects 1",
+    "text": "Geometric objects 1\nGeometric objects are used to control the type of plot you draw. So far we have used scatterplots (via geom_point). But now let’s try plotting a smoothed line fitted to the data (and note how we do side-by-side plots)\n\nlibrary(cowplot)\n\nscatterplot &lt;- ggplot(data = met_avg) + geom_point(mapping = aes(x = temp, y = rh))\nlineplot    &lt;- ggplot(data = met_avg) + geom_smooth(mapping = aes(x = temp, y = rh))\n\nplot_grid(scatterplot, lineplot, labels = \"AUTO\")"
+  },
+  {
+    "objectID": "slides/week4.html#geometric-objects-1-1",
+    "href": "slides/week4.html#geometric-objects-1-1",
+    "title": "Data Visualization",
+    "section": "Geometric objects 1",
+    "text": "Geometric objects 1\ncowplot is a package due to Claus Wilke, it “… is a simple add-on to ggplot. It provides various features that help with creating publication-quality figures, such as a set of themes, functions to align plots and arrange them into complex compound figures, and functions that make it easy to annotate plots and or mix plots with images.”"
+  },
+  {
+    "objectID": "slides/week4.html#geometric-objects-2",
+    "href": "slides/week4.html#geometric-objects-2",
+    "title": "Data Visualization",
+    "section": "Geometric objects 2",
+    "text": "Geometric objects 2\nNote that not every aesthetic works with every geom function. But now there are some new ones we can use.\n\nggplot(data = met_avg) + \n  geom_smooth(mapping = aes(x = temp, y = rh, linetype = region))\n\n\nHere we make the line type depend on the region and we clearly see east has higher rh than west, but generally as temperatures increase rh decreases in both regions."
+  },
+  {
+    "objectID": "slides/week4.html#geometric-objects-3",
+    "href": "slides/week4.html#geometric-objects-3",
+    "title": "Data Visualization",
+    "section": "Geometric objects 3",
+    "text": "Geometric objects 3\nHistograms\n\nhist(met_avg$temp)"
+  },
+  {
+    "objectID": "slides/week4.html#geometric-objects-4",
+    "href": "slides/week4.html#geometric-objects-4",
+    "title": "Data Visualization",
+    "section": "Geometric objects 4",
+    "text": "Geometric objects 4\nBoxplots\n\nboxplot(met_avg$temp ~ met_avg$elev_cat)"
+  },
+  {
+    "objectID": "slides/week4.html#geometric-objects-5",
+    "href": "slides/week4.html#geometric-objects-5",
+    "title": "Data Visualization",
+    "section": "Geometric objects 5",
+    "text": "Geometric objects 5\nLineplots\n\nplot(met_avg$day[met_avg$elev==4113], met_avg$temp[met_avg$elev==4113], type = 'l')"
+  },
+  {
+    "objectID": "slides/week4.html#geometric-objects-5-1",
+    "href": "slides/week4.html#geometric-objects-5-1",
+    "title": "Data Visualization",
+    "section": "Geometric objects 5",
+    "text": "Geometric objects 5\nJust as you can add points to an existing plot, you can also add lines()\n\nplot(1:10, pch = 16)\nlines(10:1, col = 2, lwd = 3) # add a thick red line"
+  },
+  {
+    "objectID": "slides/week4.html#geometric-objects-5-2",
+    "href": "slides/week4.html#geometric-objects-5-2",
+    "title": "Data Visualization",
+    "section": "Geometric objects 5",
+    "text": "Geometric objects 5\nLineplots\n\nggplot(data = met_avg[elev==4113])+\n geom_line(mapping=aes(x=day, y=temp))"
+  },
+  {
+    "objectID": "slides/week4.html#geoms---reference",
+    "href": "slides/week4.html#geoms---reference",
+    "title": "Data Visualization",
+    "section": "Geoms - reference",
+    "text": "Geoms - reference\nggplot2 provides over 40 geoms, and extension packages provide even more (see https://ggplot2.tidyverse.org/reference/ for a sampling).\nThe best way to get a comprehensive overview is the ggplot2 cheatsheet, which you can find at https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf"
+  },
+  {
+    "objectID": "slides/week4.html#multiple-geoms-1",
+    "href": "slides/week4.html#multiple-geoms-1",
+    "title": "Data Visualization",
+    "section": "Multiple geoms 1",
+    "text": "Multiple geoms 1\nLet’s layer geoms\n\nmet_avg[!is.na(region)] %&gt;%\n  ggplot() + \n  geom_point(mapping = aes(x = temp, y = rh, color = region))+\n  geom_smooth(mapping = aes(x = temp, y = rh, linetype = region))"
+  },
+  {
+    "objectID": "slides/week4.html#multiple-geoms-2",
+    "href": "slides/week4.html#multiple-geoms-2",
+    "title": "Data Visualization",
+    "section": "Multiple geoms 2",
+    "text": "Multiple geoms 2\nWe can avoid repetition of aesthetics by passing a set of mappings to ggplot(). ggplot2 will treat these mappings as global mappings that apply to each geom in the graph.\n\nmet_avg[!is.na(region)] %&gt;%\n  ggplot(mapping = aes(x = temp, y = rh, color=region, linetype=region)) +\n  geom_point() + \n  geom_smooth()"
+  },
+  {
+    "objectID": "slides/week4.html#multiple-geoms-2-1",
+    "href": "slides/week4.html#multiple-geoms-2-1",
+    "title": "Data Visualization",
+    "section": "Multiple geoms 2",
+    "text": "Multiple geoms 2\ngeom_smooth() has options. For example if we want a linear regression line we add method=lm\n\nmet_avg[!is.na(region)] %&gt;%\n  ggplot(mapping = aes(x = temp, y = rh, color = region, linetype = region)) +\n  geom_point() + \n  geom_smooth(method = lm, se = FALSE, col = \"black\")"
+  },
+  {
+    "objectID": "slides/week4.html#multiple-geoms-3",
+    "href": "slides/week4.html#multiple-geoms-3",
+    "title": "Data Visualization",
+    "section": "Multiple geoms 3",
+    "text": "Multiple geoms 3\nIf you place mappings in a geom function, ggplot2 will use these mappings to extend or overwrite the global mappings for that layer only. This makes it possible to display different aesthetics in different layers.\n\nmet_avg[!is.na(region)] %&gt;%\n  ggplot(mapping = aes(x = temp, y = rh)) + \n  geom_point(mapping = aes(color = region)) + \n  geom_smooth()"
+  },
+  {
+    "objectID": "slides/week4.html#multiple-geoms-4",
+    "href": "slides/week4.html#multiple-geoms-4",
+    "title": "Data Visualization",
+    "section": "Multiple geoms 4",
+    "text": "Multiple geoms 4\nYou can use the same idea to specify different data for each layer. Here, our smooth line displays the full met dataset but the points are colored by visibilty.\n\nmet_avg[!is.na(vis_cat)] %&gt;%\n  ggplot(mapping = aes(x = temp, y = rh, alpha = 0.5)) + \n  geom_point(mapping = aes(color = vis_cat)) + \n  geom_smooth(se = FALSE)"
+  },
+  {
+    "objectID": "slides/week4.html#statistical-transformations---another-example",
+    "href": "slides/week4.html#statistical-transformations---another-example",
+    "title": "Data Visualization",
+    "section": "Statistical transformations - another example",
+    "text": "Statistical transformations - another example\nYou might want to draw greater attention to the statistical transformation in your code. For example, you might use stat_summary(), which summarises the y values for each unique x value, to draw attention to the summary that you’re computing:\n\nl &lt;- met_avg[!is.na(vis_cat) & vis_cat != \"clear\"] %&gt;%\n  ggplot() + \n    stat_summary(mapping = aes(x = vis_cat, y = temp),\n    fun.min = min,\n    fun.max = max,\n    fun = median)"
+  },
+  {
+    "objectID": "slides/week4.html#statistical-transformations---another-example-1",
+    "href": "slides/week4.html#statistical-transformations---another-example-1",
+    "title": "Data Visualization",
+    "section": "Statistical transformations - another example",
+    "text": "Statistical transformations - another example\n\nl"
+  },
+  {
+    "objectID": "slides/week4.html#position-adjustments",
+    "href": "slides/week4.html#position-adjustments",
+    "title": "Data Visualization",
+    "section": "Position adjustments",
+    "text": "Position adjustments\nAn option that can be very useful is position = \"jitter\". This adds a small amount of random noise to each point. This spreads out points that might otherwise be overlapping.\n\nnojitter &lt;- ggplot(data = met_avg[1:1000,]) + \n  geom_point(mapping = aes(x = vis_cat, y = temp))\n\njitter &lt;- ggplot(data = met_avg[1:1000,]) + \n  geom_point(mapping = aes(x = vis_cat, y = temp), position = \"jitter\")"
+  },
+  {
+    "objectID": "slides/week4.html#position-adjustments-1",
+    "href": "slides/week4.html#position-adjustments-1",
+    "title": "Data Visualization",
+    "section": "Position adjustments",
+    "text": "Position adjustments\nAn option that can be very useful is position = \"jitter\". This adds a small amount of random noise to each point. This spreads out points that might otherwise be overlapping.\n\nnojitter &lt;- ggplot(data = met_avg[1:1000,]) + \n  geom_point(mapping = aes(x = vis_cat, y = temp))\n\njitter &lt;- ggplot(data = met_avg[1:1000,]) + \n  geom_point(mapping = aes(x = vis_cat, y = temp), position = \"jitter\")"
+  },
+  {
+    "objectID": "slides/week4.html#position-adjustments-2",
+    "href": "slides/week4.html#position-adjustments-2",
+    "title": "Data Visualization",
+    "section": "Position adjustments",
+    "text": "Position adjustments\n\nplot_grid(nojitter, jitter, labels = \"AUTO\")"
+  },
+  {
+    "objectID": "slides/week4.html#coordinate-systems",
+    "href": "slides/week4.html#coordinate-systems",
+    "title": "Data Visualization",
+    "section": "Coordinate systems",
+    "text": "Coordinate systems\nCoordinate systems are one of the more complicated corners of ggplot. To start with something simple, here’s how to flip axes:\n\nunflipped &lt;- ggplot(data = met_avg) + \n  geom_boxplot(mapping = aes(x = vis_cat, y = temp))\n\nflipped &lt;- ggplot(data = met_avg) + \n  geom_boxplot(mapping = aes(x = vis_cat, y = temp)) +\n  coord_flip()"
+  },
+  {
+    "objectID": "slides/week4.html#coordinate-systems-1",
+    "href": "slides/week4.html#coordinate-systems-1",
+    "title": "Data Visualization",
+    "section": "Coordinate systems",
+    "text": "Coordinate systems\n\nplot_grid(unflipped, flipped, labels = \"AUTO\")"
+  },
+  {
+    "objectID": "slides/week4.html#coordinate-systems-2",
+    "href": "slides/week4.html#coordinate-systems-2",
+    "title": "Data Visualization",
+    "section": "Coordinate systems",
+    "text": "Coordinate systems\nThere is also the ability to control the aspect ratio using coord_quickmap() and to use polar coordinates with coord_polar().\n\nbar &lt;- ggplot(data = met_avg) + \n  geom_bar(mapping = aes(x = elev_cat, fill = elev_cat), show.legend = FALSE, width = 1) + \n  theme(aspect.ratio = 1) +\n  labs(x = NULL, y = NULL)"
+  },
+  {
+    "objectID": "slides/week4.html#coordinate-systems-3",
+    "href": "slides/week4.html#coordinate-systems-3",
+    "title": "Data Visualization",
+    "section": "Coordinate systems",
+    "text": "Coordinate systems\n\nbar + coord_flip()\n\n\n\n\n\n\n\nbar + coord_polar()"
+  },
+  {
+    "objectID": "slides/week4.html#modifying-labels",
+    "href": "slides/week4.html#modifying-labels",
+    "title": "Data Visualization",
+    "section": "Modifying labels",
+    "text": "Modifying labels\n\nggplot(met_avg[!is.na(region)]) +\n  geom_point(aes(temp, rh, color = region)) + \n  labs(title = \"Weather Station Data\") + \n  labs(x = expression(\"Temperature\" *~ degree * C), y = \"Relative Humidity\")"
+  },
+  {
+    "objectID": "slides/week4.html#changing-the-theme",
+    "href": "slides/week4.html#changing-the-theme",
+    "title": "Data Visualization",
+    "section": "Changing the Theme",
+    "text": "Changing the Theme\n\nggplot(met_avg[!is.na(region)]) +\n  geom_point(aes(temp, rh, color = region)) + \n  labs(title = \"Weather Station Data\") + \n  labs(x = expression(\"Temperature\"*~degree*C), y = \"Relative Humidity\")+\n  theme_bw(base_family = \"Times\")"
+  },
+  {
+    "objectID": "slides/week4.html#changing-the-legend",
+    "href": "slides/week4.html#changing-the-legend",
+    "title": "Data Visualization",
+    "section": "Changing the Legend",
+    "text": "Changing the Legend\n\nggplot(met_avg[!is.na(region)]) +\n  geom_point(aes(temp, rh, color = region)) + \n  labs(title = \"Weather Station Data\",x = expression(\"Temperature\"*~degree*C), y = \"Relative Humidity\")+\n  scale_color_manual(name=\"Region\", labels=c(\"East\", \"West\"), values=c(\"east\"=\"lightblue\", \"west\"=\"purple\"))+\n  theme_bw(base_family = \"Times\")"
+  },
+  {
+    "objectID": "slides/week4.html#changing-colorscales",
+    "href": "slides/week4.html#changing-colorscales",
+    "title": "Data Visualization",
+    "section": "Changing Colorscales",
+    "text": "Changing Colorscales\n\nggplot(data = met_avg) + \n  geom_point(mapping=aes(x=temp, y=rh, color=elev))+\n  scale_color_gradient(low=\"blue\", high=\"red\")"
+  },
+  {
+    "objectID": "slides/week4.html#changing-colorscales-1",
+    "href": "slides/week4.html#changing-colorscales-1",
+    "title": "Data Visualization",
+    "section": "Changing Colorscales",
+    "text": "Changing Colorscales\n\nggplot(data=met_avg) + \n  geom_point(mapping= aes(x=temp, y=rh, color = cut(elev, b=5))) + \n  scale_color_manual(values = viridis::viridis(6))"
+  },
+  {
+    "objectID": "slides/week4.html#a-great-reference",
+    "href": "slides/week4.html#a-great-reference",
+    "title": "Data Visualization",
+    "section": "A Great reference",
+    "text": "A Great reference\nA great (comprehensive) reference for everything you can do with ggplot2 is the R Graphics Cookbook:\nhttps://r-graphics.org/"
+  },
+  {
+    "objectID": "slides/week4.html#reminder---the-ggplot2-cheatsheet",
+    "href": "slides/week4.html#reminder---the-ggplot2-cheatsheet",
+    "title": "Data Visualization",
+    "section": "Reminder - the ggplot2 cheatsheet",
+    "text": "Reminder - the ggplot2 cheatsheet\nA briefer summary can be found here:\nhttps://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf\nRstudio has a variety of other great Cheatsheets."
+  },
+  {
+    "objectID": "slides/week4.html#maps-with-leaflet",
+    "href": "slides/week4.html#maps-with-leaflet",
+    "title": "Data Visualization",
+    "section": "Maps with leaflet",
+    "text": "Maps with leaflet\nLet’s create a map of monthly average temperatures at each of the weather stations and colour the points by a temperature gradient. We need to create a colour palette and we can add a legend.\n\nlibrary(leaflet)\nmet_avg2 &lt;- met[,.(temp = mean(temp,na.rm=TRUE), lat = mean(lat), lon = mean(lon)),  by=c(\"USAFID\")]\nmet_avg2 &lt;- met_avg2[!is.na(temp)]\n\n# Generating a color palette\ntemp.pal &lt;- colorNumeric(c('darkgreen','goldenrod','brown'), domain=met_avg2$temp)\ntemp.pal\n\nfunction (x) \n{\n    if (length(x) == 0 || all(is.na(x))) {\n        return(pf(x))\n    }\n    if (is.null(rng)) \n        rng &lt;- range(x, na.rm = TRUE)\n    rescaled &lt;- scales::rescale(x, from = rng)\n    if (any(rescaled &lt; 0 | rescaled &gt; 1, na.rm = TRUE)) \n        warning(\"Some values were outside the color scale and will be treated as NA\")\n    if (reverse) {\n        rescaled &lt;- 1 - rescaled\n    }\n    pf(rescaled)\n}\n&lt;bytecode: 0x1335cc550&gt;\n&lt;environment: 0x1335ce070&gt;\nattr(,\"colorType\")\n[1] \"numeric\"\nattr(,\"colorArgs\")\nattr(,\"colorArgs\")$na.color\n[1] \"#808080\""
+  },
+  {
+    "objectID": "slides/week4.html#maps-with-leaflet-1",
+    "href": "slides/week4.html#maps-with-leaflet-1",
+    "title": "Data Visualization",
+    "section": "Maps with leaflet",
+    "text": "Maps with leaflet\nFor the tile providers, take a look at this site: https://leaflet-extras.github.io/leaflet-providers/preview/\n\ntempmap &lt;- leaflet(met_avg2) %&gt;% \n  # The looks of the Map\n  addProviderTiles('CartoDB.Positron') %&gt;% \n  # Some circles\n  addCircles(\n    lat = ~lat, lng=~lon,\n                                                  # HERE IS OUR PAL!\n    label = ~paste0(round(temp,2), ' C'), color = ~ temp.pal(temp),\n    opacity = 1, fillOpacity = 1, radius = 500\n    ) %&gt;%\n  # And a pretty legend\n  addLegend('bottomleft', pal=temp.pal, values=met_avg2$temp,\n          title='Temperature, C', opacity=1)"
+  },
+  {
+    "objectID": "slides/week4.html#maps-with-leaflet-2",
+    "href": "slides/week4.html#maps-with-leaflet-2",
+    "title": "Data Visualization",
+    "section": "Maps with leaflet",
+    "text": "Maps with leaflet\n\ntempmap"
+  },
+  {
+    "objectID": "slides/week4.html#basic-scatterplot-1",
+    "href": "slides/week4.html#basic-scatterplot-1",
+    "title": "Data Visualization",
+    "section": "Basic Scatterplot",
+    "text": "Basic Scatterplot\nHere’s how to create a basic plot in ggplot2\n\nggplot(data = met_avg) + \n  geom_point(mapping = aes(x = temp, y = rh))\n\n\nWe see that as temperature increases, relative humidity decreases."
+  },
+  {
+    "objectID": "slides/week4.html#controlling-point-transparency-using-the-alpha-aesthetic-1",
+    "href": "slides/week4.html#controlling-point-transparency-using-the-alpha-aesthetic-1",
+    "title": "Data Visualization",
+    "section": "Controlling point transparency using the “alpha” aesthetic",
+    "text": "Controlling point transparency using the “alpha” aesthetic\n\nggplot(data = met_avg) + \n  geom_point(mapping = aes(x = temp, y = rh, alpha = rh))"
+  },
+  {
+    "objectID": "slides/week4.html#base-plot-equivalents",
+    "href": "slides/week4.html#base-plot-equivalents",
+    "title": "Data Visualization",
+    "section": "Base plot equivalents",
+    "text": "Base plot equivalents\n\n\n\ncode\ndescription\n\n\n\n\nfirst arg / x\nposition on x-axis\n\n\nsecond arg / y\nposition on y-axis\n\n\npch\nshape\n\n\ncol\ncolor of element borders\n\n\nfill\ncolor inside of elements\n\n\ncex\nsize\n\n\nscales::alpha\ntransparency\n\n\nlty\ntype of line"
+  },
+  {
+    "objectID": "slides/week4.html#add-points-to-plot",
+    "href": "slides/week4.html#add-points-to-plot",
+    "title": "Data Visualization",
+    "section": "Add points to plot",
+    "text": "Add points to plot\nWith base plot, you can add points to an existing plot with points(), which takes the same arguments as plot() for plotting points.\n\nplot(1:10, pch = 16)\npoints(10:1, pch = 16, col = 2)"
+  },
+  {
+    "objectID": "slides/week4.html#facets-3",
+    "href": "slides/week4.html#facets-3",
+    "title": "Data Visualization",
+    "section": "Facets 3",
+    "text": "Facets 3\nBase plot is not good at this! You can make multiple plots within a single plotting window by utilizing the layout() function, but you will still have to make each plot manually.\n\nlayout(matrix(1:2, nrow=1))\nplot(met_avg$temp[which(met_avg$region == 'east')], met_avg$rh[which(met_avg$region == 'east')], pch = 16, col = 2)\nplot(met_avg$temp[which(met_avg$region == 'west')], met_avg$rh[which(met_avg$region == 'west')], pch = 16, col = 4)"
+  },
+  {
+    "objectID": "slides/week4.html#geometric-objects-3-1",
+    "href": "slides/week4.html#geometric-objects-3-1",
+    "title": "Data Visualization",
+    "section": "Geometric objects 3",
+    "text": "Geometric objects 3\nHistograms\n\nggplot(met_avg) + \n  geom_histogram(mapping = aes(x = temp))"
+  },
+  {
+    "objectID": "slides/week4.html#geometric-objects-4-1",
+    "href": "slides/week4.html#geometric-objects-4-1",
+    "title": "Data Visualization",
+    "section": "Geometric objects 4",
+    "text": "Geometric objects 4\nBoxplots\n\nmet_avg[!is.na(elev_cat)] %&gt;% \n  ggplot()+\n  geom_boxplot(mapping=aes(x=elev_cat, y=temp, fill=elev_cat))"
+  },
+  {
+    "objectID": "slides/week4.html#geometric-objects-5-3",
+    "href": "slides/week4.html#geometric-objects-5-3",
+    "title": "Data Visualization",
+    "section": "Geometric objects 5",
+    "text": "Geometric objects 5\nPolygons\n\nworld_map &lt;- map_data(\"world\")\nggplot(data = world_map, aes(x = long, y = lat, group = group)) +\n  geom_polygon(fill = \"darkgray\", colour = \"white\")"
+  },
+  {
+    "objectID": "slides/week4.html#geometric-objects-5-4",
+    "href": "slides/week4.html#geometric-objects-5-4",
+    "title": "Data Visualization",
+    "section": "Geometric objects 5",
+    "text": "Geometric objects 5\nPolygons\n\nus_map &lt;- map_data(\"state\")\nggplot(data = us_map, aes(x = long, y = lat, fill = region)) +\n  geom_polygon(colour = \"white\")"
   }
 ]

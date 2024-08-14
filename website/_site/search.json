@@ -648,7 +648,7 @@
     "href": "slides/week3.html#eda-checklist",
     "title": "Exploratory Data Analysis",
     "section": "EDA Checklist",
-    "text": "EDA Checklist\nThe goal of EDA is to better understand your data. Let’s use the checklist:\n\nFormulate a question\nRead in the data\nCheck the dimensions and headers and footers of the data\nCheck the variable types in the data\nTake a closer look at some/all of the variables\nValidate with an external source\nConduct some summary statistics to answer the initial question\nMake exploratory graphs"
+    "text": "EDA Checklist\nThe goal of EDA is to better understand your data. Let’s use the checklist:\n\nFormulate a question\nRead in the data\nCheck the dimensions and headers and footers of the data\nCheck the variable types in the data\nInspect the distributions of some/all of the variables\nValidate with an external source\nCompute summary statistics to begin answering the question\nMake exploratory graphs"
   },
   {
     "objectID": "slides/week3.html#the-goal-of-eda-is-to-better-understand-your-data.-lets-use-the-checklist",
@@ -795,42 +795,42 @@
     "href": "slides/week3.html#check-variables-more-closely-1",
     "title": "Exploratory Data Analysis",
     "section": "Check variables more closely",
-    "text": "Check variables more closely\nWe can generate tables for integer variables:\n\ntable(met$hour)\n\n\n     0      1      2      3      4      5      6      7      8      9     10 \n 99434  93482  93770  96703 110504 112128 106235 101985 100310 102915 101880 \n    11     12     13     14     15     16     17     18     19     20     21 \n100470 103605  97004  96507  97635  94942  94184 100179  94604  94928  96070 \n    22     23 \n 94046  93823 \n\ntable(met$month)\n\n\n      8 \n2377343"
+    "text": "Check variables more closely\nWe can generate tables and/or barplots for integer variables:\n\ntable(met$hour)\n\n\n     0      1      2      3      4      5      6      7      8      9     10 \n 99434  93482  93770  96703 110504 112128 106235 101985 100310 102915 101880 \n    11     12     13     14     15     16     17     18     19     20     21 \n100470 103605  97004  96507  97635  94942  94184 100179  94604  94928  96070 \n    22     23 \n 94046  93823 \n\ntable(met$month)\n\n\n      8 \n2377343"
   },
   {
     "objectID": "slides/week3.html#check-variables-more-closely-2",
     "href": "slides/week3.html#check-variables-more-closely-2",
     "title": "Exploratory Data Analysis",
     "section": "Check variables more closely",
-    "text": "Check variables more closely\nFor numeric variables we should do a summary to see the quantiles, min, max, and mean\n\ntable(met$year)\n\n\n   2019 \n2377343 \n\nsummary(met$lat)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  24.55   33.97   38.35   37.94   41.94   48.94 \n\nsummary(met$lon)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n-124.29  -98.02  -91.71  -92.15  -82.99  -68.31"
+    "text": "Check variables more closely\nWe can generate tables and/or barplots for integer variables:\n\nbarplot(table(met$hour))"
   },
   {
     "objectID": "slides/week3.html#check-variables-more-closely-3",
     "href": "slides/week3.html#check-variables-more-closely-3",
     "title": "Exploratory Data Analysis",
     "section": "Check variables more closely",
-    "text": "Check variables more closely\nIf we return to our initial question, what weather stations reported the hottest and coldest temperatures, we should take a closer look at our key variable, temperature (temp)\n\nsummary(met$temp)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n -40.00   19.60   23.50   23.59   27.80   56.00   60089 \n\n\nIt looks like the temperatures are in Celsius. A temperature of -40 in August is really cold, we should see if this is an implausible value."
+    "text": "Check variables more closely\nFor numeric variables we should do a summary to see the quantiles, min, max, and mean.\n\ntable(met$year)\n\n\n   2019 \n2377343 \n\nsummary(met$lat)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n  24.55   33.97   38.35   37.94   41.94   48.94 \n\nsummary(met$lon)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n-124.29  -98.02  -91.71  -92.15  -82.99  -68.31"
   },
   {
     "objectID": "slides/week3.html#check-variables-more-closely-4",
     "href": "slides/week3.html#check-variables-more-closely-4",
     "title": "Exploratory Data Analysis",
     "section": "Check variables more closely",
-    "text": "Check variables more closely\nIt also looks like there is a lot of missing data, encoded by NA values. Let’s check the proportion of missingness by tallying up whether or not every temperature reading is an NA. This will give us a vector of TRUE/FALSE values and then we can take the mean (average), because R automatically interprets TRUE as 1 and FALSE as 0 for mathematical functions.\n\nmean(is.na(met$temp))\n\n[1] 0.0252757\n\n\n2.5% of the data are missing, which is not a huge amount."
+    "text": "Check variables more closely\nWe can visualize these distributions with a histogram.\n\nlayout(matrix(1:2, nrow=1))\nhist(met$lat)\nhist(met$lon)\n\n\n\n\n\n\n\nlayout(1)"
   },
   {
     "objectID": "slides/week3.html#check-variables-more-closely-5",
     "href": "slides/week3.html#check-variables-more-closely-5",
     "title": "Exploratory Data Analysis",
     "section": "Check variables more closely",
-    "text": "Check variables more closely\nIn our data.frame we can easily subset the data and select certain columns. Here, we select all observations with a temperature of -40C and a specific subset of the variables:\n\nmet_ss &lt;- met[met$temp == -40.00, c('hour','lat','lon','elev','wind.sp')]\n\ndim(met_ss)\n\n[1] 60125     5\n\nsummary(met_ss)\n\n      hour            lat             lon              elev      \n Min.   : 0.00   Min.   :29.12   Min.   :-89.55   Min.   :36     \n 1st Qu.: 2.75   1st Qu.:29.12   1st Qu.:-89.55   1st Qu.:36     \n Median : 5.50   Median :29.12   Median :-89.55   Median :36     \n Mean   : 5.50   Mean   :29.12   Mean   :-89.55   Mean   :36     \n 3rd Qu.: 8.25   3rd Qu.:29.12   3rd Qu.:-89.55   3rd Qu.:36     \n Max.   :11.00   Max.   :29.12   Max.   :-89.55   Max.   :36     \n NA's   :60089   NA's   :60089   NA's   :60089    NA's   :60089  \n    wind.sp     \n Min.   : NA    \n 1st Qu.: NA    \n Median : NA    \n Mean   :NaN    \n 3rd Qu.: NA    \n Max.   : NA    \n NA's   :60125"
+    "text": "Check variables more closely\nIf we return to our initial question, what weather stations reported the hottest and coldest temperatures, we should take a closer look at our key variable, temperature (temp)\n\nsummary(met$temp)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's \n -40.00   19.60   23.50   23.59   27.80   56.00   60089 \n\nhist(met$temp)\n\n\nIt looks like the temperatures are in Celsius. A temperature of -40 in August is really cold, we should see if this is an implausible value."
   },
   {
     "objectID": "slides/week3.html#check-variables-more-closely-6",
     "href": "slides/week3.html#check-variables-more-closely-6",
     "title": "Exploratory Data Analysis",
     "section": "Check variables more closely",
-    "text": "Check variables more closely\nIn dplyr we can do the same thing using filter and select\n\nlibrary(dplyr)\nmet_ss &lt;- filter(met, temp == -40.00) |&gt; \n  select(USAFID, day, hour, lat, lon, elev, wind.sp)\n\ndim(met_ss)\n\n[1] 36  7\n\nsummary(met_ss)\n\n     USAFID            day         hour            lat             lon        \n Min.   :720717   Min.   :1   Min.   : 0.00   Min.   :29.12   Min.   :-89.55  \n 1st Qu.:720717   1st Qu.:1   1st Qu.: 2.75   1st Qu.:29.12   1st Qu.:-89.55  \n Median :720717   Median :1   Median : 5.50   Median :29.12   Median :-89.55  \n Mean   :720717   Mean   :1   Mean   : 5.50   Mean   :29.12   Mean   :-89.55  \n 3rd Qu.:720717   3rd Qu.:1   3rd Qu.: 8.25   3rd Qu.:29.12   3rd Qu.:-89.55  \n Max.   :720717   Max.   :1   Max.   :11.00   Max.   :29.12   Max.   :-89.55  \n                                                                              \n      elev       wind.sp   \n Min.   :36   Min.   : NA  \n 1st Qu.:36   1st Qu.: NA  \n Median :36   Median : NA  \n Mean   :36   Mean   :NaN  \n 3rd Qu.:36   3rd Qu.: NA  \n Max.   :36   Max.   : NA  \n              NA's   :36"
+    "text": "Check variables more closely\nIt also looks like there is a lot of missing data, encoded by NA values. Let’s check the proportion of missingness by tallying up whether or not every temperature reading is an NA. This will give us a vector of TRUE/FALSE values and then we can take the mean (average), because R automatically interprets TRUE as 1 and FALSE as 0 for mathematical functions.\n\nmean(is.na(met$temp))\n\n[1] 0.0252757\n\n\n2.5% of the data are missing, which is not a huge amount."
   },
   {
     "objectID": "slides/week3.html#validate-against-an-external-source",
@@ -844,14 +844,14 @@
     "href": "slides/week3.html#summary-statistics",
     "title": "Exploratory Data Analysis",
     "section": "Summary statistics",
-    "text": "Summary statistics\nThe maximum hourly temperature is NAC at site NA, and the minimum hourly temperature is -17.2C at site 722817."
+    "text": "Summary statistics\nThe maximum hourly temperature is 56C at site 720267, and the minimum hourly temperature is -17.2C at site 722817."
   },
   {
     "objectID": "slides/week3.html#summary-statistics-1",
     "href": "slides/week3.html#summary-statistics-1",
     "title": "Exploratory Data Analysis",
     "section": "Summary statistics",
-    "text": "Summary statistics\nWe need to transform our data to answer our initial question. Let’s find the daily mean, max, and min temperatures in our data.frame. We can do this with the summarize function from the dplyr package. This package is part of the tidyverse, so the syntax is a bit different from what we’ve seen before.\n\nlibrary(dplyr)\nmet_daily &lt;- summarize(met,\n                       temp = mean(temp),\n                       lat = mean(lat),\n                       lon = mean(lon),\n                       elev = mean(elev),\n                       .by = c(USAFID, day))\n\nWhat we’ve done here is told R to summarize the met dataset by the variables USAFID and day, splitting the data into subsets based on those two indexing variables. For each subset (representing a specific station of a specific day), we want the daily average temperature, as well as latitude, longitude, and elevation (though hopefully those don’t change too much over the course of a day!)"
+    "text": "Summary statistics\nWe need to transform our data to answer our initial question. Let’s find the daily mean, max, and min temperatures for each weather station in our data.frame. We can do this with the summarize function from the dplyr package. This package is part of the tidyverse, so the syntax is a bit different from what we’ve seen before.\n\nlibrary(dplyr)\nmet_daily &lt;- summarize(met,\n                       temp = mean(temp),\n                       lat = mean(lat),\n                       lon = mean(lon),\n                       elev = mean(elev),\n                       .by = c(USAFID, day))\n\nWhat we’ve done here is told R to summarize the met dataset by the variables USAFID and day, splitting the data into subsets based on those two indexing variables. For each subset (representing a specific station of a specific day), we want the daily average temperature, as well as latitude, longitude, and elevation (though hopefully those don’t change too much over the course of a day!)"
   },
   {
     "objectID": "slides/week3.html#summary-statistics-2",
@@ -865,14 +865,14 @@
     "href": "slides/week3.html#summary-statistics-3",
     "title": "Exploratory Data Analysis",
     "section": "Summary Statistics",
-    "text": "Summary Statistics\nNow we will order our new dataset by the average daily temperature, just as we ordered the old one by observed temperature.\n\nmet_daily &lt;- met_daily[order(met_daily$temp), ]\n\nhead(met_daily)\n\n    USAFID day       temp    lat    lon elev\n2   722817   3 -17.200000 38.767 -104.3 1838\n1   722817   1 -17.133333 38.767 -104.3 1838\n3   722817   6 -17.066667 38.767 -104.3 1838\n164 726130  11   4.278261 44.270  -71.3 1909\n166 726130  31   4.304348 44.270  -71.3 1909\n163 726130  10   4.583333 44.270  -71.3 1909\n\ntail(met_daily)\n\n      USAFID day     temp      lat       lon     elev\n48695 723805   5 40.97500 34.76800 -114.6180 279.0000\n48721 720339  14 41.00000 32.14600 -111.1710 737.0000\n48710 723805   4 41.18333 34.76800 -114.6180 279.0000\n48688 722787   5 41.35714 33.52700 -112.2950 325.0000\n48438 690150  31 41.71667 34.29967 -116.1657 690.0833\n48722     NA  NA       NA       NA        NA       NA"
+    "text": "Summary Statistics\nNow we will order our new dataset by the average daily temperature, just as we ordered the old one by observed temperature.\n\nmet_daily &lt;- met_daily[order(met_daily$temp), ]\n\nhead(met_daily)\n\n    USAFID day       temp    lat    lon elev\n2   722817   3 -17.200000 38.767 -104.3 1838\n1   722817   1 -17.133333 38.767 -104.3 1838\n3   722817   6 -17.066667 38.767 -104.3 1838\n164 726130  11   4.278261 44.270  -71.3 1909\n166 726130  31   4.304348 44.270  -71.3 1909\n163 726130  10   4.583333 44.270  -71.3 1909\n\ntail(met_daily)\n\n      USAFID day     temp      lat       lon     elev\n48708 722749   5 40.85714 33.26900 -111.8120 379.0000\n48695 723805   5 40.97500 34.76800 -114.6180 279.0000\n48721 720339  14 41.00000 32.14600 -111.1710 737.0000\n48710 723805   4 41.18333 34.76800 -114.6180 279.0000\n48688 722787   5 41.35714 33.52700 -112.2950 325.0000\n48438 690150  31 41.71667 34.29967 -116.1657 690.0833"
   },
   {
     "objectID": "slides/week3.html#summary-statistics-4",
     "href": "slides/week3.html#summary-statistics-4",
     "title": "Exploratory Data Analysis",
     "section": "Summary statistics",
-    "text": "Summary statistics\nThe maximum daily temperature is NA C at site NA and the minimum daily temperature is -17.2C at site 722817."
+    "text": "Summary statistics\nThe maximum daily average temperature is 41.7166667 C at site 690150 and the minimum daily average temperature is -17.2C at site 722817."
   },
   {
     "objectID": "slides/week3.html#summary-statistics-5",
@@ -928,35 +928,35 @@
     "href": "slides/week3.html#exploratory-graphs-6",
     "title": "Exploratory Data Analysis",
     "section": "Exploratory Graphs",
-    "text": "Exploratory Graphs\nA map will show us where the weather stations are located. First let’s get the unique latitutdes and longitudes and see how many meteorological sites there are\n\nmet_stations &lt;- (unique(met[,c(\"lat\",\"lon\")]))  \ndim(met_stations)\n\n[1] 2828    2"
+    "text": "Exploratory Graphs\nWe know that these data come from US weather stations, so we might have some idea what to expect just from plotting the latitude and longitude (note that we fix the aspect ratio at 1:1 with asp = 1; this prevents the plot from stretching or shrinking to fit the available plotting area):\n\nplot(met_daily$lon, met_daily$lat, asp=1)"
   },
   {
     "objectID": "slides/week3.html#exploratory-graphs-7",
     "href": "slides/week3.html#exploratory-graphs-7",
     "title": "Exploratory Data Analysis",
     "section": "Exploratory Graphs",
-    "text": "Exploratory Graphs\nA map will show us where the weather stations are located. First let’s get the unique latitutdes and longitudes and see how many meteorological sites there are.\n\nlibrary(leaflet)\nleaflet(met_stations) |&gt; \n  addProviderTiles('CartoDB.Positron') |&gt; \n  addCircles(lat = ~lat, lng = ~lon, opacity = 1, fillOpacity = 1, radius = 400)"
+    "text": "Exploratory Graphs\nA map will show us where the weather stations are located. First let’s get the unique latitudes and longitudes and see how many meteorological sites there are\n\nmet_stations &lt;- (unique(met[,c(\"lat\",\"lon\")]))  \ndim(met_stations)\n\n[1] 2827    2"
   },
   {
     "objectID": "slides/week3.html#exploratory-graphs-8",
     "href": "slides/week3.html#exploratory-graphs-8",
     "title": "Exploratory Data Analysis",
     "section": "Exploratory Graphs",
-    "text": "Exploratory Graphs\nLet’s map the locations of the max and min daily temperatures.\nmin &lt;- met_daily[1]  # First observation.\nmax &lt;- met_daily[.N] # Last obs, .N is a special symbol in data.table\n\nleaflet() |&gt; \n  addProviderTiles('CartoDB.Positron') |&gt; \n  addCircles(\n    data = min,\n    lat = ~lat, lng = ~lon, popup = \"Min temp.\",\n    opacity = 1, fillOpacity = 1, radius = 400, color = \"blue\"\n    ) |&gt;\n  addCircles(\n    data = max,\n    lat = ~lat, lng = ~lon, popup = \"Max temp.\",\n    opacity=1, fillOpacity=1, radius = 400, color = \"red\"\n    )\n(next slide)"
+    "text": "Exploratory Graphs\nA map will show us where the weather stations are located. First let’s get the unique latitudes and longitudes and see how many meteorological sites there are.\n\nlibrary(leaflet)\nleaflet(met_stations) |&gt; \n  addProviderTiles('CartoDB.Positron') |&gt; \n  addCircles(lat = ~lat, lng = ~lon,\n             opacity = 1, fillOpacity = 1, radius = 400)"
   },
   {
     "objectID": "slides/week3.html#exploratory-graphs-9",
     "href": "slides/week3.html#exploratory-graphs-9",
     "title": "Exploratory Data Analysis",
     "section": "Exploratory Graphs",
-    "text": "Exploratory Graphs\nScatterplots help us look at pairwise relationships. Let’s see if there is any trend in temperature with latitude\n\nplot(met_daily$lat, met_daily$temp, pch=19, cex=0.5)"
+    "text": "Exploratory Graphs"
   },
   {
     "objectID": "slides/week3.html#exploratory-graphs-10",
     "href": "slides/week3.html#exploratory-graphs-10",
     "title": "Exploratory Data Analysis",
     "section": "Exploratory Graphs",
-    "text": "Exploratory Graphs\nWe can add a simple linear regression line to this plot using lm() and abline(). We can also add a title and change the axis labels.\nmod &lt;- lm(temp ~ lat, data = met_daily)\nmet_daily[, plot(\n  lat, temp, pch=19, cex=0.5, \n  main = \"Temperature and Latitude\", \n  xlab = \"Latitude\", ylab = \"Temperature (deg C)\")\n  ]\nabline(mod, lwd=2, col=\"red\")\n(next slide)"
+    "text": "Exploratory Graphs\nLet’s map the locations of the max and min daily temperatures.\n\nmin &lt;- met_daily[1, ]               # First observation\nmax &lt;- met_daily[nrow(met_daily), ] # Last observation\n\nleaflet() |&gt; \n  addProviderTiles('CartoDB.Positron') |&gt; \n  addCircles(\n    data = min,\n    lat = ~lat, lng = ~lon, popup = \"Min temp.\",\n    opacity = 1, fillOpacity = 1, radius = 400, color = \"blue\"\n    ) |&gt;\n  addCircles(\n    data = max,\n    lat = ~lat, lng = ~lon, popup = \"Max temp.\",\n    opacity=1, fillOpacity=1, radius = 400, color = \"red\"\n    )\n\n(next slide)"
   },
   {
     "objectID": "slides/week3.html#exploratory-data-analysis-1",
@@ -977,14 +977,14 @@
     "href": "slides/week3.html#sorting",
     "title": "Exploratory Data Analysis",
     "section": "Sorting",
-    "text": "Sorting\nIf we return to our initial question (“Which weather stations reported the hottest and coldest daily temperatures?”), we need to generate a list of weather stations that are ordered from highest to lowest. We can then examine the top and bottom of this new dataset.\nFirst let us remove the aberrant observations and then we’ll sort by temperature.\n\nmet &lt;- met[met$temp &gt; -40, ]\n\nNotice that we do not create a new object, we just overwrite the met object. Once you’re sure that you want to remove certain observations, this is a good way to avoid confusion (otherwise, you might have multiple subsets of the data in your R environment with similar names like met, met_ss, met_ss2, met_final, etc.)"
+    "text": "Sorting\nIf we return to our initial question (“Which weather stations reported the hottest and coldest daily temperatures?”), we need to generate a list of weather stations that are ordered from highest to lowest. We can then examine the top and bottom of this new dataset.\nFirst let us remove the aberrant observations and then we’ll sort by temperature.\n\nmet &lt;- met[met$temp &gt; -40, ]\n\nNotice that we do not create a new object, we just overwrite the met object. Once you’re sure that you want to remove certain observations, this is a good way to avoid confusion (otherwise, it is easy to end up with multiple subsets of the data in your R environment with similar names like met, met_ss, met_ss2, met_final, met_FINAL, met_FINAL_REAL, etc.)"
   },
   {
     "objectID": "slides/week3.html#highest-and-lowest",
     "href": "slides/week3.html#highest-and-lowest",
     "title": "Exploratory Data Analysis",
     "section": "Highest and Lowest",
-    "text": "Highest and Lowest\n\nhead(met)[,c(1,8:10,24)]\n\n        USAFID    lat    lon elev  temp\n1203053 722817 38.767 -104.3 1838 -17.2\n1203055 722817 38.767 -104.3 1838 -17.2\n1203128 722817 38.767 -104.3 1838 -17.2\n1203129 722817 38.767 -104.3 1838 -17.2\n1203222 722817 38.767 -104.3 1838 -17.2\n1203225 722817 38.767 -104.3 1838 -17.2\n\ntail(met)[,c(1,8:10,24)]\n\n         USAFID lat lon elev temp\nNA.60083     NA  NA  NA   NA   NA\nNA.60084     NA  NA  NA   NA   NA\nNA.60085     NA  NA  NA   NA   NA\nNA.60086     NA  NA  NA   NA   NA\nNA.60087     NA  NA  NA   NA   NA\nNA.60088     NA  NA  NA   NA   NA"
+    "text": "Highest and Lowest\n\nhead(met)[,c(1,8:10,24)]\n\n        USAFID    lat    lon elev  temp\n1203053 722817 38.767 -104.3 1838 -17.2\n1203055 722817 38.767 -104.3 1838 -17.2\n1203128 722817 38.767 -104.3 1838 -17.2\n1203129 722817 38.767 -104.3 1838 -17.2\n1203222 722817 38.767 -104.3 1838 -17.2\n1203225 722817 38.767 -104.3 1838 -17.2\n\ntail(met)[,c(1,8:10,24)]\n\n      USAFID    lat      lon elev temp\n42783 720267 38.955 -121.081  467 52.0\n724   690150 34.300 -116.166  696 52.8\n749   690150 34.296 -116.162  625 52.8\n748   690150 34.300 -116.166  696 53.9\n701   690150 34.300 -116.166  696 54.4\n42403 720267 38.955 -121.081  467 56.0"
   },
   {
     "objectID": "slides/week1.html#r-stuff",
@@ -992,5 +992,54 @@
     "title": "Welcome!",
     "section": "r stuff",
     "text": "r stuff\n\nsummary(1:10)\n\n   Min. 1st Qu.  Median    Mean 3rd Qu.    Max. \n   1.00    3.25    5.50    5.50    7.75   10.00"
+  },
+  {
+    "objectID": "slides/week3.html#the-tidyverse-model",
+    "href": "slides/week3.html#the-tidyverse-model",
+    "title": "Exploratory Data Analysis",
+    "section": "The Tidyverse Model",
+    "text": "The Tidyverse Model\n\nLoosely, EDA encompasses the Import -&gt; Tidy -&gt; Transform -&gt; Visualize steps. Basically it is everything before we do modeling, prediction or inference.\nEDA may involve some statistical summaries, but it does not include formal statistical analysis."
+  },
+  {
+    "objectID": "slides/week3.html#check-variables-more-closely-7",
+    "href": "slides/week3.html#check-variables-more-closely-7",
+    "title": "Exploratory Data Analysis",
+    "section": "Check variables more closely",
+    "text": "Check variables more closely\nIn our data.frame we can easily subset the data and select certain columns. Here, we select all observations with a temperature of -40C and a specific subset of the variables:\n\nmet_ss &lt;- met[met$temp == -40.00, c('hour','lat','lon','elev','wind.sp')]\n\ndim(met_ss)\n\n[1] 60125     5\n\nsummary(met_ss)\n\n      hour            lat             lon              elev      \n Min.   : 0.00   Min.   :29.12   Min.   :-89.55   Min.   :36     \n 1st Qu.: 2.75   1st Qu.:29.12   1st Qu.:-89.55   1st Qu.:36     \n Median : 5.50   Median :29.12   Median :-89.55   Median :36     \n Mean   : 5.50   Mean   :29.12   Mean   :-89.55   Mean   :36     \n 3rd Qu.: 8.25   3rd Qu.:29.12   3rd Qu.:-89.55   3rd Qu.:36     \n Max.   :11.00   Max.   :29.12   Max.   :-89.55   Max.   :36     \n NA's   :60089   NA's   :60089   NA's   :60089    NA's   :60089  \n    wind.sp     \n Min.   : NA    \n 1st Qu.: NA    \n Median : NA    \n Mean   :NaN    \n 3rd Qu.: NA    \n Max.   : NA    \n NA's   :60125"
+  },
+  {
+    "objectID": "slides/week3.html#check-variables-more-closely-8",
+    "href": "slides/week3.html#check-variables-more-closely-8",
+    "title": "Exploratory Data Analysis",
+    "section": "Check variables more closely",
+    "text": "Check variables more closely\nIn dplyr we can do the same thing using filter and select\n\nlibrary(dplyr)\nmet_ss &lt;- filter(met, temp == -40.00) |&gt; \n  select(USAFID, day, hour, lat, lon, elev, wind.sp)\n\ndim(met_ss)\n\n[1] 36  7\n\nsummary(met_ss)\n\n     USAFID            day         hour            lat             lon        \n Min.   :720717   Min.   :1   Min.   : 0.00   Min.   :29.12   Min.   :-89.55  \n 1st Qu.:720717   1st Qu.:1   1st Qu.: 2.75   1st Qu.:29.12   1st Qu.:-89.55  \n Median :720717   Median :1   Median : 5.50   Median :29.12   Median :-89.55  \n Mean   :720717   Mean   :1   Mean   : 5.50   Mean   :29.12   Mean   :-89.55  \n 3rd Qu.:720717   3rd Qu.:1   3rd Qu.: 8.25   3rd Qu.:29.12   3rd Qu.:-89.55  \n Max.   :720717   Max.   :1   Max.   :11.00   Max.   :29.12   Max.   :-89.55  \n                                                                              \n      elev       wind.sp   \n Min.   :36   Min.   : NA  \n 1st Qu.:36   1st Qu.: NA  \n Median :36   Median : NA  \n Mean   :36   Mean   :NaN  \n 3rd Qu.:36   3rd Qu.: NA  \n Max.   :36   Max.   : NA  \n              NA's   :36"
+  },
+  {
+    "objectID": "slides/week3.html#data-cleaning",
+    "href": "slides/week3.html#data-cleaning",
+    "title": "Exploratory Data Analysis",
+    "section": "Data cleaning",
+    "text": "Data cleaning\nIf we return to our initial question (“Which weather stations reported the hottest and coldest daily temperatures?”), we need to generate a list of weather stations that are ordered from highest to lowest. We can then examine the top and bottom of this new dataset.\nFirst let us remove the aberrant observations and then we’ll sort by temperature.\n\nmet &lt;- met[met$temp &gt; -40, ]\n\nNotice that we do not create a new object, we just overwrite the met object. Once you’re sure that you want to remove certain observations, this is a good way to avoid confusion (otherwise, it is easy to end up with multiple subsets of the data in your R environment with similar names like met, met_ss, met_ss2, met_final, met_FINAL, met_FINAL_REAL, etc.)"
+  },
+  {
+    "objectID": "slides/week3.html#data-cleaning-1",
+    "href": "slides/week3.html#data-cleaning-1",
+    "title": "Exploratory Data Analysis",
+    "section": "Data cleaning",
+    "text": "Data cleaning\nWe will also remove any observations with missing temperature values (NA).\nThe is.na() function tells you whether or not a particular value is missing and the ! operator takes the opposite of a TRUE/FALSE value, so in combination, they tell you which observations are not missing.\n\nmet &lt;- met[!is.na(met$temp), ]"
+  },
+  {
+    "objectID": "slides/week3.html#exploratory-graphs-11",
+    "href": "slides/week3.html#exploratory-graphs-11",
+    "title": "Exploratory Data Analysis",
+    "section": "Exploratory Graphs",
+    "text": "Exploratory Graphs\nScatterplots help us look at pairwise relationships. Let’s see if there is any trend in temperature with latitude\n\nplot(met_daily$lat, met_daily$temp, pch=16, cex=0.5)\n\n\n\n\n\n\n\n\nThere is a clear decrease in temperatures as you increase in latitude (i.e as you go north)."
+  },
+  {
+    "objectID": "slides/week3.html#exploratory-graphs-12",
+    "href": "slides/week3.html#exploratory-graphs-12",
+    "title": "Exploratory Data Analysis",
+    "section": "Exploratory Graphs",
+    "text": "Exploratory Graphs\nWe can add a simple linear regression line to this plot using lm() and abline(). We can also add a title and change the axis labels.\n\nmod &lt;- lm(temp ~ lat, data = met_daily)\nmet_daily[, plot(\n  lat, temp, pch=19, cex=0.5, \n  main = \"Temperature and Latitude\", \n  xlab = \"Latitude\", ylab = \"Temperature (deg C)\")\n  ]\nabline(mod, lwd=2, col=\"red\")\n\n(next slide)"
   }
 ]

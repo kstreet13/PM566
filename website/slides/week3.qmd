@@ -51,13 +51,13 @@ These slides were originally developed by Meredith Franklin. They have been modi
 
 ---
 
-## Pipeline
+## The Tidyverse Model
 
 ![](img/tidy_pipeline.png)
 
-EDA involves Import -> Tidy -> Transform -> Visualize. Basically it is everything before we do modeling, prediction or inference.
+Loosely, EDA encompasses the Import -> Tidy -> Transform -> Visualize steps. Basically it is everything before we do modeling, prediction or inference.
 
-EDA may involve some statistical summaries, but it does not include formal statistical analysis.
+EDA may involve some statistical summaries, but it does *not* include formal statistical analysis.
 
 ---
 
@@ -69,9 +69,9 @@ The goal of EDA is to better understand your data. Let's use the **checklist**:
 2.  Read in the data
 3.  Check the dimensions and headers and footers of the data
 4.  Check the variable types in the data
-5.  Take a closer look at some/all of the variables
+5.  Inspect the distributions of some/all of the variables
 6.  Validate with an external source
-7.  Conduct some summary statistics to answer the initial question
+7.  Compute summary statistics to begin answering the question
 8.  Make exploratory graphs
 
 ---
@@ -194,18 +194,26 @@ We know that we are supposed to have hourly measurements of weather data for the
 
 ## Check variables more closely
 
-We can generate tables for integer variables:
+We can generate tables and/or barplots for integer variables:
 
 ```{r}
 table(met$hour)
 table(met$month)
 ```
 
+## Check variables more closely
+
+We can generate tables and/or barplots for integer variables:
+
+```{r out.width = '50%', out.height='50%', fig.align = "center"}
+barplot(table(met$hour))
+```
+
 ---
 
 ## Check variables more closely
 
-For numeric variables we should do a summary to see the quantiles, min, max, and mean
+For numeric variables we should do a summary to see the quantiles, min, max, and mean.
 
 ```{r}
 table(met$year)
@@ -217,10 +225,24 @@ summary(met$lon)
 
 ## Check variables more closely
 
+We can visualize these distributions with a histogram.
+
+```{r out.width = '50%', out.height='50%', fig.align = "center"}
+layout(matrix(1:2, nrow=1))
+hist(met$lat)
+hist(met$lon)
+layout(1)
+```
+
+---
+
+## Check variables more closely
+
 If we return to our initial question, what weather stations reported the hottest and coldest temperatures, we should take a closer look at our key variable, temperature (`temp`)
 
 ```{r}
 summary(met$temp)
+hist(met$temp)
 ```
 
 It looks like the temperatures are in Celsius. A temperature of -40 in August is really cold, we should see if this is an implausible value.
@@ -241,7 +263,7 @@ mean(is.na(met$temp))
 
 
 
-## Check variables more closely
+## Check variables more closely{.smaller}
 
 In our `data.frame` we can easily subset the data and select certain columns. Here, we select all observations with a temperature of -40C and a specific subset of the variables:
 
@@ -281,7 +303,7 @@ It doesn't make much sense to have a -40C reading in the Gulf of Mexico off the 
 
 ---
 
-## Sorting
+## Data cleaning{.smaller}
 
 If we return to our initial question ("Which weather stations reported the hottest and coldest daily temperatures?"), we need to generate a list of weather stations that are ordered from highest to lowest. We can then examine the top and bottom of this new dataset.
 
@@ -291,9 +313,22 @@ First let us remove the aberrant observations and then we'll sort by temperature
 met <- met[met$temp > -40, ]
 ```
 
-Notice that we do not create a new object, we just overwrite the `met` object. Once you're sure that you want to remove certain observations, this is a good way to avoid confusion (otherwise, you might have multiple subsets of the data in your R environment with similar names like `met`, `met_ss`, `met_ss2`, `met_final`, etc.)
+Notice that we do not create a new object, we just overwrite the `met` object. Once you're sure that you want to remove certain observations, this is a good way to avoid confusion (otherwise, it is easy to end up with multiple subsets of the data in your R environment with similar names like `met`, `met_ss`, `met_ss2`, `met_final`, `met_FINAL`, `met_FINAL_REAL`, etc.)
 
 ---
+
+---
+
+## Data cleaning
+
+We will also remove any observations with missing temperature values (`NA`).
+
+The `is.na()` function tells you whether or not a particular value is missing and the `!` operator takes the opposite of a `TRUE`/`FALSE` value, so in combination, they tell you which observations are not missing.
+
+```{r}
+met <- met[!is.na(met$temp), ]
+```
+
 
 # Sorting
 
@@ -322,9 +357,9 @@ The maximum hourly temperature is `r met$temp[nrow(met)]`C at site `r met$USAFID
 
 ---
 
-## Summary statistics
+## Summary statistics{.smaller}
 
-We need to transform our data to answer our initial question. Let's find the **daily** mean, max, and min temperatures in our `data.frame`. We can do this with the `summarize` function from the `dplyr` package. This package is part of the `tidyverse`, so the syntax is a bit different from what we've seen before.
+We need to transform our data to answer our initial question. Let's find the **daily** mean, max, and min temperatures for each weather station in our `data.frame`. We can do this with the `summarize` function from the `dplyr` package. This package is part of the `tidyverse`, so the syntax is a bit different from what we've seen before.
 
 ```{r}
 library(dplyr)
@@ -346,7 +381,7 @@ Before we continue, check the relative sizes of the `met` and `met_daily` object
 
 ---
 
-## Summary Statistics
+## Summary Statistics{.smaller}
 
 Now we will order our new dataset by the average daily temperature, just as we ordered the old one by observed temperature.
 
@@ -361,7 +396,7 @@ tail(met_daily)
 
 ## Summary statistics
 
-The maximum **daily** temperature is `r met_daily$temp[nrow(met_daily)]` C at site `r met_daily$USAFID[nrow(met_daily)]` and the minimum daily temperature is `r met_daily$temp[1]`C at site `r met_daily$USAFID[1]`.
+The maximum **daily average** temperature is `r met_daily$temp[nrow(met_daily)]` C at site `r met_daily$USAFID[nrow(met_daily)]` and the minimum daily average temperature is `r met_daily$temp[1]`C at site `r met_daily$USAFID[1]`.
 
 ---
 
@@ -445,7 +480,17 @@ boxplot(met_daily$temp, col = "blue")
 
 ## Exploratory Graphs
 
-A map will show us where the weather stations are located. First let's get the unique latitutdes and longitudes and see how many meteorological sites there are
+We know that these data come from US weather stations, so we might have some idea what to expect just from plotting the latitude and longitude (note that we fix the aspect ratio at 1:1 with `asp = 1`; this prevents the plot from stretching or shrinking to fit the available plotting area):
+
+```{r out.width = '60%', out.height='60%', fig.align = "center"}
+plot(met_daily$lon, met_daily$lat, asp=1)
+```
+
+---
+
+## Exploratory Graphs
+
+A map will show us where the weather stations are located. First let's get the unique latitudes and longitudes and see how many meteorological sites there are
 
 ```{r}
 met_stations <- (unique(met[,c("lat","lon")]))  
@@ -456,13 +501,26 @@ dim(met_stations)
 
 ## Exploratory Graphs
 
-A map will show us where the weather stations are located. First let's get the unique latitutdes and longitudes and see how many meteorological sites there are.
+A map will show us where the weather stations are located. First let's get the unique latitudes and longitudes and see how many meteorological sites there are.
 
-```{r out.width = '40%', out.height='40%', fig.align = "center"}
+```{r eval=FALSE}
 library(leaflet)
 leaflet(met_stations) |> 
   addProviderTiles('CartoDB.Positron') |> 
-  addCircles(lat = ~lat, lng = ~lon, opacity = 1, fillOpacity = 1, radius = 400)
+  addCircles(lat = ~lat, lng = ~lon,
+             opacity = 1, fillOpacity = 1, radius = 400)
+```
+
+---
+
+## Exploratory Graphs
+
+```{r echo=FALSE}
+library(leaflet)
+leaflet(met_stations) |> 
+  addProviderTiles('CartoDB.Positron') |> 
+  addCircles(lat = ~lat, lng = ~lon,
+             opacity = 1, fillOpacity = 1, radius = 400)
 ```
 
 ---
@@ -471,9 +529,9 @@ leaflet(met_stations) |>
 
 Let's map the locations of the max and min daily temperatures.
 
-```r
-min <- met_daily[1]  # First observation.
-max <- met_daily[.N] # Last obs, .N is a special symbol in data.table
+```{r eval=FALSE}
+min <- met_daily[1, ]               # First observation
+max <- met_daily[nrow(met_daily), ] # Last observation
 
 leaflet() |> 
   addProviderTiles('CartoDB.Positron') |> 
@@ -493,7 +551,7 @@ leaflet() |>
 
 ---
 
-```{r out.width = '40%', out.height='40%', fig.align = "center", echo = FALSE}
+```{r echo = FALSE}
 min <- met_daily[1, ]  # First observation.
 max <- met_daily[nrow(met_daily), ] # Last observation
 
@@ -518,15 +576,7 @@ leaflet() |>
 Scatterplots help us look at pairwise relationships. Let's see if there is any trend in temperature with latitude
 
 ```{r out.width = '40%', out.height='40%', fig.align = "center"}
-plot(met_daily$lat, met_daily$temp, pch=19, cex=0.5)
-```
-
----
-
-equivalent to
-
-```{r plot_daily-bis, results='hide', out.width='40%'}
-plot(met_daily$lat, met_daily$temp, pch = 16, cex = 0.5)
+plot(met_daily$lat, met_daily$temp, pch=16, cex=0.5)
 ```
 
 There is a clear decrease in temperatures as you increase in latitude (i.e as you go north).
@@ -537,7 +587,7 @@ There is a clear decrease in temperatures as you increase in latitude (i.e as yo
 
 We can add a simple linear regression line to this plot using `lm()` and `abline()`. We can also add a title and change the axis labels.
 
-```r
+```{r eval=FALSE}
 mod <- lm(temp ~ lat, data = met_daily)
 met_daily[, plot(
   lat, temp, pch=19, cex=0.5, 

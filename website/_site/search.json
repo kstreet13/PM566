@@ -345,392 +345,392 @@
   {
     "objectID": "slides/week4.html#acknowledgment",
     "href": "slides/week4.html#acknowledgment",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Acknowledgment",
     "text": "Acknowledgment\nThese slides were originally developed by Meredith Franklin (and Paul Marjoram) and modified by George G. Vega Yon."
   },
   {
     "objectID": "slides/week4.html#background",
     "href": "slides/week4.html#background",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Background",
     "text": "Background\n\nThis lecture provides an introduction to ggplot2, an R package that provides vastly better graphics options than R’s default plots, histograms, etc.\nThis section is based on chapter 3 of “R for Data Science”"
   },
   {
     "objectID": "slides/week4.html#background-1",
     "href": "slides/week4.html#background-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Background",
     "text": "Background\nggplot2 is part of the Tidyverse. The tidyverse is…“an opinionated collection of R packages designed for data science. All packages share an underlying design philosophy, grammar, and data structures.” (https://www.tidyverse.org/)\n\nlibrary(tidyverse)\nlibrary(data.table)"
   },
   {
     "objectID": "slides/week4.html#ggplot2",
     "href": "slides/week4.html#ggplot2",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "ggplot2",
     "text": "ggplot2\nggplot2 is designed on the principle of adding layers."
   },
   {
     "objectID": "slides/week4.html#ggplot2-1",
     "href": "slides/week4.html#ggplot2-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "ggplot2",
     "text": "ggplot2\n\nWith ggplot2 a plot is initiated with the function ggplot()\nThe first argument of ggplot() is the dataset to use in the graph\nLayers are added to ggplot() with +\nLayers include geom functions such as point, lines, etc\nEach geom function takes a mapping argument, which is always paired with aes()\nThe aes() mapping takes the x and y axes of the plot\n\n\nggplot(data = data) +\n    geom_function(mapping = aes(mappings))"
   },
   {
     "objectID": "slides/week4.html#data",
     "href": "slides/week4.html#data",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Data",
     "text": "Data\nContinuing with the weather data from last week, let’s take the daily averages at each site, keeping some of the variables. Let’s also create a new variable for region (east and west), categorize elevation, and create a multi-category variable for visibility for exploratory purposes.\n\n# Reading the data, filtering, and replacing bad values with NAs\nmet &lt;- read.csv(file.path('..','..','data','met_all.gz'))\nmet &lt;- met[met$temp &gt; -10, ]\nmet$elev[met$elev == 9999.0] &lt;- NA\n\n# Creating an aggregated version of the dataset\nlibrary(dplyr)\nmet_avg &lt;- summarize(met,\n                     temp =     mean(temp, na.rm = TRUE),\n                     rh =       mean(rh, na.rm = TRUE),\n                     wind.sp =  mean(wind.sp, na.rm = TRUE),\n                     vis.dist = mean(vis.dist, na.rm = TRUE),\n                     lat =      mean(lat, na.rm = TRUE),\n                     lon =      mean(lon, na.rm = TRUE),\n                     elev =     mean(elev, na.rm = TRUE),\n                     .by = c(USAFID, day))"
   },
   {
     "objectID": "slides/week4.html#basic-scatterplot",
     "href": "slides/week4.html#basic-scatterplot",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Basic Scatterplot",
     "text": "Basic Scatterplot\n\nplot(met_avg$temp, met_avg$rh)"
   },
   {
     "objectID": "slides/week4.html#basic-scatterplot-1",
     "href": "slides/week4.html#basic-scatterplot-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Basic Scatterplot",
     "text": "Basic Scatterplot\nHere’s how to create a basic plot in ggplot2\n\nggplot(data = met_avg) + \n  geom_point(mapping = aes(x = temp, y = rh))\n\n\nWe see that as temperature increases, relative humidity decreases."
   },
   {
     "objectID": "slides/week4.html#basic-scatterplot-2",
     "href": "slides/week4.html#basic-scatterplot-2",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Basic Scatterplot 2",
     "text": "Basic Scatterplot 2\n\ngeom_point() adds a layer of points to your plot, to create a scatterplot.\nggplot2 comes with many geom functions that each add a different type of layer to a plot.\nEach geom function in ggplot2 takes a mapping argument. This defines how variables in your dataset are mapped to visual properties.\nThe mapping argument is always paired with aes(), and the x and y arguments of aes() specify which variables to map to the x and y axes. ggplot2 looks for the mapped variables in the data argument, in this case, met_avg\nOne common problem when creating ggplot2 graphics is to put the + in the wrong place: it has to come at the end of the line, not the start."
   },
   {
     "objectID": "slides/week4.html#coloring-by-a-variable---using-aesthetics",
     "href": "slides/week4.html#coloring-by-a-variable---using-aesthetics",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Coloring by a variable - using aesthetics",
     "text": "Coloring by a variable - using aesthetics\nYou can map the colors of your points to the class variable to reveal the region of data (west or east). ggplot2 chooses colors, and adds a legend, automatically.\n\nggplot(data = met_avg) + \n  geom_point(mapping = aes(x = temp, y = rh, color = region))\n\n\n\n\n\n\n\n\nWe see that humidity in the east is generally higher than in the west and that the hottest temperatures are in the west."
   },
   {
     "objectID": "slides/week4.html#controlling-point-transparency-using-the-alpha-aesthetic",
     "href": "slides/week4.html#controlling-point-transparency-using-the-alpha-aesthetic",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Controlling point transparency using the “alpha” aesthetic",
     "text": "Controlling point transparency using the “alpha” aesthetic\n\nggplot(data = met_avg) + \n  geom_point(mapping = aes(x = temp, y = rh, alpha = 0.3))"
   },
   {
     "objectID": "slides/week4.html#controlling-point-transparency-using-the-alpha-aesthetic-1",
     "href": "slides/week4.html#controlling-point-transparency-using-the-alpha-aesthetic-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Controlling point transparency using the “alpha” aesthetic",
     "text": "Controlling point transparency using the “alpha” aesthetic\n\nggplot(data = met_avg) + \n  geom_point(mapping = aes(x = temp, y = rh, alpha = rh))"
   },
   {
     "objectID": "slides/week4.html#controlling-point-shape",
     "href": "slides/week4.html#controlling-point-shape",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Controlling point shape:",
     "text": "Controlling point shape:\n\nggplot(data = met_avg) + \n  geom_point(mapping = aes(x = temp, y = rh, shape = region))\n\n\nNote that, by default, ggplot uses up to 6 shapes. If there are more, some of your data is not plotted!! (At least it warns you.)"
   },
   {
     "objectID": "slides/week4.html#summary-of-aesthetics",
     "href": "slides/week4.html#summary-of-aesthetics",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Summary of aesthetics",
     "text": "Summary of aesthetics\n\n\n\ncode\ndescription\n\n\n\n\nx\nposition on x-axis\n\n\ny\nposition on y-axis\n\n\nshape\nshape\n\n\ncolor\ncolor of element borders\n\n\nfill\ncolor inside of elements\n\n\nsize\nsize\n\n\nalpha\ntransparency\n\n\nlinetype\ntype of line"
   },
   {
     "objectID": "slides/week4.html#base-plot-equivalents",
     "href": "slides/week4.html#base-plot-equivalents",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Base plot equivalents",
     "text": "Base plot equivalents\n\n\n\ncode\ndescription\n\n\n\n\nfirst arg / x\nposition on x-axis\n\n\nsecond arg / y\nposition on y-axis\n\n\npch\nshape\n\n\ncol\ncolor of element borders\n\n\nfill\ncolor inside of elements\n\n\ncex\nsize\n\n\nscales::alpha\ntransparency\n\n\nlty\ntype of line"
   },
   {
     "objectID": "slides/week4.html#add-points-to-plot",
     "href": "slides/week4.html#add-points-to-plot",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Add points to plot",
     "text": "Add points to plot\nWith base plot, you can add points to an existing plot with points(), which takes the same arguments as plot() for plotting points.\n\nplot(1:10, pch = 16)\npoints(10:1, pch = 16, col = 2)"
   },
   {
     "objectID": "slides/week4.html#facets-1",
     "href": "slides/week4.html#facets-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Facets 1",
     "text": "Facets 1\nFacets are particularly useful for categorical variables.\n\nmet_avg[!is.na(met_avg$region), ] %&gt;% \n  ggplot() + \n  geom_point(mapping = aes(x = temp, y = rh, color=region)) + \n  facet_wrap(~ region, nrow = 1)"
   },
   {
     "objectID": "slides/week4.html#facets-2",
     "href": "slides/week4.html#facets-2",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Facets 2",
     "text": "Facets 2\nOr you can facet on two variables…\n\nmet_avg[!is.na(met_avg$region) & !is.na(met_avg$elev_cat), ] %&gt;% \n  ggplot() + \n  geom_point(mapping = aes(x = temp, y = rh)) + \n  facet_grid(region ~ elev_cat)"
   },
   {
     "objectID": "slides/week4.html#facets-3",
     "href": "slides/week4.html#facets-3",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Facets 3",
     "text": "Facets 3\nBase plot is not good at this! You can make multiple plots within a single plotting window by utilizing the layout() function, but you will still have to make each plot manually.\n\nlayout(matrix(1:2, nrow=1))\nplot(met_avg$temp[which(met_avg$region == 'east')], met_avg$rh[which(met_avg$region == 'east')], pch = 16, col = 2)\nplot(met_avg$temp[which(met_avg$region == 'west')], met_avg$rh[which(met_avg$region == 'west')], pch = 16, col = 4)"
   },
   {
     "objectID": "slides/week4.html#geometric-objects-1",
     "href": "slides/week4.html#geometric-objects-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Geometric objects 1",
     "text": "Geometric objects 1\nGeometric objects are used to control the type of plot you draw. So far we have used scatterplots (via geom_point). But now let’s try plotting a smoothed line fitted to the data (and note how we do side-by-side plots)\n\nlibrary(cowplot)\n\nscatterplot &lt;- ggplot(data = met_avg) + geom_point(mapping = aes(x = temp, y = rh))\nlineplot    &lt;- ggplot(data = met_avg) + geom_smooth(mapping = aes(x = temp, y = rh))\n\nplot_grid(scatterplot, lineplot, labels = \"AUTO\")"
   },
   {
     "objectID": "slides/week4.html#geometric-objects-1-1",
     "href": "slides/week4.html#geometric-objects-1-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Geometric objects 1",
     "text": "Geometric objects 1\ncowplot is a package due to Claus Wilke, it “… is a simple add-on to ggplot. It provides various features that help with creating publication-quality figures, such as a set of themes, functions to align plots and arrange them into complex compound figures, and functions that make it easy to annotate plots and or mix plots with images.”"
   },
   {
     "objectID": "slides/week4.html#geometric-objects-2",
     "href": "slides/week4.html#geometric-objects-2",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Geometric objects 2",
     "text": "Geometric objects 2\nNote that not every aesthetic works with every geom function. But now there are some new ones we can use.\n\nggplot(data = met_avg) + \n  geom_smooth(mapping = aes(x = temp, y = rh, linetype = region))\n\n\nHere we make the line type depend on the region and we clearly see east has higher rh than west, but generally as temperatures increase rh decreases in both regions."
   },
   {
     "objectID": "slides/week4.html#geometric-objects-3",
     "href": "slides/week4.html#geometric-objects-3",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Geometric objects 3",
     "text": "Geometric objects 3\nHistograms\n\nhist(met_avg$temp)"
   },
   {
     "objectID": "slides/week4.html#geometric-objects-3-1",
     "href": "slides/week4.html#geometric-objects-3-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Geometric objects 3",
     "text": "Geometric objects 3\nHistograms\n\nggplot(met_avg) + \n  geom_histogram(mapping = aes(x = temp))"
   },
   {
     "objectID": "slides/week4.html#geometric-objects-4",
     "href": "slides/week4.html#geometric-objects-4",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Geometric objects 4",
     "text": "Geometric objects 4\nBoxplots\n\nboxplot(met_avg$temp ~ met_avg$elev_cat)"
   },
   {
     "objectID": "slides/week4.html#geometric-objects-4-1",
     "href": "slides/week4.html#geometric-objects-4-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Geometric objects 4",
     "text": "Geometric objects 4\nBoxplots\n\nmet_avg[!is.na(met_avg$elev_cat), ] %&gt;% \n  ggplot()+\n  geom_boxplot(mapping=aes(x=elev_cat, y=temp, fill=elev_cat))"
   },
   {
     "objectID": "slides/week4.html#geometric-objects-5",
     "href": "slides/week4.html#geometric-objects-5",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Geometric objects 5",
     "text": "Geometric objects 5\nLineplots\n\nplot(met_avg$day[met_avg$elev==4113], met_avg$temp[met_avg$elev==4113], type = 'l')"
   },
   {
     "objectID": "slides/week4.html#geometric-objects-5-1",
     "href": "slides/week4.html#geometric-objects-5-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Geometric objects 5",
     "text": "Geometric objects 5\nJust as you can add points to an existing plot, you can also add lines()\n\nplot(1:10, pch = 16)\nlines(10:1, col = 2, lwd = 3) # add a thick red line"
   },
   {
     "objectID": "slides/week4.html#geometric-objects-5-2",
     "href": "slides/week4.html#geometric-objects-5-2",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Geometric objects 5",
     "text": "Geometric objects 5\nLineplots\n\nggplot(data = met_avg[met_avg$elev==4113, ])+\n geom_line(mapping=aes(x=day, y=temp))"
   },
   {
     "objectID": "slides/week4.html#geometric-objects-5-3",
     "href": "slides/week4.html#geometric-objects-5-3",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Geometric objects 5",
     "text": "Geometric objects 5\nPolygons\n\nworld_map &lt;- map_data(\"world\")\nggplot(data = world_map, aes(x = long, y = lat, group = group)) +\n  geom_polygon(fill = \"darkgray\", color = \"white\")"
   },
   {
     "objectID": "slides/week4.html#geometric-objects-5-4",
     "href": "slides/week4.html#geometric-objects-5-4",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Geometric objects 5",
     "text": "Geometric objects 5\nPolygons\n\nus_map &lt;- map_data(\"state\")\nggplot(data = us_map, aes(x = long, y = lat, fill = region)) +\n  geom_polygon(color = \"white\")"
   },
   {
     "objectID": "slides/week4.html#geoms---reference",
     "href": "slides/week4.html#geoms---reference",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Geoms - reference",
     "text": "Geoms - reference\nggplot2 provides over 40 geoms, and extension packages provide even more (see https://ggplot2.tidyverse.org/reference/ for a sampling).\nThe best way to get a comprehensive overview is the ggplot2 cheatsheet, which you can find at https://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf"
   },
   {
     "objectID": "slides/week4.html#multiple-geoms-1",
     "href": "slides/week4.html#multiple-geoms-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Multiple geoms 1",
     "text": "Multiple geoms 1\nLet’s layer geoms\n\nmet_avg[!is.na(met_avg$region), ] %&gt;%\n  ggplot() + \n  geom_point(mapping = aes(x = temp, y = rh, color = region))+\n  geom_smooth(mapping = aes(x = temp, y = rh, linetype = region))"
   },
   {
     "objectID": "slides/week4.html#multiple-geoms-2",
     "href": "slides/week4.html#multiple-geoms-2",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Multiple geoms 2",
     "text": "Multiple geoms 2\nWe can avoid repetition of aesthetics by passing a set of mappings to ggplot(). ggplot2 will treat these mappings as global mappings that apply to each geom in the graph.\n\nmet_avg[!is.na(met_avg$region), ] %&gt;%\n  ggplot(mapping = aes(x = temp, y = rh, color=region, linetype=region)) +\n  geom_point() + \n  geom_smooth()"
   },
   {
     "objectID": "slides/week4.html#multiple-geoms-2-1",
     "href": "slides/week4.html#multiple-geoms-2-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Multiple geoms 2",
     "text": "Multiple geoms 2\ngeom_smooth() has options. For example if we want a linear regression line we add method=lm\n\nmet_avg[!is.na(met_avg$region), ] %&gt;%\n  ggplot(mapping = aes(x = temp, y = rh, color = region, linetype = region)) +\n  geom_point() + \n  geom_smooth(method = lm, se = FALSE, col = \"black\")"
   },
   {
     "objectID": "slides/week4.html#multiple-geoms-3",
     "href": "slides/week4.html#multiple-geoms-3",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Multiple geoms 3",
     "text": "Multiple geoms 3\nIf you place mappings in a geom function, ggplot2 will use these mappings to extend or overwrite the global mappings for that layer only. This makes it possible to display different aesthetics in different layers.\n\nmet_avg[!is.na(met_avg$region), ] %&gt;%\n  ggplot(mapping = aes(x = temp, y = rh)) + \n  geom_point(mapping = aes(color = region)) + \n  geom_smooth()"
   },
   {
     "objectID": "slides/week4.html#multiple-geoms-4",
     "href": "slides/week4.html#multiple-geoms-4",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Multiple geoms 4",
     "text": "Multiple geoms 4\nYou can use the same idea to specify different data for each layer. Here, our smooth line displays the full met dataset but the points are colored by visibilty.\n\nmet_avg[!is.na(met_avg$vis_cat), ] %&gt;%\n  ggplot(mapping = aes(x = temp, y = rh, alpha = 0.5)) + \n  geom_point(mapping = aes(color = vis_cat)) + \n  geom_smooth(se = FALSE)"
   },
   {
     "objectID": "slides/week4.html#statistical-transformations---another-example",
     "href": "slides/week4.html#statistical-transformations---another-example",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Statistical transformations - another example",
     "text": "Statistical transformations - another example\nYou might want to draw greater attention to the statistical transformation in your code. For example, you might use stat_summary(), which summarises the y values for each unique x value, to draw attention to the summary that you’re computing:\n\nl &lt;- met_avg[!is.na(met_avg$vis_cat) & met_avg$vis_cat != \"clear\", ] %&gt;%\n  ggplot() + \n    stat_summary(mapping = aes(x = vis_cat, y = temp),\n    fun.min = min,\n    fun.max = max,\n    fun = median)"
   },
   {
     "objectID": "slides/week4.html#statistical-transformations---another-example-1",
     "href": "slides/week4.html#statistical-transformations---another-example-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Statistical transformations - another example",
     "text": "Statistical transformations - another example\n\nl"
   },
   {
     "objectID": "slides/week4.html#position-adjustments",
     "href": "slides/week4.html#position-adjustments",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Position adjustments",
     "text": "Position adjustments\nAn option that can be very useful is position = \"jitter\". This adds a small amount of random noise to each point. This spreads out points that might otherwise be overlapping.\n\nnojitter &lt;- ggplot(data = met_avg[1:1000,]) + \n  geom_point(mapping = aes(x = vis_cat, y = temp))\n\njitter &lt;- ggplot(data = met_avg[1:1000,]) + \n  geom_point(mapping = aes(x = vis_cat, y = temp), position = \"jitter\")"
   },
   {
     "objectID": "slides/week4.html#position-adjustments-1",
     "href": "slides/week4.html#position-adjustments-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Position adjustments",
     "text": "Position adjustments\nAn option that can be very useful is position = \"jitter\". This adds a small amount of random noise to each point. This spreads out points that might otherwise be overlapping.\n\nnojitter &lt;- ggplot(data = met_avg[1:1000,]) + \n  geom_point(mapping = aes(x = vis_cat, y = temp))\n\njitter &lt;- ggplot(data = met_avg[1:1000,]) + \n  geom_point(mapping = aes(x = vis_cat, y = temp), position = \"jitter\")"
   },
   {
     "objectID": "slides/week4.html#position-adjustments-2",
     "href": "slides/week4.html#position-adjustments-2",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Position adjustments",
     "text": "Position adjustments\n\nplot_grid(nojitter, jitter, labels = \"AUTO\")"
   },
   {
     "objectID": "slides/week4.html#coordinate-systems",
     "href": "slides/week4.html#coordinate-systems",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Coordinate systems",
     "text": "Coordinate systems\nCoordinate systems are one of the more complicated corners of ggplot. To start with something simple, here’s how to flip axes:\n\nunflipped &lt;- ggplot(data = met_avg) + \n  geom_boxplot(mapping = aes(x = vis_cat, y = temp))\n\nflipped &lt;- ggplot(data = met_avg) + \n  geom_boxplot(mapping = aes(x = vis_cat, y = temp)) +\n  coord_flip()"
   },
   {
     "objectID": "slides/week4.html#coordinate-systems-1",
     "href": "slides/week4.html#coordinate-systems-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Coordinate systems",
     "text": "Coordinate systems\n\nplot_grid(unflipped, flipped, labels = \"AUTO\")"
   },
   {
     "objectID": "slides/week4.html#coordinate-systems-2",
     "href": "slides/week4.html#coordinate-systems-2",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Coordinate systems",
     "text": "Coordinate systems\nThere is also the ability to control the aspect ratio using coord_quickmap() and to use polar coordinates with coord_polar().\n\nbar &lt;- ggplot(data = met_avg) + \n  geom_bar(mapping = aes(x = elev_cat, fill = elev_cat), show.legend = FALSE, width = 1) + \n  theme(aspect.ratio = 1) +\n  labs(x = NULL, y = NULL)"
   },
   {
     "objectID": "slides/week4.html#coordinate-systems-3",
     "href": "slides/week4.html#coordinate-systems-3",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Coordinate systems",
     "text": "Coordinate systems\n\nbar + coord_flip()\n\n\n\n\n\n\n\nbar + coord_polar()"
   },
   {
     "objectID": "slides/week4.html#modifying-labels",
     "href": "slides/week4.html#modifying-labels",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Modifying labels",
     "text": "Modifying labels\n\nggplot(met_avg[!is.na(met_avg$region), ]) +\n  geom_point(aes(temp, rh, color = region)) + \n  labs(title = \"Weather Station Data\") + \n  labs(x = expression(\"Temperature\" *~ degree * C), y = \"Relative Humidity\")"
   },
   {
     "objectID": "slides/week4.html#changing-the-theme",
     "href": "slides/week4.html#changing-the-theme",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Changing the Theme",
     "text": "Changing the Theme\n\nggplot(met_avg[!is.na(met_avg$region), ]) +\n  geom_point(aes(temp, rh, color = region)) + \n  labs(title = \"Weather Station Data\") + \n  labs(x = expression(\"Temperature\"*~degree*C), y = \"Relative Humidity\")+\n  theme_bw(base_family = \"Times\")"
   },
   {
     "objectID": "slides/week4.html#changing-the-legend",
     "href": "slides/week4.html#changing-the-legend",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Changing the Legend",
     "text": "Changing the Legend\n\nggplot(met_avg[!is.na(met_avg$region), ]) +\n  geom_point(aes(temp, rh, color = region)) + \n  labs(title = \"Weather Station Data\",x = expression(\"Temperature\"*~degree*C), y = \"Relative Humidity\")+\n  scale_color_manual(name=\"Region\", labels=c(\"East\", \"West\"), values=c(\"east\"=\"lightblue\", \"west\"=\"purple\"))+\n  theme_bw(base_family = \"Times\")"
   },
   {
     "objectID": "slides/week4.html#changing-colorscales",
     "href": "slides/week4.html#changing-colorscales",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Changing Colorscales",
     "text": "Changing Colorscales\n\nggplot(data = met_avg) + \n  geom_point(mapping=aes(x=temp, y=rh, color=elev))+\n  scale_color_gradient(low=\"blue\", high=\"red\")"
   },
   {
     "objectID": "slides/week4.html#changing-colorscales-1",
     "href": "slides/week4.html#changing-colorscales-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Changing Colorscales",
     "text": "Changing Colorscales\n\nggplot(data=met_avg) + \n  geom_point(mapping= aes(x=temp, y=rh, color = cut(elev, b=5))) + \n  scale_color_manual(values = viridis::viridis(6))"
   },
   {
     "objectID": "slides/week4.html#a-great-reference",
     "href": "slides/week4.html#a-great-reference",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "A Great reference",
     "text": "A Great reference\nA great (comprehensive) reference for everything you can do with ggplot2 is the R Graphics Cookbook:\nhttps://r-graphics.org/"
   },
   {
     "objectID": "slides/week4.html#reminder---the-ggplot2-cheatsheet",
     "href": "slides/week4.html#reminder---the-ggplot2-cheatsheet",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Reminder - the ggplot2 cheatsheet",
     "text": "Reminder - the ggplot2 cheatsheet\nA briefer summary can be found here:\nhttps://github.com/rstudio/cheatsheets/blob/main/data-visualization-2.1.pdf\nRstudio has a variety of other great Cheatsheets."
   },
   {
     "objectID": "slides/week4.html#maps-with-leaflet",
     "href": "slides/week4.html#maps-with-leaflet",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Maps with leaflet",
-    "text": "Maps with leaflet\nLet’s create a map of monthly average temperatures at each of the weather stations and color the points by a temperature gradient. We need to create a color palette and we can add a legend.\n\nlibrary(leaflet)\nmet_avg2 &lt;- summarize(met,\n                      temp =     mean(temp, na.rm = TRUE),\n                      lat =      mean(lat, na.rm = TRUE),\n                      lon =      mean(lon, na.rm = TRUE),\n                      .by = c(USAFID))\nmet_avg2 &lt;- met_avg2[!is.na(met_avg2$temp), ]\n\n# Generating a color palette\ntemp.pal &lt;- colorNumeric(c('darkgreen','goldenrod','brown'), domain=met_avg2$temp)\n\ntemp.pal(20)\n\n[1] \"#B69A19\"\n\ntemp.pal\n\nfunction (x) \n{\n    if (length(x) == 0 || all(is.na(x))) {\n        return(pf(x))\n    }\n    if (is.null(rng)) \n        rng &lt;- range(x, na.rm = TRUE)\n    rescaled &lt;- scales::rescale(x, from = rng)\n    if (any(rescaled &lt; 0 | rescaled &gt; 1, na.rm = TRUE)) \n        warning(\"Some values were outside the color scale and will be treated as NA\")\n    if (reverse) {\n        rescaled &lt;- 1 - rescaled\n    }\n    pf(rescaled)\n}\n&lt;bytecode: 0x12e491158&gt;\n&lt;environment: 0x12e495a88&gt;\nattr(,\"colorType\")\n[1] \"numeric\"\nattr(,\"colorArgs\")\nattr(,\"colorArgs\")$na.color\n[1] \"#808080\""
+    "text": "Maps with leaflet\nLet’s create a map of monthly average temperatures at each of the weather stations and color the points by a temperature gradient. We need to create a color palette and we can add a legend.\n\nlibrary(leaflet)\nmet_avg2 &lt;- summarize(met,\n                      temp =     mean(temp, na.rm = TRUE),\n                      lat =      mean(lat, na.rm = TRUE),\n                      lon =      mean(lon, na.rm = TRUE),\n                      .by = c(USAFID))\nmet_avg2 &lt;- met_avg2[!is.na(met_avg2$temp), ]\n\n# Generating a color palette\ntemp.pal &lt;- colorNumeric(c('darkgreen','goldenrod','brown'), domain=met_avg2$temp)\n\ntemp.pal(20)\n\n[1] \"#B69A19\"\n\ntemp.pal\n\nfunction (x) \n{\n    if (length(x) == 0 || all(is.na(x))) {\n        return(pf(x))\n    }\n    if (is.null(rng)) \n        rng &lt;- range(x, na.rm = TRUE)\n    rescaled &lt;- scales::rescale(x, from = rng)\n    if (any(rescaled &lt; 0 | rescaled &gt; 1, na.rm = TRUE)) \n        warning(\"Some values were outside the color scale and will be treated as NA\")\n    if (reverse) {\n        rescaled &lt;- 1 - rescaled\n    }\n    pf(rescaled)\n}\n&lt;bytecode: 0x358d4b8f0&gt;\n&lt;environment: 0x358d4dff0&gt;\nattr(,\"colorType\")\n[1] \"numeric\"\nattr(,\"colorArgs\")\nattr(,\"colorArgs\")$na.color\n[1] \"#808080\""
   },
   {
     "objectID": "slides/week4.html#maps-with-leaflet-1",
     "href": "slides/week4.html#maps-with-leaflet-1",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Maps with leaflet",
     "text": "Maps with leaflet\nFor the tile providers, take a look at this site: https://leaflet-extras.github.io/leaflet-providers/preview/\n\ntempmap &lt;- leaflet(met_avg2) %&gt;% \n  # The looks of the Map\n  addProviderTiles('CartoDB.Positron') %&gt;% \n  # Some circles\n  addCircles(\n    lat = ~lat, lng=~lon,\n                                                  # HERE IS OUR PAL!\n    label = ~paste0(round(temp,2), ' C'), color = ~ temp.pal(temp),\n    opacity = 1, fillOpacity = 1, radius = 500\n    ) %&gt;%\n  # And a pretty legend\n  addLegend('bottomleft', pal=temp.pal, values=met_avg2$temp,\n          title='Temperature, C', opacity=1)"
   },
   {
     "objectID": "slides/week4.html#maps-with-leaflet-2",
     "href": "slides/week4.html#maps-with-leaflet-2",
-    "title": "Data Visualization",
+    "title": "Week 4: Data Visualization",
     "section": "Maps with leaflet",
     "text": "Maps with leaflet\n\ntempmap"
   },
@@ -1062,5 +1062,705 @@
     "title": "Week 5: Data Wrangling",
     "section": "Solutions (cont.)",
     "text": "Solutions (cont.)\n\n# Question 3\n# Drawing a sample\nset.seed(123)\nidx1 &lt;- sample(which(is.na(dat$temp)), 1000)\nidx2 &lt;- sample(which(!is.na(dat$temp)), 1000)\n\n# Visualizing the data\n# make a map of the US, as we did last class\nggplot(map_data(\"state\"), aes(x = long, y = lat)) +\n  geom_map(aes(map_id = region), map = map_data(\"state\"), col = \"lightgrey\", fill = \"gray\") +\n  geom_jitter(\n    data    = dat[c(idx1, idx2), ],\n    mapping = aes(x = lon, y = lat, col = is.na(temp)),\n    inherit.aes = FALSE, alpha = .5, cex = 2\n    )"
+  },
+  {
+    "objectID": "slides/week06.html#acknowledgment",
+    "href": "slides/week06.html#acknowledgment",
+    "title": "Week 6: Text Mining",
+    "section": "Acknowledgment",
+    "text": "Acknowledgment\nThese slides were originally developed by Emil Hvitfeldt and modified by George G. Vega Yon and Kelly Street."
+  },
+  {
+    "objectID": "slides/week06.html#stop-words-in-tidytext",
+    "href": "slides/week06.html#stop-words-in-tidytext",
+    "title": "Week 6: Text Mining",
+    "section": "Stop words in tidytext",
+    "text": "Stop words in tidytext\ntidytext comes with a built-in data.frame of stop words\n\nstop_words\n\n# A tibble: 1,149 × 2\n   word        lexicon\n   &lt;chr&gt;       &lt;chr&gt;  \n 1 a           SMART  \n 2 a's         SMART  \n 3 able        SMART  \n 4 about       SMART  \n 5 above       SMART  \n 6 according   SMART  \n 7 accordingly SMART  \n 8 across      SMART  \n 9 actually    SMART  \n10 after       SMART  \n# ℹ 1,139 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#removing-stopwords",
+    "href": "slides/week06.html#removing-stopwords",
+    "title": "Week 6: Text Mining",
+    "section": "Removing stopwords",
+    "text": "Removing stopwords\nWe can use an anti_join() to remove the tokens that also appear in the stop_words data.frame\n\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  anti_join(stop_words, by = c(\"token\" = \"word\")) |&gt;\n  count(token, sort = TRUE)\n\n# A tibble: 2,314 × 2\n   token       n\n   &lt;chr&gt;   &lt;int&gt;\n 1 alice     386\n 2 time       71\n 3 queen      68\n 4 king       61\n 5 don’t      60\n 6 it’s       57\n 7 i’m        56\n 8 mock       56\n 9 turtle     56\n10 gryphon    55\n# ℹ 2,304 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#anti-join-with-same-variable-name",
+    "href": "slides/week06.html#anti-join-with-same-variable-name",
+    "title": "Week 6: Text Mining",
+    "section": "Anti-join with same variable name",
+    "text": "Anti-join with same variable name\n\nalice |&gt;\n  unnest_tokens(word, text) |&gt;\n  anti_join(stop_words, by = c(\"word\")) |&gt;\n  count(word, sort = TRUE)\n\n# A tibble: 2,314 × 2\n   word        n\n   &lt;chr&gt;   &lt;int&gt;\n 1 alice     386\n 2 time       71\n 3 queen      68\n 4 king       61\n 5 don’t      60\n 6 it’s       57\n 7 i’m        56\n 8 mock       56\n 9 turtle     56\n10 gryphon    55\n# ℹ 2,304 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#which-words-appears-together",
+    "href": "slides/week06.html#which-words-appears-together",
+    "title": "Week 6: Text Mining",
+    "section": "Which words appears together?",
+    "text": "Which words appears together?\nngrams are n consecutive word, we can count these to see what words appears together.\n\nngram with n = 1 are called unigrams: “which”, “words”, “appears”, “together”\nngram with n = 2 are called bigrams: “which words”, “words appears”, “appears together”\nngram with n = 3 are called trigrams: “which words appears”, “words appears together”"
+  },
+  {
+    "objectID": "slides/week06.html#which-words-appears-together-1",
+    "href": "slides/week06.html#which-words-appears-together-1",
+    "title": "Week 6: Text Mining",
+    "section": "Which words appears together?",
+    "text": "Which words appears together?\nWe can extract bigrams using unnest_ngrams() with n = 2\n\nalice |&gt;\n  unnest_ngrams(ngram, text, n = 2)\n\n# A tibble: 25,170 × 3\n   chapter chapter_name ngram        \n     &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        \n 1       1 CHAPTER I.   chapter i    \n 2       1 CHAPTER I.   down the     \n 3       1 CHAPTER I.   the rabbit   \n 4       1 CHAPTER I.   rabbit hole  \n 5       1 CHAPTER I.   &lt;NA&gt;         \n 6       1 CHAPTER I.   &lt;NA&gt;         \n 7       1 CHAPTER I.   alice was    \n 8       1 CHAPTER I.   was beginning\n 9       1 CHAPTER I.   beginning to \n10       1 CHAPTER I.   to get       \n# ℹ 25,160 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#alices-adventures-in-wonderland",
+    "href": "slides/week06.html#alices-adventures-in-wonderland",
+    "title": "Week 6: Text Mining",
+    "section": "Alice’s Adventures in Wonderland",
+    "text": "Alice’s Adventures in Wonderland\nDownload the alice dataset from https://USCBiostats.github.io/PM566/slides/06-textmining/alice.rds (or from here)\n\nlibrary(tidyverse)\nalice &lt;- readRDS(\"../../data/alice.rds\")\nalice\n\n# A tibble: 3,351 × 3\n   text                                                     chapter chapter_name\n   &lt;chr&gt;                                                      &lt;int&gt; &lt;chr&gt;       \n 1 \"CHAPTER I.\"                                                   1 CHAPTER I.  \n 2 \"Down the Rabbit-Hole\"                                         1 CHAPTER I.  \n 3 \"\"                                                             1 CHAPTER I.  \n 4 \"\"                                                             1 CHAPTER I.  \n 5 \"Alice was beginning to get very tired of sitting by he…       1 CHAPTER I.  \n 6 \"bank, and of having nothing to do: once or twice she h…       1 CHAPTER I.  \n 7 \"the book her sister was reading, but it had no picture…       1 CHAPTER I.  \n 8 \"conversations in it, “and what is the use of a book,” …       1 CHAPTER I.  \n 9 \"“without pictures or conversations?”\"                         1 CHAPTER I.  \n10 \"\"                                                             1 CHAPTER I.  \n# ℹ 3,341 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#using-dplyr-verbs",
+    "href": "slides/week06.html#using-dplyr-verbs",
+    "title": "Week 6: Text Mining",
+    "section": "Using dplyr verbs",
+    "text": "Using dplyr verbs\n\nlibrary(dplyr)\nalice |&gt;\n  unnest_tokens(token, text)\n\n# A tibble: 26,687 × 3\n   chapter chapter_name token    \n     &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;    \n 1       1 CHAPTER I.   chapter  \n 2       1 CHAPTER I.   i        \n 3       1 CHAPTER I.   down     \n 4       1 CHAPTER I.   the      \n 5       1 CHAPTER I.   rabbit   \n 6       1 CHAPTER I.   hole     \n 7       1 CHAPTER I.   alice    \n 8       1 CHAPTER I.   was      \n 9       1 CHAPTER I.   beginning\n10       1 CHAPTER I.   to       \n# ℹ 26,677 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#using-dplyr-verbs-1",
+    "href": "slides/week06.html#using-dplyr-verbs-1",
+    "title": "Week 6: Text Mining",
+    "section": "Using dplyr verbs",
+    "text": "Using dplyr verbs\n\nlibrary(dplyr)\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  count(token)\n\n# A tibble: 2,740 × 2\n   token        n\n   &lt;chr&gt;    &lt;int&gt;\n 1 _alice’s     1\n 2 _all         1\n 3 _all_        1\n 4 _and         1\n 5 _are_        4\n 6 _at          1\n 7 _before      1\n 8 _beg_        1\n 9 _began_      1\n10 _best_       2\n# ℹ 2,730 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#using-dplyr-verbs-2",
+    "href": "slides/week06.html#using-dplyr-verbs-2",
+    "title": "Week 6: Text Mining",
+    "section": "Using dplyr verbs",
+    "text": "Using dplyr verbs\n\nlibrary(dplyr)\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  count(token, sort = TRUE)\n\n# A tibble: 2,740 × 2\n   token     n\n   &lt;chr&gt; &lt;int&gt;\n 1 the    1643\n 2 and     871\n 3 to      729\n 4 a       632\n 5 she     538\n 6 it      527\n 7 of      514\n 8 said    460\n 9 i       393\n10 alice   386\n# ℹ 2,730 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#using-dplyr-verbs-3",
+    "href": "slides/week06.html#using-dplyr-verbs-3",
+    "title": "Week 6: Text Mining",
+    "section": "Using dplyr verbs",
+    "text": "Using dplyr verbs\n\nlibrary(dplyr)\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  count(chapter, token)\n\n# A tibble: 7,549 × 3\n   chapter token            n\n     &lt;int&gt; &lt;chr&gt;        &lt;int&gt;\n 1       1 _curtseying_     1\n 2       1 _never_          1\n 3       1 _not_            1\n 4       1 _one_            1\n 5       1 _poison_         1\n 6       1 _that_           1\n 7       1 _through_        1\n 8       1 _took            1\n 9       1 _very_           4\n10       1 _was_            1\n# ℹ 7,539 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#using-dplyr-verbs-4",
+    "href": "slides/week06.html#using-dplyr-verbs-4",
+    "title": "Week 6: Text Mining",
+    "section": "Using dplyr verbs",
+    "text": "Using dplyr verbs\n\nlibrary(dplyr)\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  group_by(chapter) |&gt;\n  count(token) |&gt;\n  top_n(10, n)\n\n# A tibble: 122 × 3\n# Groups:   chapter [12]\n   chapter token     n\n     &lt;int&gt; &lt;chr&gt; &lt;int&gt;\n 1       1 a        52\n 2       1 alice    27\n 3       1 and      65\n 4       1 i        30\n 5       1 it       62\n 6       1 of       43\n 7       1 she      79\n 8       1 the      92\n 9       1 to       75\n10       1 was      52\n# ℹ 112 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#dplyr-verbs-and-ggplot2",
+    "href": "slides/week06.html#dplyr-verbs-and-ggplot2",
+    "title": "Week 6: Text Mining",
+    "section": "dplyr verbs and ggplot2",
+    "text": "dplyr verbs and ggplot2\n\nlibrary(dplyr)\nlibrary(ggplot2)\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  count(token) |&gt;\n  top_n(10, n) |&gt;\n  ggplot(aes(n, token)) +\n  geom_col()"
+  },
+  {
+    "objectID": "slides/week06.html#dplyr-verbs-and-ggplot2-1",
+    "href": "slides/week06.html#dplyr-verbs-and-ggplot2-1",
+    "title": "Week 6: Text Mining",
+    "section": "dplyr verbs and ggplot2",
+    "text": "dplyr verbs and ggplot2\n\nlibrary(dplyr)\nlibrary(ggplot2)\nlibrary(forcats)\nalice |&gt;\n  unnest_tokens(token, text) |&gt;\n  count(token) |&gt;\n  top_n(10, n) |&gt;\n  ggplot(aes(n, fct_reorder(token, n))) +\n  geom_col()"
+  },
+  {
+    "objectID": "slides/week06.html#stop-word-lexicons",
+    "href": "slides/week06.html#stop-word-lexicons",
+    "title": "Week 6: Text Mining",
+    "section": "Stop word lexicons",
+    "text": "Stop word lexicons\n\ntable(stop_words$lexicon)\n\n\n    onix    SMART snowball \n     404      571      174"
+  },
+  {
+    "objectID": "slides/week06.html#snowball-stopwords",
+    "href": "slides/week06.html#snowball-stopwords",
+    "title": "Week 6: Text Mining",
+    "section": "snowball stopwords",
+    "text": "snowball stopwords\n\nstop_words |&gt;\n  filter(lexicon == \"snowball\") |&gt;\n  pull(word)\n\n  [1] \"i\"          \"me\"         \"my\"         \"myself\"     \"we\"        \n  [6] \"our\"        \"ours\"       \"ourselves\"  \"you\"        \"your\"      \n [11] \"yours\"      \"yourself\"   \"yourselves\" \"he\"         \"him\"       \n [16] \"his\"        \"himself\"    \"she\"        \"her\"        \"hers\"      \n [21] \"herself\"    \"it\"         \"its\"        \"itself\"     \"they\"      \n [26] \"them\"       \"their\"      \"theirs\"     \"themselves\" \"what\"      \n [31] \"which\"      \"who\"        \"whom\"       \"this\"       \"that\"      \n [36] \"these\"      \"those\"      \"am\"         \"is\"         \"are\"       \n [41] \"was\"        \"were\"       \"be\"         \"been\"       \"being\"     \n [46] \"have\"       \"has\"        \"had\"        \"having\"     \"do\"        \n [51] \"does\"       \"did\"        \"doing\"      \"would\"      \"should\"    \n [56] \"could\"      \"ought\"      \"i'm\"        \"you're\"     \"he's\"      \n [61] \"she's\"      \"it's\"       \"we're\"      \"they're\"    \"i've\"      \n [66] \"you've\"     \"we've\"      \"they've\"    \"i'd\"        \"you'd\"     \n [71] \"he'd\"       \"she'd\"      \"we'd\"       \"they'd\"     \"i'll\"      \n [76] \"you'll\"     \"he'll\"      \"she'll\"     \"we'll\"      \"they'll\"   \n [81] \"isn't\"      \"aren't\"     \"wasn't\"     \"weren't\"    \"hasn't\"    \n [86] \"haven't\"    \"hadn't\"     \"doesn't\"    \"don't\"      \"didn't\"    \n [91] \"won't\"      \"wouldn't\"   \"shan't\"     \"shouldn't\"  \"can't\"     \n [96] \"cannot\"     \"couldn't\"   \"mustn't\"    \"let's\"      \"that's\"    \n[101] \"who's\"      \"what's\"     \"here's\"     \"there's\"    \"when's\"    \n[106] \"where's\"    \"why's\"      \"how's\"      \"a\"          \"an\"        \n[111] \"the\"        \"and\"        \"but\"        \"if\"         \"or\"        \n[116] \"because\"    \"as\"         \"until\"      \"while\"      \"of\"        \n[121] \"at\"         \"by\"         \"for\"        \"with\"       \"about\"     \n[126] \"against\"    \"between\"    \"into\"       \"through\"    \"during\"    \n[131] \"before\"     \"after\"      \"above\"      \"below\"      \"to\"        \n[136] \"from\"       \"up\"         \"down\"       \"in\"         \"out\"       \n[141] \"on\"         \"off\"        \"over\"       \"under\"      \"again\"     \n[146] \"further\"    \"then\"       \"once\"       \"here\"       \"there\"     \n[151] \"when\"       \"where\"      \"why\"        \"how\"        \"all\"       \n[156] \"any\"        \"both\"       \"each\"       \"few\"        \"more\"      \n[161] \"most\"       \"other\"      \"some\"       \"such\"       \"no\"        \n[166] \"nor\"        \"not\"        \"only\"       \"own\"        \"same\"      \n[171] \"so\"         \"than\"       \"too\"        \"very\""
+  },
+  {
+    "objectID": "slides/week06.html#duplicated-stopwords",
+    "href": "slides/week06.html#duplicated-stopwords",
+    "title": "Week 6: Text Mining",
+    "section": "Duplicated stopwords",
+    "text": "Duplicated stopwords\n\nsort(table(stop_words$word), decreasing = TRUE)\n\n\n         down         would             a         about         above \n            4             4             3             3             3 \n        after         again       against           all            an \n            3             3             3             3             3 \n          and           any           are            as            at \n            3             3             3             3             3 \n           be       because          been        before         being \n            3             3             3             3             3 \n      between          both           but            by        cannot \n            3             3             3             3             3 \n        could           did            do          does        during \n            3             3             3             3             3 \n         each           few           for          from       further \n            3             3             3             3             3 \n          had           has          have        having            he \n            3             3             3             3             3 \n          her          here       herself          high           him \n            3             3             3             3             3 \n      himself           his           how             i            if \n            3             3             3             3             3 \n           in          into            is            it           its \n            3             3             3             3             3 \n       itself            me          more          most            my \n            3             3             3             3             3 \n       myself           new            no           not            of \n            3             3             3             3             3 \n          off            on          once          only            or \n            3             3             3             3             3 \n        other           our           out          over         right \n            3             3             3             3             3 \n         same           she        should          some         still \n            3             3             3             3             3 \n         such          than          that           the         their \n            3             3             3             3             3 \n         them          then         there         these          they \n            3             3             3             3             3 \n         this         those       through            to           too \n            3             3             3             3             3 \n        under         until            up          very           was \n            3             3             3             3             3 \n           we          were          what          when         where \n            3             3             3             3             3 \n        which         while           who           why          with \n            3             3             3             3             3 \n          you          your         yours        across        almost \n            3             3             3             2             2 \n        alone         along       already          also      although \n            2             2             2             2             2 \n       always            am         among       another       anybody \n            2             2             2             2             2 \n       anyone      anything      anywhere        aren't        around \n            2             2             2             2             2 \n          ask        asking          away        became        become \n            2             2             2             2             2 \n      becomes        behind         below          best        better \n            2             2             2             2             2 \n         came           can         can't       certain     certainly \n            2             2             2             2             2 \n      clearly          come      couldn't        didn't     different \n            2             2             2             2             2 \n      doesn't         doing         don't          done        either \n            2             2             2             2             2 \n       enough          even          ever         every     everybody \n            2             2             2             2             2 \n     everyone    everything    everywhere           far         first \n            2             2             2             2             2 \n         four           get          gets         given         gives \n            2             2             2             2             2 \n           go         going           got        hadn't        hasn't \n            2             2             2             2             2 \n      haven't          he's        here's          hers       however \n            2             2             2             2             2 \n          i'd          i'll           i'm          i've         isn't \n            2             2             2             2             2 \n         it's          just          keep         keeps          know \n            2             2             2             2             2 \n        known         knows          last         later         least \n            2             2             2             2             2 \n         less           let         let's          like        likely \n            2             2             2             2             2 \n         many           may         might        mostly          much \n            2             2             2             2             2 \n         must     necessary          need         needs         never \n            2             2             2             2             2 \n         next        nobody           non         noone           nor \n            2             2             2             2             2 \n      nothing           now       nowhere         often           old \n            2             2             2             2             2 \n          one        others         ought          ours     ourselves \n            2             2             2             2             2 \n          own           per       perhaps      possible         quite \n            2             2             2             2             2 \n       rather        really          said           saw           say \n            2             2             2             2             2 \n         says        second           see          seem        seemed \n            2             2             2             2             2 \n      seeming         seems       several         shall     shouldn't \n            2             2             2             2             2 \n        since            so      somebody       someone     something \n            2             2             2             2             2 \n    somewhere          sure          take         taken        that's \n            2             2             2             2             2 \n       theirs    themselves       there's     therefore        they'd \n            2             2             2             2             2 \n      they'll       they're       they've         think        though \n            2             2             2             2             2 \n        three          thus      together          took        toward \n            2             2             2             2             2 \n          two          upon            us           use          used \n            2             2             2             2             2 \n         uses          want         wants        wasn't           way \n            2             2             2             2             2 \n         we'd         we'll         we're         we've          well \n            2             2             2             2             2 \n         went       weren't        what's       where's       whether \n            2             2             2             2             2 \n        who's         whole          whom         whose          will \n            2             2             2             2             2 \n       within       without         won't      wouldn't           yet \n            2             2             2             2             2 \n        you'd        you'll        you're        you've      yourself \n            2             2             2             2             2 \n   yourselves           a's          able     according   accordingly \n            2             1             1             1             1 \n     actually    afterwards         ain't         allow        allows \n            1             1             1             1             1 \n      amongst        anyhow        anyway       anyways         apart \n            1             1             1             1             1 \n       appear    appreciate   appropriate          area         areas \n            1             1             1             1             1 \n        aside         asked          asks    associated     available \n            1             1             1             1             1 \n      awfully             b          back        backed       backing \n            1             1             1             1             1 \n        backs      becoming    beforehand         began        beings \n            1             1             1             1             1 \n      believe        beside       besides        beyond           big \n            1             1             1             1             1 \n        brief             c         c'mon           c's          cant \n            1             1             1             1             1 \n         case         cases         cause        causes       changes \n            1             1             1             1             1 \n        clear            co           com         comes    concerning \n            1             1             1             1             1 \n consequently      consider   considering       contain    containing \n            1             1             1             1             1 \n     contains corresponding        course     currently             d \n            1             1             1             1             1 \n   definitely     described       despite        differ   differently \n            1             1             1             1             1 \n       downed       downing         downs     downwards             e \n            1             1             1             1             1 \n        early           edu            eg         eight          else \n            1             1             1             1             1 \n    elsewhere           end         ended        ending          ends \n            1             1             1             1             1 \n     entirely    especially            et           etc        evenly \n            1             1             1             1             1 \n           ex       exactly       example        except             f \n            1             1             1             1             1 \n         face         faces          fact         facts          felt \n            1             1             1             1             1 \n        fifth          find         finds          five      followed \n            1             1             1             1             1 \n    following       follows        former      formerly         forth \n            1             1             1             1             1 \n         full         fully     furthered    furthering   furthermore \n            1             1             1             1             1 \n     furthers             g          gave       general     generally \n            1             1             1             1             1 \n      getting          give          goes          gone          good \n            1             1             1             1             1 \n        goods        gotten         great       greater      greatest \n            1             1             1             1             1 \n    greetings         group       grouped      grouping        groups \n            1             1             1             1             1 \n            h       happens        hardly          he'd         he'll \n            1             1             1             1             1 \n        hello          help         hence     hereafter        hereby \n            1             1             1             1             1 \n       herein      hereupon            hi        higher       highest \n            1             1             1             1             1 \n       hither     hopefully         how's       howbeit            ie \n            1             1             1             1             1 \n      ignored     immediate     important      inasmuch           inc \n            1             1             1             1             1 \n       indeed      indicate     indicated     indicates         inner \n            1             1             1             1             1 \n      insofar       instead      interest    interested   interesting \n            1             1             1             1             1 \n    interests        inward          it'd         it'll             j \n            1             1             1             1             1 \n            k          kept          kind          knew             l \n            1             1             1             1             1 \n        large       largely        lately        latest        latter \n            1             1             1             1             1 \n     latterly          lest          lets         liked        little \n            1             1             1             1             1 \n         long        longer       longest          look       looking \n            1             1             1             1             1 \n        looks           ltd             m          made        mainly \n            1             1             1             1             1 \n         make        making           man         maybe          mean \n            1             1             1             1             1 \n    meanwhile        member       members           men        merely \n            1             1             1             1             1 \n     moreover            mr           mrs       mustn't             n \n            1             1             1             1             1 \n         name        namely            nd          near        nearly \n            1             1             1             1             1 \n       needed       needing       neither  nevertheless         newer \n            1             1             1             1             1 \n       newest          nine          none      normally         novel \n            1             1             1             1             1 \n       number       numbers             o     obviously            oh \n            1             1             1             1             1 \n           ok          okay         older        oldest          ones \n            1             1             1             1             1 \n         onto          open        opened       opening         opens \n            1             1             1             1             1 \n        order       ordered      ordering        orders     otherwise \n            1             1             1             1             1 \n      outside       overall             p          part        parted \n            1             1             1             1             1 \n   particular  particularly       parting         parts         place \n            1             1             1             1             1 \n       placed        places        please          plus         point \n            1             1             1             1             1 \n      pointed      pointing        points       present     presented \n            1             1             1             1             1 \n   presenting      presents    presumably      probably       problem \n            1             1             1             1             1 \n     problems      provides           put          puts             q \n            1             1             1             1             1 \n          que            qv             r            rd            re \n            1             1             1             1             1 \n   reasonably     regarding    regardless       regards    relatively \n            1             1             1             1             1 \n respectively          room         rooms             s        saying \n            1             1             1             1             1 \n     secondly       seconds        seeing          seen          sees \n            1             1             1             1             1 \n         self        selves      sensible          sent       serious \n            1             1             1             1             1 \n    seriously         seven        shan't         she'd        she'll \n            1             1             1             1             1 \n        she's          show        showed       showing         shows \n            1             1             1             1             1 \n         side         sides           six         small       smaller \n            1             1             1             1             1 \n     smallest       somehow      sometime     sometimes      somewhat \n            1             1             1             1             1 \n         soon         sorry     specified       specify    specifying \n            1             1             1             1             1 \n        state        states           sub           sup             t \n            1             1             1             1             1 \n          t's          tell         tends            th         thank \n            1             1             1             1             1 \n       thanks         thanx         thats        thence    thereafter \n            1             1             1             1             1 \n      thereby       therein        theres     thereupon         thing \n            1             1             1             1             1 \n       things        thinks         third      thorough    thoroughly \n            1             1             1             1             1 \n      thought      thoughts    throughout          thru         today \n            1             1             1             1             1 \n      towards         tried         tries         truly           try \n            1             1             1             1             1 \n       trying          turn        turned       turning         turns \n            1             1             1             1             1 \n        twice             u            un unfortunately        unless \n            1             1             1             1             1 \n     unlikely          unto        useful         using       usually \n            1             1             1             1             1 \n         uucp             v         value       various           via \n            1             1             1             1             1 \n          viz            vs             w        wanted       wanting \n            1             1             1             1             1 \n         ways       welcome         wells      whatever        when's \n            1             1             1             1             1 \n       whence      whenever    whereafter       whereas       whereby \n            1             1             1             1             1 \n      wherein     whereupon      wherever       whither       whoever \n            1             1             1             1             1 \n        why's       willing          wish        wonder          work \n            1             1             1             1             1 \n       worked       working         works             x             y \n            1             1             1             1             1 \n         year         years           yes         young       younger \n            1             1             1             1             1 \n     youngest             z          zero \n            1             1             1"
+  },
+  {
+    "objectID": "slides/week06.html#stop-words-removed",
+    "href": "slides/week06.html#stop-words-removed",
+    "title": "Week 6: Text Mining",
+    "section": "Stop words removed",
+    "text": "Stop words removed\n\nalice |&gt;\n  unnest_tokens(word, text) |&gt;\n  anti_join(stop_words, by = c(\"word\")) |&gt;\n  count(word, sort = TRUE) |&gt;\n  top_n(10, n) |&gt;\n  ggplot(aes(n, fct_reorder(word, n))) +\n  geom_col()"
+  },
+  {
+    "objectID": "slides/week06.html#which-words-appears-together-2",
+    "href": "slides/week06.html#which-words-appears-together-2",
+    "title": "Week 6: Text Mining",
+    "section": "Which words appears together?",
+    "text": "Which words appears together?\nTallying up the bi-grams still shows a lot of stop words but it able to pick up retationhips with patients\n\nalice |&gt;\n  unnest_ngrams(ngram, text, n = 2) |&gt;\n  count(ngram, sort = TRUE)\n\n# A tibble: 13,424 × 2\n   ngram          n\n   &lt;chr&gt;      &lt;int&gt;\n 1 &lt;NA&gt;         951\n 2 said the     206\n 3 of the       130\n 4 said alice   112\n 5 in a          96\n 6 and the       75\n 7 in the        75\n 8 it was        72\n 9 to the        68\n10 the queen     60\n# ℹ 13,414 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#which-words-appears-together-3",
+    "href": "slides/week06.html#which-words-appears-together-3",
+    "title": "Week 6: Text Mining",
+    "section": "Which words appears together?",
+    "text": "Which words appears together?\n\nalice |&gt;\n  unnest_ngrams(ngram, text, n = 2) |&gt;\n  separate(ngram, into = c(\"word1\", \"word2\"), sep = \" \") |&gt;\n  select(word1, word2)\n\n# A tibble: 25,170 × 2\n   word1     word2    \n   &lt;chr&gt;     &lt;chr&gt;    \n 1 chapter   i        \n 2 down      the      \n 3 the       rabbit   \n 4 rabbit    hole     \n 5 &lt;NA&gt;      &lt;NA&gt;     \n 6 &lt;NA&gt;      &lt;NA&gt;     \n 7 alice     was      \n 8 was       beginning\n 9 beginning to       \n10 to        get      \n# ℹ 25,160 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#turning-the-data-into-a-tidy-format",
+    "href": "slides/week06.html#turning-the-data-into-a-tidy-format",
+    "title": "Week 6: Text Mining",
+    "section": "Turning the data into a tidy format",
+    "text": "Turning the data into a tidy format\n\nlibrary(tidytext)\nalice |&gt;\n  unnest_tokens(token, text)\n\n# A tibble: 26,687 × 3\n   chapter chapter_name token    \n     &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;    \n 1       1 CHAPTER I.   chapter  \n 2       1 CHAPTER I.   i        \n 3       1 CHAPTER I.   down     \n 4       1 CHAPTER I.   the      \n 5       1 CHAPTER I.   rabbit   \n 6       1 CHAPTER I.   hole     \n 7       1 CHAPTER I.   alice    \n 8       1 CHAPTER I.   was      \n 9       1 CHAPTER I.   beginning\n10       1 CHAPTER I.   to       \n# ℹ 26,677 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#which-words-appear-together",
+    "href": "slides/week06.html#which-words-appear-together",
+    "title": "Week 6: Text Mining",
+    "section": "Which words appear together?",
+    "text": "Which words appear together?\nngrams are sets of n consecutive words and we can count these to see which words appear together most frequently.\n\nngrams with n = 1 are called “unigrams”: “which”, “words”, “appear”, “together”\nngrams with n = 2 are called “bigrams”: “which words”, “words appear”, “appear together”\nngrams with n = 3 are called “trigrams”: “which words appear”, “words appear together”"
+  },
+  {
+    "objectID": "slides/week06.html#which-words-appear-together-1",
+    "href": "slides/week06.html#which-words-appear-together-1",
+    "title": "Week 6: Text Mining",
+    "section": "Which words appear together?",
+    "text": "Which words appear together?\nWe can extract bigrams using unnest_ngrams() with n = 2\n\nalice |&gt;\n  unnest_ngrams(ngram, text, n = 2)\n\n# A tibble: 25,170 × 3\n   chapter chapter_name ngram        \n     &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;        \n 1       1 CHAPTER I.   chapter i    \n 2       1 CHAPTER I.   down the     \n 3       1 CHAPTER I.   the rabbit   \n 4       1 CHAPTER I.   rabbit hole  \n 5       1 CHAPTER I.   &lt;NA&gt;         \n 6       1 CHAPTER I.   &lt;NA&gt;         \n 7       1 CHAPTER I.   alice was    \n 8       1 CHAPTER I.   was beginning\n 9       1 CHAPTER I.   beginning to \n10       1 CHAPTER I.   to get       \n# ℹ 25,160 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#which-words-appear-together-2",
+    "href": "slides/week06.html#which-words-appear-together-2",
+    "title": "Week 6: Text Mining",
+    "section": "Which words appear together?",
+    "text": "Which words appear together?\nTallying up the bigrams still shows a lot of stop words, but it is able to pick up some common phrases:\n\nalice |&gt;\n  unnest_ngrams(ngram, text, n = 2) |&gt;\n  count(ngram, sort = TRUE)\n\n# A tibble: 13,424 × 2\n   ngram          n\n   &lt;chr&gt;      &lt;int&gt;\n 1 &lt;NA&gt;         951\n 2 said the     206\n 3 of the       130\n 4 said alice   112\n 5 in a          96\n 6 and the       75\n 7 in the        75\n 8 it was        72\n 9 to the        68\n10 the queen     60\n# ℹ 13,414 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#which-words-appear-together-3",
+    "href": "slides/week06.html#which-words-appear-together-3",
+    "title": "Week 6: Text Mining",
+    "section": "Which words appear together?",
+    "text": "Which words appear together?\n\nalice |&gt;\n  unnest_ngrams(ngram, text, n = 2) |&gt;\n  separate(ngram, into = c(\"word1\", \"word2\"), sep = \" \") |&gt;\n  select(word1, word2)\n\n# A tibble: 25,170 × 2\n   word1     word2    \n   &lt;chr&gt;     &lt;chr&gt;    \n 1 chapter   i        \n 2 down      the      \n 3 the       rabbit   \n 4 rabbit    hole     \n 5 &lt;NA&gt;      &lt;NA&gt;     \n 6 &lt;NA&gt;      &lt;NA&gt;     \n 7 alice     was      \n 8 was       beginning\n 9 beginning to       \n10 to        get      \n# ℹ 25,160 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-lexicons",
+    "href": "slides/week06.html#sentiment-lexicons",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Lexicons",
+    "text": "Sentiment Lexicons\nThe tidytext and textdata packages provide access to three different databases of words and their associated sentiments (known as “sentiment lexicons”). Obviously, none of these can be perfect, as there is no “correct” way to quantify feelings, but they all attempt to capture different elements of how a text makes you feel.\nThe readily available lexicons are:\n\nafinn from Finn Årup Nielsen\nbing from Bing Liu and collaborators\nnrc from Saif Mohammad and Peter Turney"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-lexicons---bing",
+    "href": "slides/week06.html#sentiment-lexicons---bing",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Lexicons - bing",
+    "text": "Sentiment Lexicons - bing\nThe bing lexicon contains a large list of words and a binary association, either “positive” or “negative”:\n\nlibrary(textdata)\nget_sentiments('bing')\n\n# A tibble: 6,786 × 2\n   word        sentiment\n   &lt;chr&gt;       &lt;chr&gt;    \n 1 2-faces     negative \n 2 abnormal    negative \n 3 abolish     negative \n 4 abominable  negative \n 5 abominably  negative \n 6 abominate   negative \n 7 abomination negative \n 8 abort       negative \n 9 aborted     negative \n10 aborts      negative \n# ℹ 6,776 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-lexicons---afinn",
+    "href": "slides/week06.html#sentiment-lexicons---afinn",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Lexicons - afinn",
+    "text": "Sentiment Lexicons - afinn\nThe afinn lexicon goes slightly further, assigning words a value between -5 and 5 that represents their positivity or negativity.\n\nget_sentiments('afinn')\n\n# A tibble: 2,477 × 2\n   word       value\n   &lt;chr&gt;      &lt;dbl&gt;\n 1 abandon       -2\n 2 abandoned     -2\n 3 abandons      -2\n 4 abducted      -2\n 5 abduction     -2\n 6 abductions    -2\n 7 abhor         -3\n 8 abhorred      -3\n 9 abhorrent     -3\n10 abhors        -3\n# ℹ 2,467 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-lexicons---nrc",
+    "href": "slides/week06.html#sentiment-lexicons---nrc",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Lexicons - nrc",
+    "text": "Sentiment Lexicons - nrc\nThe nrc lexicon takes a different approach and assigns each word an associated sentiment. Some words appear more than once because they have multiple associations:\n\nget_sentiments('nrc')\n\n# A tibble: 13,872 × 2\n   word        sentiment\n   &lt;chr&gt;       &lt;chr&gt;    \n 1 abacus      trust    \n 2 abandon     fear     \n 3 abandon     negative \n 4 abandon     sadness  \n 5 abandoned   anger    \n 6 abandoned   fear     \n 7 abandoned   negative \n 8 abandoned   sadness  \n 9 abandonment anger    \n10 abandonment fear     \n# ℹ 13,862 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-2",
+    "href": "slides/week06.html#sentiment-analysis-2",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\nWe can use one of these databases to analyze Alice’s Adventures in Wonderland by breaking the text down into words and combining the result with a lexicon. Let’s use bing to assign “positive” and “negative” labels to as many words as possible in the book. (Note that this time the variable created by unnest_tokens is called word, to match the column name in bing).\n\nalice |&gt;\n  unnest_tokens(word, text) |&gt;\n  inner_join(get_sentiments(\"bing\"))\n\n# A tibble: 1,409 × 4\n   chapter chapter_name word        sentiment\n     &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;       &lt;chr&gt;    \n 1       1 CHAPTER I.   tired       negative \n 2       1 CHAPTER I.   well        positive \n 3       1 CHAPTER I.   hot         positive \n 4       1 CHAPTER I.   stupid      negative \n 5       1 CHAPTER I.   pleasure    positive \n 6       1 CHAPTER I.   worth       positive \n 7       1 CHAPTER I.   trouble     negative \n 8       1 CHAPTER I.   remarkable  positive \n 9       1 CHAPTER I.   burning     negative \n10       1 CHAPTER I.   fortunately positive \n# ℹ 1,399 more rows"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-3",
+    "href": "slides/week06.html#sentiment-analysis-3",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\nWe can now group and summarize this new dataset the same as any other. For example, let’s look at the sentiment by chapter. We’ll do this by counting the number of “positive” words and subtracting the number of “negative” words:\n\ndiff_by_chap &lt;- alice |&gt;\n  unnest_tokens(word, text) |&gt;\n  inner_join(get_sentiments(\"bing\")) |&gt; \n  group_by(chapter) |&gt; \n  summarise(sentiment = sum(sentiment == \"positive\") - sum(sentiment == \"negative\"))"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-4",
+    "href": "slides/week06.html#sentiment-analysis-4",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\n\ndiff_by_chap\n\n# A tibble: 12 × 2\n   chapter sentiment\n     &lt;int&gt;     &lt;int&gt;\n 1       1        13\n 2       2        -3\n 3       3       -14\n 4       4         1\n 5       5         5\n 6       6       -17\n 7       7        19\n 8       8        -9\n 9       9       -10\n10      10        -8\n11      11       -15\n12      12       -15"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-5",
+    "href": "slides/week06.html#sentiment-analysis-5",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\n\nbarplot(diff_by_chap$sentiment, names.arg = diff_by_chap$chapter)"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-6",
+    "href": "slides/week06.html#sentiment-analysis-6",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\nAlternatively, we could use the afinn lexicon and quantify the “sentiment” of each chapter by the average of all words with numeric associations:\n\navg_by_chap &lt;- alice |&gt;\n  unnest_tokens(word, text) |&gt;\n  inner_join(get_sentiments(\"afinn\")) |&gt; \n  group_by(chapter) |&gt; \n  summarise(sentiment = mean(value))"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-7",
+    "href": "slides/week06.html#sentiment-analysis-7",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\n\nbarplot(avg_by_chap$sentiment, names.arg = avg_by_chap$chapter)"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-8",
+    "href": "slides/week06.html#sentiment-analysis-8",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\nSimilarly, we can find the most frequent sentiment association in the nrc lexicon for each chapter. Unfortunately, for all chapters, the most frequent sentiment association ends up being the rather bland “positive” or “negative”:\n\nalice |&gt;\n  unnest_tokens(word, text) |&gt;\n  inner_join(get_sentiments(\"nrc\")) |&gt; \n  group_by(chapter) |&gt; \n  summarise(sentiment = names(which.max(table(sentiment))))\n\n# A tibble: 12 × 2\n   chapter sentiment\n     &lt;int&gt; &lt;chr&gt;    \n 1       1 positive \n 2       2 positive \n 3       3 positive \n 4       4 positive \n 5       5 positive \n 6       6 negative \n 7       7 positive \n 8       8 positive \n 9       9 positive \n10      10 positive \n11      11 positive \n12      12 positive"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-9",
+    "href": "slides/week06.html#sentiment-analysis-9",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\nWe’ll try to spice things up by removing “positive” and “negative” from the nrc lexicon:\n\nnrc_fun &lt;- get_sentiments(\"nrc\")\nnrc_fun &lt;- nrc_fun[!nrc_fun$sentiment %in% c(\"positive\",\"negative\"), ]"
+  },
+  {
+    "objectID": "slides/week06.html#sentiment-analysis-10",
+    "href": "slides/week06.html#sentiment-analysis-10",
+    "title": "Week 6: Text Mining",
+    "section": "Sentiment Analysis",
+    "text": "Sentiment Analysis\nNow we see a lot of “anticipation”:\n\nalice |&gt;\n  unnest_tokens(word, text) |&gt;\n  inner_join(nrc_fun) |&gt; \n  group_by(chapter) |&gt; \n  summarise(sentiment = names(which.max(table(sentiment))))\n\n# A tibble: 12 × 2\n   chapter sentiment   \n     &lt;int&gt; &lt;chr&gt;       \n 1       1 anticipation\n 2       2 anticipation\n 3       3 sadness     \n 4       4 anticipation\n 5       5 trust       \n 6       6 anticipation\n 7       7 anticipation\n 8       8 anticipation\n 9       9 trust       \n10      10 joy         \n11      11 anticipation\n12      12 trust"
+  },
+  {
+    "objectID": "slides/week07.html#todays-goals",
+    "href": "slides/week07.html#todays-goals",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Today’s goals",
+    "text": "Today’s goals\n\nIntroduction to Regular Expressions\nUnderstand the fundamentals of Web Scraping\nLearn how to use an API"
+  },
+  {
+    "objectID": "slides/week07.html#regular-expressions-what-is-it",
+    "href": "slides/week07.html#regular-expressions-what-is-it",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regular Expressions: What is it?",
+    "text": "Regular Expressions: What is it?\n\nA regular expression (shortened as regex or regexp; also referred to as rational expression) is a sequence of characters that define a search pattern. – Wikipedia"
+  },
+  {
+    "objectID": "slides/week07.html#regular-expressions-why-should-you-care",
+    "href": "slides/week07.html#regular-expressions-why-should-you-care",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regular Expressions: Why should you care?",
+    "text": "Regular Expressions: Why should you care?\nWe can use Regular Expressions for:\n\nValidating data fields, email address, numbers, etc.\nSearching text in various formats, e.g., addresses, there are many ways to write an address.\nReplace text, e.g., different spellings, Storm, Stôrm, Stórm to Storm.\nRemove text, e.g., tags from an HTML text, &lt;name&gt;George&lt;/name&gt; to George."
+  },
+  {
+    "objectID": "slides/week07.html#regular-expressions-101-metacharacters",
+    "href": "slides/week07.html#regular-expressions-101-metacharacters",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Regular Expressions 101: Metacharacters",
+    "text": "Regular Expressions 101: Metacharacters\nWhat makes regex special is metacharacters. While we can always use regex to match literals like dog, human, 1999, we only make use of all regex power when using metacharacters:\n\n. Any character except new line\n^ beginning of the text\n$ end of the text\n[regex] Match a single character in regex, e.g.\n\n[0123456789] Any number\n[0-9] Any number in the range 0-9\n[a-z] Lower-case letters\n[A-Z] Upper-case letters\n[a-zA-Z] Lower or upper case letters.\n[a-zA-Z0-9] Any alpha-numeric\n\n[^regex] Match any except those in regex, e.g.\n\n[^0123456789] Match any except a number\n[^0-9] Match anything except in the range 0-9\n[^./ ] any except dot, slash, and space."
+  },
+  {
+    "objectID": "slides/week07.html#regular-expressions-101-metacharacters-cont.-1",
+    "href": "slides/week07.html#regular-expressions-101-metacharacters-cont.-1",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Regular Expressions 101: Metacharacters (cont. 1)",
+    "text": "Regular Expressions 101: Metacharacters (cont. 1)\nRanges, e.g., 0-9 or a-z, are locale- and implementation-dependent, meaning that the range of lower case letters may vary depending on the OS’s language. To solve for this problem, you could use Character classes. Some examples:\n\n[:lower:] lower case letters in the current locale, could be [a-z]\n[:upper:] upper case letters in the current locale, could be [A-Z]\n[:alpha:] upper and lower case letters in the current locale, could be [a-zA-Z]\n[:digit:] Digits: 0 1 2 3 4 5 6 7 8 9\n[:alnum:] Alpha numeric characters [:alpha:] and [:digit:].\n[:punct:] Punctuation characters: ! ” # $ % & ’ ( ) * + , - . / : ; &lt; = &gt; ? @ [ \\ ] ^ _ ` { | } ~.\n\nFor example, in the locale en_US, the word Ḧóla IS NOT fully matched by [a-zA-Z]+, but IT IS fully matched by [[:alpha:]]+.\nOther important Metacharacters:\n\n\\s white space, equivalent to [\\r\\n\\t\\f\\v ]\n| or (logical or)."
+  },
+  {
+    "objectID": "slides/week07.html#regular-expressions-101-metacharacters-cont.-2",
+    "href": "slides/week07.html#regular-expressions-101-metacharacters-cont.-2",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Regular Expressions 101: Metacharacters (cont. 2)",
+    "text": "Regular Expressions 101: Metacharacters (cont. 2)\nThese usually come together with specifying how many times (repetition):\n\nregex? Zero or one match.\nregex* Zero or more matches\nregex+ One or more matches\nregex{n,} At least n matches\nregex{,m} at most m matches\nregex{n,m} Between n and m matches.\n\nWhere regex is a regular expression"
+  },
+  {
+    "objectID": "slides/week07.html#regular-expressions-101-metacharacters-cont.-3",
+    "href": "slides/week07.html#regular-expressions-101-metacharacters-cont.-3",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Regular Expressions 101: Metacharacters (cont. 3)",
+    "text": "Regular Expressions 101: Metacharacters (cont. 3)\nThere are other operators that can be very useful,\n\n(regex) Group capture.\n(?:regex) Group operation without capture.\n(?=regex) Look ahead (match)\n(?!regex) Look ahead (don’t match)\n(?&lt;=regex) Look behind (match)\n(?&lt;!regex) Look behind (don’t match)\n\nGroup captures can be reused with \\1, \\2, …, \\n.\nMore (great) information here https://regex101.com/"
+  },
+  {
+    "objectID": "slides/week07.html#regular-expressions-101-examples",
+    "href": "slides/week07.html#regular-expressions-101-examples",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Regular Expressions 101: Examples",
+    "text": "Regular Expressions 101: Examples\nHere we are extracting the first occurrence of the following regular expressions (using stringr::str_extract()):\n\n\n\nregex\nHanna Perez [name]\nThe 年 year was 1999\nHaHa, @abc said that\nGoGo trojans #2020!\n\n\n\n\n.\nH\nT\nH\nG\n\n\nn\nn\n\n\nn\n\n\n[0-9]+\n\n1999\n\n2020\n\n\n\\s[a-zA-Z]+\\s\nPerez\nyear\nsaid\ntrojans\n\n\n\\s[[:alpha:]]+\\s\nPerez\n年\nsaid\ntrojans\n\n\n[a-zA-Z]+ [a-zA-Z]+\nHanna Perez\nyear was\nabc said\nGoGo trojans\n\n\n([a-zA-Z]+\\s?)\nHanna\nThe\nHaHa\nGoGo\n\n\n([a-zA-Z]+)\\1\nnn\n\nHaHa\nGoGo\n\n\n(@|#)[a-z0-9]+\n\n\n@abc\n#2020\n\n\n(?&lt;=#|@)[a-z0-9]+\n\n\nabc\n2020\n\n\n\\[[a-z]+\\]\n[name]\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n## Regular Expressions 101: Examples (cont. 1){.smaller}\n\n\n1. . Match any character (except line end) five times.\n\n\n2. n Match the letter n twice.\n\n\n3. [0-9]+ Match any number at least once\n\n\n4. +Match a space, any lower or upper case letter at least once, and a space.\n\n\n5. ]+Same as before but this time .\n\n\n6. [a-zA-Z]+ [a-zA-Z]+ Match two sets of letters separated by one space.\n\n\n7. ([a-zA-Z]+?) Match any lower or upper case letter at least once, maybe followed by a white space, twice.\n\n\n8. ([a-zA-Z]+)\\1 Match any lower or upper case letter at least once, and then match the same pattern again.\n\n\n9. (@|#)[a-z0-9]+ Match either the @ or # symbol, followed by one or more lower case letter or number.\n\n\n10. (?&lt;=#|@)[a-z0-9]+ Match one or more lower case letter or number that follows either the @ or # symbol.\n\n\n11. \\ [[a-z]+\\ ] Match the symbol [, at least one lower case letter, and the symbol ]."
+  },
+  {
+    "objectID": "slides/week07.html#regular-expressions-101-functions-in-r",
+    "href": "slides/week07.html#regular-expressions-101-functions-in-r",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Regular Expressions 101: Functions in R",
+    "text": "Regular Expressions 101: Functions in R\n\nLookup text: base::grepl(), stringr::str_detect().\nSimilar to which(), which elements are TRUE base::grep(), stringr::str_which()\nReplace the first instance: base::sub(), stringr::str_replace()\nReplace all instances: base::gsub(), stringr::str_replace_all()\nExtract text: base::regmatches(), stringr::str_extract() and stringr::str_extract_all()."
+  },
+  {
+    "objectID": "slides/week07.html#regular-expressions-101-functions-in-r-cont.",
+    "href": "slides/week07.html#regular-expressions-101-functions-in-r-cont.",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Regular Expressions 101: Functions in R (cont.)",
+    "text": "Regular Expressions 101: Functions in R (cont.)\nFor example, like in Twitter, let’s create a regex that matches usernames or hashtags with the following pattern:\n(@|#)([[:alnum:]]+)\n\n\n\n\n\n\n\n\n\n\n\nCode\n@Hanna Perez [name] #html\nThe @年 year was 1999\nHaHa, @abc said that @z\n\n\n\n\nstr_detect(text, pattern) or grepl(pattern, text)\nTRUE\nTRUE\nTRUE\n\n\nstr_extract(text, pattern)\n@Hanna\n@年\n@abc\n\n\nstr_extract_all(text, pattern)\n[@Hanna, #html]\n[@年]\n[@abc, @z]\n\n\nstr_replace(text, pattern, \"\\1justinbieber\")\n@justinbieber Perez [name] #html\nThe @justinbieber year was 1999\nHaHa, @justinbieber said that @z\n\n\nstr_replace_all(text, pattern, \"\\1justinbieber\")\n@justinbieber Perez [name] #justinbieber\nThe @justinbieber year was 1999\nHaHa, @justinbieber said that @justinbieber\n\n\n\n\n\nNote: While it is not showing in the table, the group replacement was scaped, i.e., \\\\1 instead of \\1 in the code."
+  },
+  {
+    "objectID": "slides/week07.html#data",
+    "href": "slides/week07.html#data",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Data",
+    "text": "Data\nThis week we will continue using our text mining dataset:\n\n# Where are we getting the data from\nmts_url &lt;- \"https://github.com/USCbiostats/data-science-data/raw/master/00_mtsamples/mtsamples.csv\"\n\n# Downloading the data to a tempfile (so it is destroyed afterwards)\ntmp &lt;- tempfile(pattern = \"mtsamples\", fileext = \".csv\")\n\n# We should be downloading this, ONLY IF this was not downloaded already.\n# otherwise is just a waste of time.\nif (!file.exists(tmp)) {\n  download.file(\n    url      = mts_url,\n    destfile = tmp,\n    # method   = \"libcurl\", timeout = 1000 (you may need this option)\n  )\n}\n\n# read the file\nmtsamples &lt;- read.csv(tmp, header = TRUE, row.names = 1)"
+  },
+  {
+    "objectID": "slides/week07.html#regex-lookup-text-tumor",
+    "href": "slides/week07.html#regex-lookup-text-tumor",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex Lookup Text: Tumor",
+    "text": "Regex Lookup Text: Tumor\nFor each entry, we want to know if it is tumor-related. For that we can use the following code:\n\n# How many entries contain the word tumor?\nsum(grepl(\"tumor\", mtsamples$description, ignore.case = TRUE))\n\n[1] 80\n\n# Generating a column tagging tumor\nmtsamples$tumor_related &lt;- grepl(\"tumor\", mtsamples$description, ignore.case = TRUE)\n\n# Taking a look at a few examples\nmtsamples$description[mtsamples$tumor_related == TRUE][1:3]\n\n[1] \"  Transurethral resection of a medium bladder tumor (TURBT), left lateral wall.\"                              \n[2] \" Transurethral resection of the bladder tumor (TURBT), large.\"                                                \n[3] \" Cystoscopy, transurethral resection of medium bladder tumor (4.0 cm in diameter), and direct bladder biopsy.\"\n\n\nNotice the ignore.case = TRUE. This is equivalent to transforming the text to lower case using tolower() before passing the text to the regular expression function."
+  },
+  {
+    "objectID": "slides/week07.html#regex-lookup-text-pronoun-of-the-patient",
+    "href": "slides/week07.html#regex-lookup-text-pronoun-of-the-patient",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex Lookup text: Pronoun of the patient",
+    "text": "Regex Lookup text: Pronoun of the patient\nNow, let’s try to guess the pronoun of the patient. To do so, we could tag by using the words he, his, him, they, them, theirs, ze, hir, hirs, she, hers, her (see this article on sexist text):\n\nmtsamples$pronoun &lt;- str_extract(\n  string  = tolower(mtsamples$transcription),\n  pattern = \"he|his|him|they|them|theirs|ze|hir|hirs|she|hers|her\"\n)\n\nWhat is the problem with this approach?"
+  },
+  {
+    "objectID": "slides/week07.html#regex-lookup-text-pronoun-of-the-patient-cont.-1",
+    "href": "slides/week07.html#regex-lookup-text-pronoun-of-the-patient-cont.-1",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex Lookup text: Pronoun of the patient (cont. 1)",
+    "text": "Regex Lookup text: Pronoun of the patient (cont. 1)\n\nmtsamples$transcription[1]\n\n[1] \"SUBJECTIVE:,  This 23-year-old white female presents with complaint of allergies.  She used to have allergies when she lived in Seattle but she thinks they are worse here.  In the past, she has tried Claritin, and Zyrtec.  Both worked for short time but then seemed to lose effectiveness.  She has used Allegra also.  She used that last summer and she began using it again two weeks ago.  It does not appear to be working very well.  She has used over-the-counter sprays but no prescription nasal sprays.  She does have asthma but doest not require daily medication for this and does not think it is flaring up.,MEDICATIONS: , Her only medication currently is Ortho Tri-Cyclen and the Allegra.,ALLERGIES: , She has no known medicine allergies.,OBJECTIVE:,Vitals:  Weight was 130 pounds and blood pressure 124/78.,HEENT:  Her throat was mildly erythematous without exudate.  Nasal mucosa was erythematous and swollen.  Only clear drainage was seen.  TMs were clear.,Neck:  Supple without adenopathy.,Lungs:  Clear.,ASSESSMENT:,  Allergic rhinitis.,PLAN:,1.  She will try Zyrtec instead of Allegra again.  Another option will be to use loratadine.  She does not think she has prescription coverage so that might be cheaper.,2.  Samples of Nasonex two sprays in each nostril given for three weeks.  A prescription was written as well.\"\n\nmtsamples$pronoun[1]\n\n[1] \"his\""
+  },
+  {
+    "objectID": "slides/week07.html#regex-lookup-text-pronoun-of-the-patient-cont.-2",
+    "href": "slides/week07.html#regex-lookup-text-pronoun-of-the-patient-cont.-2",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex Lookup text: Pronoun of the patient (cont. 2)",
+    "text": "Regex Lookup text: Pronoun of the patient (cont. 2)\nLet’s use this new pattern:\n\nmtsamples$pronoun &lt;- str_extract(\n  string  = tolower(mtsamples$transcription), \n  pattern = \"(?&lt;=\\\\W|^)(he|his|him|they|them|theirs|ze|hir|hirs|she|hers|her)(?=\\\\W|$)\"\n  )\nmtsamples$pronoun[1:10]\n\n [1] \"she\" \"he\"  \"he\"  NA    NA    \"she\" \"she\" NA    NA    NA"
+  },
+  {
+    "objectID": "slides/week07.html#regex-extract-text-type-of-cancer",
+    "href": "slides/week07.html#regex-extract-text-type-of-cancer",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex Extract Text: Type of Cancer",
+    "text": "Regex Extract Text: Type of Cancer\n\nImagine now that you need to see the types of cancer mentioned in the data.\nFor simplicity, let’s assume that, if specified, it is in the form of TYPE cancer, i.e. single word.\nWe are interested in the word before cancer, how can we capture this?"
+  },
+  {
+    "objectID": "slides/week07.html#regex-extract-text-type-of-cancer-cont-1.",
+    "href": "slides/week07.html#regex-extract-text-type-of-cancer-cont-1.",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex Extract Text: Type of Cancer (cont 1.)",
+    "text": "Regex Extract Text: Type of Cancer (cont 1.)\nWe can just try to extract the phrase \"[some word] cancer\", in particular, we could use the following regular expression:\n[[:alnum:]-_]{4,}\\s*cancer\nWhere\n\n[[:alnum:]-_]{4,} captures any alphanumeric character, including - and _. Furthermore, for this match to work there must be at least 4 characters,\n\\s* captures 0 or more white-spaces, and\ncancer captures the word cancer"
+  },
+  {
+    "objectID": "slides/week07.html#fundamentals-of-web-scraping",
+    "href": "slides/week07.html#fundamentals-of-web-scraping",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Fundamentals of Web Scraping",
+    "text": "Fundamentals of Web Scraping\nWhat?\n\nWeb scraping, web harvesting, or web data extraction is data scraping used for extracting data from websites – Wikipedia\n\nHow?\n\nThe rvest R package provides various tools for reading and processing web data.\nUnder the hood, rvest is a wrapper of the xml2 and httr R packages.\n\n(in the case of dynamic websites, take a look at selenium)"
+  },
+  {
+    "objectID": "slides/week07.html#web-scraping-raw-html-example",
+    "href": "slides/week07.html#web-scraping-raw-html-example",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web scraping raw HTML: Example",
+    "text": "Web scraping raw HTML: Example\nWe would like to capture the table of COVID-19 death rates per country directly from Wikipedia.\n\nlibrary(rvest)\nlibrary(xml2)\n\n# Reading the HTML table with the function xml2::read_html\ncovid &lt;- read_html(\n  x = \"https://en.wikipedia.org/wiki/COVID-19_pandemic_death_rates_by_country\"\n  )\n\n# Let's look at the the output\ncovid\n\n{html_document}\n&lt;html class=\"client-nojs vector-feature-language-in-header-enabled vector-feature-language-in-main-page-header-disabled vector-feature-page-tools-pinned-disabled vector-feature-toc-pinned-clientpref-1 vector-feature-main-menu-pinned-disabled vector-feature-limited-width-clientpref-1 vector-feature-limited-width-content-enabled vector-feature-custom-font-size-clientpref-1 vector-feature-appearance-pinned-clientpref-1 vector-feature-night-mode-enabled skin-theme-clientpref-day vector-sticky-header-enabled vector-toc-available\" lang=\"en\" dir=\"ltr\"&gt;\n[1] &lt;head&gt;\\n&lt;meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8 ...\n[2] &lt;body class=\"skin--responsive skin-vector skin-vector-search-vue mediawik ..."
+  },
+  {
+    "objectID": "slides/week07.html#web-scraping-raw-html-example-cont-1.",
+    "href": "slides/week07.html#web-scraping-raw-html-example-cont-1.",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Web scraping raw HTML: Example (cont 1.)",
+    "text": "Web scraping raw HTML: Example (cont 1.)\n\nWe want to get the HTML table that shows up in the doc. To do so, we can use the function xml2::xml_find_all() and rvest::html_table()\nThe first will locate the place in the document that matches a given XPath expression.\nXPath, XML Path Language, is a query language to select nodes in a XML document.\nA nice tutorial can be found here\nModern Web browsers make it easy to use XPath!\n\nLive Example! (inspect elements in Google Chrome, Mozilla Firefox, Internet Explorer, and Safari)"
+  },
+  {
+    "objectID": "slides/week07.html#web-scraping-with-xml2-and-the-rvest-package-cont.-2",
+    "href": "slides/week07.html#web-scraping-with-xml2-and-the-rvest-package-cont.-2",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web scraping with xml2 and the rvest package (cont. 2)",
+    "text": "Web scraping with xml2 and the rvest package (cont. 2)\nNow that we know the path, let’s use that and extract\n\ntable &lt;- xml_find_all(covid, xpath = '/html/body/div[2]/div/div[3]/main/div[3]/div[3]/div[1]/div[4]/table')\ntable &lt;- html_table(table) # This returns a list of tables\nhead(table[[1]])\n\n# A tibble: 6 × 4\n  Country                `Deaths / million` Deaths    Cases      \n  &lt;chr&gt;                  &lt;chr&gt;              &lt;chr&gt;     &lt;chr&gt;      \n1 World[a]               891                7,098,868 778,384,946\n2 Peru                   6,603              221,060   4,532,699  \n3 Bulgaria               5,679              38,765    1,338,504  \n4 North Macedonia        5,429              9,991     352,093    \n5 Bosnia and Herzegovina 5,119              16,406    404,287    \n6 Hungary                5,072              49,124    2,238,102"
+  },
+  {
+    "objectID": "slides/week07.html#web-apis",
+    "href": "slides/week07.html#web-apis",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web APIs",
+    "text": "Web APIs\nWhat?\n\nA Web API is an application programming interface for either a web server or a web browser. – Wikipedia\n\nSome examples include: twitter API, facebook API, Gene Ontology API\nHow?\nYou can request data, the GET method, post data, the POST method, and do many other things using the HTTP protocol.\nHow in R?\nFor this part, we will be using the httr() package, which is a wrapper of the curl() package, which in turn provides access to the curl library that is used to communicate with APIs."
+  },
+  {
+    "objectID": "slides/week07.html#web-apis-with-curl",
+    "href": "slides/week07.html#web-apis-with-curl",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web APIs with curl",
+    "text": "Web APIs with curl\n\n  Structure of a URL (source: “HTTP: The Protocol Every Web Developer Must Know - Part 1”)"
+  },
+  {
+    "objectID": "slides/week07.html#web-apis-with-curl-1",
+    "href": "slides/week07.html#web-apis-with-curl-1",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web APIs with curl",
+    "text": "Web APIs with curl\nUnder the hood, the httr (and thus curl) sends request somewhat like this\ncurl -X GET https://google.com -w \"%{content_type}\\n%{http_code}\\n\"\nA get request (-X GET) to https://google.com, which also includes (-w) the following: content_type and http_code:\n&lt;HTML&gt;&lt;HEAD&gt;&lt;meta http-equiv=\"content-type\" content=\"text/html;charset=utf-8\"&gt;\n&lt;TITLE&gt;301 Moved&lt;/TITLE&gt;&lt;/HEAD&gt;&lt;BODY&gt;\n&lt;H1&gt;301 Moved&lt;/H1&gt;\nThe document has moved\n&lt;A HREF=\"https://www.google.com/\"&gt;here&lt;/A&gt;.\n&lt;/BODY&gt;&lt;/HTML&gt;\ntext/html; charset=UTF-8\n301\nWe use the httr R package to make life easier."
+  },
+  {
+    "objectID": "slides/week07.html#web-api-example-1-gene-ontology",
+    "href": "slides/week07.html#web-api-example-1-gene-ontology",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web API Example 1: Gene Ontology",
+    "text": "Web API Example 1: Gene Ontology\n\nWe will make use of the Gene Ontology API.\nWe want to know what genes (human or not) are involved in the function antiviral innate immune response (go term GO:0140374), looking only at those annotations that have evidence code ECO:0000006 (experimental evidence):\n\n\nlibrary(httr)\ngo_query &lt;- GET(\n  url   = \"http://api.geneontology.org/\",\n  path  = \"api/bioentity/function/GO:0140374/genes\",\n  query = list(\n    evidence          = \"ECO:0000006\",\n    relationship_type = \"involved_in\"\n  ), \n  # May need to pass this option to curl to allow to wait for at least\n  # 60 seconds before returning error.\n  config = config(\n    connecttimeout = 60\n    )\n)\n\nWe could have also passed the full URL directly…"
+  },
+  {
+    "objectID": "slides/week07.html#web-api-example-1-gene-ontology-cont.-1",
+    "href": "slides/week07.html#web-api-example-1-gene-ontology-cont.-1",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web API Example 1: Gene Ontology (cont. 1)",
+    "text": "Web API Example 1: Gene Ontology (cont. 1)\nLet’s take a look at the curl call:\ncurl -X GET \"http://api.geneontology.org/api/bioentity/function/GO:0140374/genes?evidence=ECO%3A0000006&relationship_type=involved_in\" -H \"accept: application/json\"\nWhat httr::GET() does:\n&gt; go_query$request\n## &lt;request&gt;\n## GET http://api.geneontology.org/api/bioentity/function/GO:0140374/genes?evidence=ECO%3A0000006&relationship_type=involved_in\n## Output: write_memory\n## Options:\n## * useragent: libcurl/7.58.0 r-curl/4.3 httr/1.4.1\n## * connecttimeout: 60\n## * httpget: TRUE\n## Headers:\n## * Accept: application/json, text/xml, application/xml, */*"
+  },
+  {
+    "objectID": "slides/week07.html#web-api-example-1-gene-ontology-cont.-2",
+    "href": "slides/week07.html#web-api-example-1-gene-ontology-cont.-2",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web API Example 1: Gene Ontology (cont. 2)",
+    "text": "Web API Example 1: Gene Ontology (cont. 2)\nLet’s take a look at the response:\n\ngo_query\n\nResponse [https://api.geneontology.org/api/bioentity/function/GO:0140374/genes?evidence=ECO%3A0000006&relationship_type=involved_in]\n  Date: 2025-08-26 19:38\n  Status: 200\n  Content-Type: application/json\n  Size: 116 kB\n\n\nRemember the codes:\n\n1xx: Information message\n2xx: Success\n3xx: Redirection\n4xx: Client error\n5xx: Server error"
+  },
+  {
+    "objectID": "slides/week07.html#web-api-example-1-gene-ontology-cont.-3",
+    "href": "slides/week07.html#web-api-example-1-gene-ontology-cont.-3",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web API Example 1: Gene Ontology (cont. 3)",
+    "text": "Web API Example 1: Gene Ontology (cont. 3)\nWe can extract the results using the httr::content() function:\n\ndat &lt;- content(go_query) \ndat &lt;- lapply(dat$associations, function(a) {\n  data.frame(\n    Gene        = a$subject$id,\n    taxon_id    = a$subject$taxon$id,\n    taxon_label = a$subject$taxon$label\n  )\n})\ndat &lt;- do.call(rbind, dat)\nstr(dat)\n\n'data.frame':   100 obs. of  3 variables:\n $ Gene       : chr  \"UniProtKB:H9GKP0\" \"UniProtKB:H9GSI3\" \"UniProtKB:A0A287AMJ0\" \"UniProtKB:A0A287AKR1\" ...\n $ taxon_id   : chr  \"NCBITaxon:28377\" \"NCBITaxon:28377\" \"NCBITaxon:9823\" \"NCBITaxon:9823\" ...\n $ taxon_label: chr  \"Anolis carolinensis\" \"Anolis carolinensis\" \"Sus scrofa\" \"Sus scrofa\" ..."
+  },
+  {
+    "objectID": "slides/week07.html#web-api-example-1-gene-ontology-cont.-4",
+    "href": "slides/week07.html#web-api-example-1-gene-ontology-cont.-4",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web API Example 1: Gene Ontology (cont. 4)",
+    "text": "Web API Example 1: Gene Ontology (cont. 4)\nThe structure of the result will depend on the API. In this case, the output was a JSON file, so the content function returns a list in R. In other scenarios it could return an XML object.\n\nknitr::kable(head(dat),\n  caption = \"Genes experimentally annotated with the function\\\n  **antiviral innate immune response** (GO:0140374)\"\n  )\n\n\nGenes experimentally annotated with the function antiviral innate immune response (GO:0140374)\n\n\nGene\ntaxon_id\ntaxon_label\n\n\n\n\nUniProtKB:H9GKP0\nNCBITaxon:28377\nAnolis carolinensis\n\n\nUniProtKB:H9GSI3\nNCBITaxon:28377\nAnolis carolinensis\n\n\nUniProtKB:A0A287AMJ0\nNCBITaxon:9823\nSus scrofa\n\n\nUniProtKB:A0A287AKR1\nNCBITaxon:9823\nSus scrofa\n\n\nUniProtKB:F7EI59\nNCBITaxon:9544\nMacaca mulatta\n\n\nUniProtKB:A0A6I8NTG1\nNCBITaxon:9258\nOrnithorhynchus anatinus"
+  },
+  {
+    "objectID": "slides/week07.html#web-api-example-2-using-tokens",
+    "href": "slides/week07.html#web-api-example-2-using-tokens",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web API Example 2: Using Tokens",
+    "text": "Web API Example 2: Using Tokens\n\nSometimes, APIs are not completely open, you need to register.\nThe API may require to login (user+password), or pass a token.\nIn this example, I’m using a token which I obtained here\nYou can find information about the National Centers for Environmental Information API here"
+  },
+  {
+    "objectID": "slides/week07.html#web-api-example-2-using-tokens-cont.-1",
+    "href": "slides/week07.html#web-api-example-2-using-tokens-cont.-1",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web API Example 2: Using Tokens (cont. 1)",
+    "text": "Web API Example 2: Using Tokens (cont. 1)\n\nThe way to pass the token will depend on the API service.\nSome require authentication, others need you to pass it as an argument of the query, i.e., directly in the URL.\nIn this case, we pass it on the header.\nThis is equivalent to using the following query\ncurl --header \"token: [YOUR TOKEN HERE]\" \\\n  https://www.ncdc.noaa.gov/cdo-web/api/v2/stations?limit=1000\n\nNote: This won’t run, you need to get your own token"
+  },
+  {
+    "objectID": "slides/week07.html#web-api-example-2-using-tokens-cont.-2",
+    "href": "slides/week07.html#web-api-example-2-using-tokens-cont.-2",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web API Example 2: Using Tokens (cont. 2)",
+    "text": "Web API Example 2: Using Tokens (cont. 2)\nAgain, we can recover the data using the content() function:\n\nans &lt;- content(stations_api)\nans$results[[1]]\n## $elevation\n## [1] 139\n## \n## $mindate\n## [1] \"1948-01-01\"\n## \n## $maxdate\n## [1] \"2014-01-01\"\n## \n## $latitude\n## [1] 31.5702\n## \n## $name\n## [1] \"ABBEVILLE, AL US\"\n## \n## $datacoverage\n## [1] 0.8813\n## \n## $id\n## [1] \"COOP:010008\""
+  },
+  {
+    "objectID": "slides/week07.html#web-api-example-3-hhs-health-recommendation",
+    "href": "slides/week07.html#web-api-example-3-hhs-health-recommendation",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web API Example 3: HHS health recommendation",
+    "text": "Web API Example 3: HHS health recommendation\nHere is a last example. We will use the Department of Health and Human Services API for “[…] demographic-specific health recommendations” (details at health.gov)\n\nhealth_advises &lt;- GET(\n  url  = \"https://health.gov/\", \n  path = \"myhealthfinder/api/v3/myhealthfinder.json\",\n  query = list(\n    lang = \"en\",\n    age  = \"32\",\n    sex  = \"male\",\n    tobaccoUse = 0\n  ),\n  config = c(\n    add_headers(accept = \"application/json\"),\n    config(connecttimeout = 60)\n  )\n)"
+  },
+  {
+    "objectID": "slides/week07.html#web-api-example-3-hhs-health-recommendation-cont.-1",
+    "href": "slides/week07.html#web-api-example-3-hhs-health-recommendation-cont.-1",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web API Example 3: HHS health recommendation (cont. 1)",
+    "text": "Web API Example 3: HHS health recommendation (cont. 1)\nLet’s see the response\n\nhealth_advises\n\nResponse [https://odphp.health.gov/myhealthfinder/api/v3/myhealthfinder.json?lang=en&age=32&sex=male&tobaccoUse=0]\n  Date: 2025-08-26 19:38\n  Status: 200\n  Content-Type: application/json\n  Size: 310 kB\n{\n    \"Result\": {\n        \"Error\": \"MyHealthfinder API version 3 is no longer supported. Please...\n        \"Total\": 18,\n        \"Query\": {\n            \"ApiVersion\": \"3\",\n            \"ApiType\": \"myhealthfinder\",\n            \"TopicId\": null,\n            \"CategoryId\": null,\n            \"Keyword\": null,\n..."
+  },
+  {
+    "objectID": "slides/week07.html#web-api-example-3-hhs-health-recommendation-cont.-2",
+    "href": "slides/week07.html#web-api-example-3-hhs-health-recommendation-cont.-2",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web API Example 3: HHS health recommendation (cont. 2)",
+    "text": "Web API Example 3: HHS health recommendation (cont. 2)\n# Extracting the content\nhealth_advises_ans &lt;- content(health_advises)\n\n# Getting the titles\ntxt &lt;- with(health_advises_ans$Result$Resources, c(\n  sapply(all$Resource, \"[[\", \"Title\"),\n  sapply(some$Resource, \"[[\", \"Title\"),\n  sapply(`You may also be interested in these health topics:`$Resource, \"[[\", \"Title\")\n))\ncat(txt, sep = \"; \")\nQuit Smoking; Hepatitis C Screening: Questions for the Doctor; Protect Yourself from Seasonal Flu; Talk with Your Doctor About Depression; Get Your Blood Pressure Checked; Get Tested for HIV; Get Vaccines to Protect Your Health (Adults Ages 19 to 49 Years); Drink Alcohol Only in Moderation; Talk with Your Doctor About Drug Misuse and Substance Use Disorder; Aim for a Healthy Weight; Testing for Syphilis: Questions for the Doctor; Eat Healthy; Protect Yourself from Hepatitis B; Testing for Latent Tuberculosis: Questions for the Doctor; Manage Stress; Alcohol Use: Conversation Starters; Get Active; Quitting Smoking: Conversation Starters"
+  },
+  {
+    "objectID": "slides/week07.html#summary",
+    "href": "slides/week07.html#summary",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Summary",
+    "text": "Summary\n\nWe learned about regular expressions with the package stringr (a wrapper of stringi)\nWe can use regular expressions to detect (str_detect()), replace (str_replace()), and extract (str_extract()) expressions.\nWe looked at web scraping using the rvest package (a wrapper of xml2).\nWe extracted elements from the HTML/XML using xml_find_all() with XPath expressions.\nWe also used the html_table() function from rvest to extract tables from HTML documents.\nWe took a quick review on Web APIs and the Hyper-text-transfer-protocol (HTTP).\nWe used the httr R package (wrapper of curl) to make GET requests to various APIs\nWe even showed an example using a token passed via the header.\nOnce we got the responses, we used the content() function to extract the message of the response."
+  },
+  {
+    "objectID": "slides/week07.html#detour-on-curl-options",
+    "href": "slides/week07.html#detour-on-curl-options",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Detour on CURL options",
+    "text": "Detour on CURL options\nSometimes you will need to change the default set of options in CURL. You can checkout the list of options in curl::curl_options(). A common hack is to extend the time-limit before dropping the conection, e.g.:\nUsing the Health IT API from the US government, we can obtain the Electronic Prescribing Adoption and Use by County (see docs here)\nThe problem is that it usually takes longer to get the data, so we pass the config option connecttimeout (which corresponds to the flag --connect-timeout) in the curl call (see next slide)"
+  },
+  {
+    "objectID": "slides/week07.html#detour-on-curl-options-cont.",
+    "href": "slides/week07.html#detour-on-curl-options-cont.",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Detour on CURL options (cont.)",
+    "text": "Detour on CURL options (cont.)\n\nans &lt;- httr::GET(\n  url    = \"https://dashboard.healthit.gov/api/open-api.php\",\n  query  = list(\n    source = \"AHA_2008-2015.csv\",\n    region = \"California\",\n    period = 2015\n    ),\n  config = config(\n    connecttimeout = 60\n    )\n)\n\n&gt; ans$request\n# &lt;request&gt;\n# GET https://dashboard.healthit.gov/api/open-api.php?source=AHA_2008-2015.csv&region=California&period=2015\n# Output: write_memory\n# Options:\n# * useragent: libcurl/7.58.0 r-curl/4.3 httr/1.4.1\n# * connecttimeout: 60\n# * httpget: TRUE\n# Headers:\n# * Accept: application/json, text/xml, application/xml, */*"
+  },
+  {
+    "objectID": "slides/week07.html#regular-expressions-email-validation",
+    "href": "slides/week07.html#regular-expressions-email-validation",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regular Expressions: Email validation",
+    "text": "Regular Expressions: Email validation\nThis is the official regex for email validation implemented by RCF 5322\n(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\n\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?\n:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:(2(5[\n0-5]|[0-4][0-9])|1[0-9][0-9]|[1-9]?[0-9]))\\.){3}(?:(2(5[0-5]|[0-4][0-9])|1[0-9][0\n-9]|[1-9]?[0-9])|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\\nx7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])\nSee the corresponding post in StackOverflow"
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-metacharacters",
+    "href": "slides/week07.html#regex-101-metacharacters",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Metacharacters",
+    "text": "Regex 101: Metacharacters\nWhat makes regex special is metacharacters. While we can always use regex to match literals like dog, human, 1999, we only make use of all regex power when using metacharacters:\n\n. Any character except new line\n^ beginning of the text\n$ end of the text\n[expression] Match any single character in “expression”, e.g.\n\n[0123456789] Any digit\n[0-9] Any digit in the range 0-9\n[a-z] Lower-case letters\n[A-Z] Upper-case letters\n[a-zA-Z] Lower or upper case letters.\n[a-zA-Z0-9] Any alpha-numeric"
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-metacharacters-cont.-1",
+    "href": "slides/week07.html#regex-101-metacharacters-cont.-1",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Metacharacters (cont. 1)",
+    "text": "Regex 101: Metacharacters (cont. 1)\n\n[^regex] Match any except those in regex, e.g.\n\n[^0123456789] Match any except a number\n[^0-9] Match anything except in the range 0-9\n[^./ ] any except dot, slash, and space."
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-metacharacters-cont.-2",
+    "href": "slides/week07.html#regex-101-metacharacters-cont.-2",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Metacharacters (cont. 2)",
+    "text": "Regex 101: Metacharacters (cont. 2)\nRanges, e.g., 0-9 or a-z, are locale- and implementation-dependent, meaning that the range of lower case letters may vary depending on the OS’s language. To solve for this problem, you could use Character classes. Some examples:\n\n[[:lower:]] lower case letters in the current locale, could be [a-z]\n[[:upper:]] upper case letters in the current locale, could be [A-Z]\n[[:alpha:]] upper and lower case letters in the current locale, could be [a-zA-Z]\n[[:digit:]] Digits: 0 1 2 3 4 5 6 7 8 9\n[[:alnum:]] Alpha numeric characters [[:alpha:]] and [[:digit:]].\n[[:punct:]] Punctuation characters: ! ” # $ % & ’ ( ) * + , - . / : ; &lt; = &gt; ? @ [ \\ ] ^ _ ` { | } ~.\n\nFor example, in the locale en_US, the word Ḧóla IS NOT fully matched by [a-zA-Z]+, but IT IS fully matched by [[:alpha:]]+."
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-metacharacters-cont.-3",
+    "href": "slides/week07.html#regex-101-metacharacters-cont.-3",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Metacharacters (cont. 3)",
+    "text": "Regex 101: Metacharacters (cont. 3)\nOther important metacharacters:\n\n\\\\s white space, equivalent to [\\\\r\\\\n\\\\t\\\\f\\\\v ]\n| or (logical or)."
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-examples",
+    "href": "slides/week07.html#regex-101-examples",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Examples",
+    "text": "Regex 101: Examples\n\n.{5} Match any character (except line end) five times.\nn{2} Match the letter n twice.\n[0-9] Match any number once.\n[0-9]+ Match any number at least once.\n[a-zA-Z]+ Match any lower or upper case letter at least once.\n\\\\s[a-zA-Z]+\\\\s Match a space, any lower or upper case letter at least once, and a space.\n\\\\s[[:alpha:]]+\\\\s Same as before but this time with the [[:alpha:]] character class."
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-functions-in-r",
+    "href": "slides/week07.html#regex-101-functions-in-r",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Functions in R",
+    "text": "Regex 101: Functions in R\n\nFind in text: grepl(), stringr::str_detect().\nSimilar to which(), which elements are TRUE grep(), stringr::str_which()\nReplace the first instance: sub(), stringr::str_replace()\nReplace all instances: gsub(), stringr::str_replace_all()\nExtract text: regmatches() plus regexpr(), stringr::str_extract() and stringr::str_extract_all()."
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-functions-in-r-cont.",
+    "href": "slides/week07.html#regex-101-functions-in-r-cont.",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Regex 101: Functions in R (cont.)",
+    "text": "Regex 101: Functions in R (cont.)\nFor example, like in Twitter, let’s create a regex that matches usernames or hashtags with the following pattern:\n(@|#)([[:alnum:]]+)\n\n\n\n\n\n\n\n\n\n\n\nCode\n@Hanna Perez [name] #html\nThe @年 year was 1999\nHaHa, @abc said that @z\n\n\n\n\nstr_detect(text, pattern) or grepl(pattern, text)\nTRUE\nTRUE\nTRUE\n\n\nstr_extract(text, pattern)\n@Hanna\n@年\n@abc\n\n\nstr_extract_all(text, pattern)\n[@Hanna, #html]\n[@年]\n[@abc, @z]\n\n\nstr_replace(text, pattern, \"\\1justinbieber\")\n@justinbieber Perez [name] #html\nThe @justinbieber year was 1999\nHaHa, @justinbieber said that @z\n\n\nstr_replace_all(text, pattern, \"\\1justinbieber\")\n@justinbieber Perez [name] #justinbieber\nThe @justinbieber year was 1999\nHaHa, @justinbieber said that @justinbieber\n\n\n\n\n\nNote: While it is not showing in the table, the group replacement was escaped, i.e., \\\\1 instead of \\1 in the code."
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-metacharacters-cont.-4",
+    "href": "slides/week07.html#regex-101-metacharacters-cont.-4",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Metacharacters (cont. 4)",
+    "text": "Regex 101: Metacharacters (cont. 4)\nThese usually come together with specifying how many times (repetition):\n\nregex? Zero or one match.\nregex* Zero or more matches\nregex+ One or more matches\nregex{n,} At least n matches\nregex{,m} at most m matches\nregex{n,m} Between n and m matches.\n\nWhere regex is a regular expression"
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-metacharacters-cont.-5",
+    "href": "slides/week07.html#regex-101-metacharacters-cont.-5",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Metacharacters (cont. 5)",
+    "text": "Regex 101: Metacharacters (cont. 5)\nThere are other operators that can be very useful,\n\n(regex) Group capture.\n(?:regex) Group operation without capture.\nA(?=B) Look ahead (match). Find expression A where expression B follows.\nA(?!B) Look ahead (don’t match). Find expression A where expression B does not follow.\n(?&lt;=B)A Look behind (match). Find expression A where expression B precedes.\n(?&lt;!B)A Look behind (don’t match). Find expression A where expression B does not precede.\n\nGroup captures can be reused with \\\\1, \\\\2, …, \\\\n, referring to the first group, second group, etc.\nMore (great) information here https://regex101.com/"
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-examples-cont.-1",
+    "href": "slides/week07.html#regex-101-examples-cont.-1",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Examples (cont. 1)",
+    "text": "Regex 101: Examples (cont. 1)\nHere we are extracting the first occurrence of the following regular expressions (using stringr::str_extract()):\n\n\n\n\n\nregex\nHanna Perez [name]\nThe 年 year was 1999\nHaHa, @abc said that\nGoGo trojans #2025!\n\n\n\n\n.{5}\nHanna\nThe 年\nHaHa,\nGoGo\n\n\nn{2}\nnn\n\n\n\n\n\n[0-9]\n\n1\n\n2\n\n\n[0-9]+\n\n1999\n\n2025\n\n\n[a-zA-Z]+\nHanna\nThe\nHaHa\nGoGo\n\n\n\\\\s[a-zA-Z]+\\\\s\nPerez\nyear\nsaid\ntrojans\n\n\n\\\\s[[:alpha:]]+\\\\s\nPerez\n年\nsaid\ntrojans"
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-examples-1",
+    "href": "slides/week07.html#regex-101-examples-1",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Regex 101: Examples",
+    "text": "Regex 101: Examples\nHere we are extracting the first occurrence of the following regular expressions (using stringr::str_extract()):\n\n\n\nregex\nHanna Perez [name]\nThe 年 year was 1999\nHaHa, @abc said that\nGoGo trojans #2020!\n\n\n\n\n[a-zA-Z]+ [a-zA-Z]+\nHanna Perez\nyear was\nabc said\nGoGo trojans\n\n\n[a-zA-Z]+\\s?\nHanna\nThe\nHaHa\nGoGo\n\n\n([a-zA-Z]+)\\1\nnn\n\nHaHa\nGoGo\n\n\n(@|#)[a-z0-9]+\n\n\n@abc\n#2020\n\n\n(?&lt;=#|@)[a-z0-9]+\n\n\nabc\n2020\n\n\n\\[[a-z]+\\]\n[name]"
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-examples-cont.-2",
+    "href": "slides/week07.html#regex-101-examples-cont.-2",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Examples (cont. 2)",
+    "text": "Regex 101: Examples (cont. 2)\n\n\n\nregex\nHanna Perez [name]\nThe 年 year was 1999\nHaHa, @abc said that\nGoGo trojans #2025!\n\n\n\n\n[a-zA-Z]+ [a-zA-Z]+\nHanna Perez\nyear was\nabc said\nGoGo trojans\n\n\n[a-zA-Z]+\\\\s?\nHanna\nThe\nHaHa\nGoGo\n\n\n([a-zA-Z]+)\\\\1\nnn\n\nHaHa\nGoGo\n\n\n(@|#)[a-z0-9]+\n\n\n@abc\n#2025\n\n\n(?&lt;=#|@)[a-z0-9]+\n\n\nabc\n2025"
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-examples-cont.-2-1",
+    "href": "slides/week07.html#regex-101-examples-cont.-2-1",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Regex 101: Examples (cont. 2)",
+    "text": "Regex 101: Examples (cont. 2)\n\n. Match any character (except line end) five times.\nn Match the letter n twice.\n[0-9] Match any number at least once\n[0-9]+ Match a space, any lower or upper case letter at least once, and a space.\n[a-zA-Z]+ Same as before but this time .\n\\s[a-zA-Z]+\\s Match two sets of letters separated by one space.\n\\s[[:alpha:]]+\\s Match any lower or upper case letter at least once, maybe followed by a white space, twice.\n[a-zA-Z]+ [a-zA-Z]+ Match any lower or upper case letter at least once, and then match the same pattern again.\n[a-zA-Z]+\\s? Match either the @ or # symbol, followed by one or more lower case letter or number.\n([a-zA-Z]+)\\1 Match one or more lower case letter or number that follows either the @ or # symbol.\n\\\\[[a-z]+\\\\] Match the symbol [, at least one lower case letter, and the symbol ]."
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-examples-cont.-3",
+    "href": "slides/week07.html#regex-101-examples-cont.-3",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Examples (cont. 3)",
+    "text": "Regex 101: Examples (cont. 3)\n\n[a-zA-Z]+ [a-zA-Z]+ Match two sets of letters separated by one space.\n[a-zA-Z]+\\\\s? Match one set of letters, maybe followed by a white space.\n([a-zA-Z]+)\\\\1 Match any lower or upper case letter at least once and then match the same pattern again.\n(@|#)[a-z0-9]+ Match either the @ or # symbol, followed by one or more lower case letter or number.\n(?&lt;=#|@)[a-z0-9]+ Match one or more lower case letter or number that follows either the @ or # symbol.\n\\\\[[a-z]+\\\\] Match the symbol [, at least one lower case letter, then symbol ]."
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-examples-cont.-3-1",
+    "href": "slides/week07.html#regex-101-examples-cont.-3-1",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Examples (cont. 3)",
+    "text": "Regex 101: Examples (cont. 3)"
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-functions-in-r-cont.-1",
+    "href": "slides/week07.html#regex-101-functions-in-r-cont.-1",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Functions in R (cont. 1)",
+    "text": "Regex 101: Functions in R (cont. 1)\nFor example, like in Twitter, let’s create a regex that matches usernames or hashtags with the following pattern:\n(@|#)([[:alnum:]]+)\n\n\n\n\n\n\n\n\n\n\n\nCode\n@Hanna Perez [name] #html\nThe @年 year was 1999\nHaHa, @abc said that @z\n\n\n\n\nstr_detect(text, pattern) or grepl(pattern, text)\nTRUE\nTRUE\nTRUE\n\n\nstr_extract(text, pattern) or regmatches(...)\n@Hanna\n@年\n@abc\n\n\nstr_extract_all(text, pattern)\n@Hanna, #html\n@年\n@abc, @z"
+  },
+  {
+    "objectID": "slides/week07.html#regex-101-functions-in-r-cont.-2",
+    "href": "slides/week07.html#regex-101-functions-in-r-cont.-2",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex 101: Functions in R (cont. 2)",
+    "text": "Regex 101: Functions in R (cont. 2)\nPattern: (@|#)([[:alnum:]]+)\n\n\n\n\n\n\n\n\n\n\n\nCode\n@Hanna Perez [name] #html\nThe @年 year was 1999\nHaHa, @abc said that @z\n\n\n\n\nstr_replace(text, pattern, \"\\\\1justinbieber\") or sub(...)\n@justinbieber Perez [name] #html\nThe @justinbieber year was 1999\nHaHa, @justinbieber said that @z\n\n\nstr_replace_all(text, pattern, \"\\\\1justinbieber\") or gsub(...)\n@justinbieber Perez [name] #justinbieber\nThe @justinbieber year was 1999\nHaHa, @justinbieber said that @justinbieber\n\n\n\n\n\nNote: It renders oddly in the table, but there is no space or line break in the group replacement, \\\\1."
+  },
+  {
+    "objectID": "slides/week07.html#regex-lookup-text-pronoun-of-the-patient-cont.-1-1",
+    "href": "slides/week07.html#regex-lookup-text-pronoun-of-the-patient-cont.-1-1",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex Lookup text: Pronoun of the patient (cont. 1)",
+    "text": "Regex Lookup text: Pronoun of the patient (cont. 1)\nTo correct this issue, we can make our regular expression more precise:\n(?&lt;=\\W|^)(he|his|him|they|them|theirs|ze|hir|hirs|she|hers|her)(?=\\W|$)\nBit by bit this is:\n\n(?&lt;=regex) look behind for…\n\n\\W any non-alphanumeric character, this is equivalent to [^[:alnum:]], | or\n^ the beginning of text\n\nhe|his|him... any of these words\n(?=regex) followed by…\n\n\\W any non-alphanumeric character, this is equivalent to [^[:alnum:]], | or\n$ the end of the text."
+  },
+  {
+    "objectID": "slides/week07.html#regex-lookup-text-pronoun-of-the-patient-cont.-1-2",
+    "href": "slides/week07.html#regex-lookup-text-pronoun-of-the-patient-cont.-1-2",
+    "title": "Week 7: Scraping, APIs, and Regular Expressions",
+    "section": "Regex Lookup text: Pronoun of the patient (cont. 1)",
+    "text": "Regex Lookup text: Pronoun of the patient (cont. 1)\nLet’s use this new pattern:\n\nmtsamples$pronoun &lt;- str_extract(\n  string  = tolower(mtsamples$transcription), \n  pattern = \"(?&lt;=\\\\W|^)(he|his|him|they|them|theirs|ze|hir|hirs|she|hers|her)(?=\\\\W|$)\"\n  )\nmtsamples$pronoun[1:10]\n\n [1] \"she\" \"he\"  \"he\"  NA    NA    \"she\" \"she\" NA    NA    NA"
+  },
+  {
+    "objectID": "slides/week07.html#regex-lookup-text-pronoun-of-the-patient-cont.-3",
+    "href": "slides/week07.html#regex-lookup-text-pronoun-of-the-patient-cont.-3",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex Lookup text: Pronoun of the patient (cont. 3)",
+    "text": "Regex Lookup text: Pronoun of the patient (cont. 3)\n\ntable(mtsamples$pronoun, useNA = \"always\")\n\n\n  he  her  him  his  she them they &lt;NA&gt; \n1073  554   39  524 1261   23   96 1429"
+  },
+  {
+    "objectID": "slides/week07.html#regex-extract-text-type-of-cancer-cont.-2",
+    "href": "slides/week07.html#regex-extract-text-type-of-cancer-cont.-2",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Regex Extract Text: Type of Cancer (cont. 2)",
+    "text": "Regex Extract Text: Type of Cancer (cont. 2)\n\nmtsamples$cancer_type &lt;- str_extract(tolower(mtsamples$keywords), \"[[:alnum:]-_]{4,}\\\\s*cancer\")\ntable(mtsamples$cancer_type)\n\n\n       anal cancer     bladder cancer      breast cancer       colon cancer \n                 1                  8                 21                 14 \nendometrial cancer  esophageal cancer        lung cancer     ovarian cancer \n                 5                  2                 13                  1 \n  papillary cancer    prostate cancer     uterine cancer \n                 3                 17                  7"
+  },
+  {
+    "objectID": "slides/week07.html#web-scraping-raw-html-example-cont.-1",
+    "href": "slides/week07.html#web-scraping-raw-html-example-cont.-1",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Web scraping raw HTML: Example (cont. 1)",
+    "text": "Web scraping raw HTML: Example (cont. 1)\n\nWe want to get the HTML table that shows up in the doc. To do so, we can use the function xml2::xml_find_all() and rvest::html_table()\nThe first will locate the place in the document that matches a given XPath expression.\nXPath, XML Path Language, is a query language to select nodes in a XML document.\nA nice tutorial can be found here\nModern Web browsers make it easy to use XPath!\n\nLive Example! (inspect elements in Google Chrome, Mozilla Firefox, Internet Explorer, and Safari)"
+  },
+  {
+    "objectID": "slides/week07.html#detour-on-curl-options-cont.-1",
+    "href": "slides/week07.html#detour-on-curl-options-cont.-1",
+    "title": "Week 7: Regular Expressions and Web Scraping",
+    "section": "Detour on CURL options (cont. 1)",
+    "text": "Detour on CURL options (cont. 1)\n\nans &lt;- httr::GET(\n  url    = \"https://dashboard.healthit.gov/api/open-api.php\",\n  query  = list(\n    source = \"AHA_2008-2015.csv\",\n    region = \"California\",\n    period = 2015\n    ),\n  config = config(\n    connecttimeout = 60\n    )\n)\n\n&gt; ans$request\n# &lt;request&gt;\n# GET https://dashboard.healthit.gov/api/open-api.php?source=AHA_2008-2015.csv&region=California&period=2015\n# Output: write_memory\n# Options:\n# * useragent: libcurl/7.58.0 r-curl/4.3 httr/1.4.1\n# * connecttimeout: 60\n# * httpget: TRUE\n# Headers:\n# * Accept: application/json, text/xml, application/xml, */*"
   }
 ]

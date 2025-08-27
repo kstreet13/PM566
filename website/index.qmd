@@ -1,14 +1,30 @@
 ---
-title: "Intro to PHDS"
+title: "PM 566"
+toc: false
 ---
 
-## PM 566: Introduction to Health Data Science 
+## Introduction to Health Data Science 
 
-**Term**: Fall 2024
+ - **Term**: Fall 2025
 
-**Time**: Friday 9am - 12:55pm
+ - **Time**: Friday 9am - 12:55pm
 
-**Location**: SSB 114
+ - **Location**: SSB 114
 
-[GitHub](https://github.com/USCbiostats/PM566)
+ - **Course GitHub**: [https://github.com/USCbiostats/PM566](https://github.com/USCbiostats/PM566)
 
+## Instructor
+
+**Kelly Street**
+
+ - **Email**: kelly.street@usc.edu
+
+ - **Office**: Soto (SSB) 202V
+
+ - **Office Hours**: Wednesday 11am - 12pm
+
+## Teaching Assistant
+
+**Xuduo Victor Wen**
+
+ - **Email**: wenv@usc.edu

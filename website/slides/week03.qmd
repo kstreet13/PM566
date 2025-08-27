@@ -24,7 +24,7 @@ These slides were originally developed by Meredith Franklin. They have been modi
 
 ---
 
-## Exploratory Data Analysis
+## Exploratory Data Analysis{.smaller}
 
 * Exploratory data analysis is the process of becoming familiar with a dataset
 * It should be the first step in your analysis pipeline
@@ -36,7 +36,7 @@ These slides were originally developed by Meredith Franklin. They have been modi
 
 ---
 
-## Exploratory Data Analysis
+## Exploratory Data Analysis{.smaller}
 
 > Since our eyes and brains are not wired to detect patterns in large data tables filled with text and numbers, communication about data [...] rarely comes in the form of raw data or code output. Instead, data and data-driven results are usually either summarized (e.g., using an average/mean) and presented in small summary tables or they are presented visually in the form of graphs, in which shape, distance, color, and size can be used to represent the magnitudes of (and relationships between) the values within our data.
 
@@ -61,7 +61,7 @@ EDA may involve some statistical summaries, but it does *not* include formal sta
 
 ---
 
-## EDA Checklist
+## EDA Checklist{.smaller}
 
 The goal of EDA is to better understand your data. Let's use the **checklist**:
 
@@ -69,11 +69,12 @@ The goal of EDA is to better understand your data. Let's use the **checklist**:
 2.  Check the size of the data
 3.  Examine the variables and their types
 4.  Look at the top and bottom of the data
-5.  Check your expectations
-6.  Validate with an external source
-7.  Formulate a (simple) question
-8.  Try the easy solution first
-9.  Challenge your solution
+5.  Visualize the distributions of key variables
+6.  Check your expectations
+7.  Validate with an external source
+8.  Formulate a (simple) question
+9.  Try the easy solution first
+10.  Challenge your solution
 
 (adapted from [Exploratory Data Analysis with R](https://bookdown.org/rdpeng/exdata/exploratory-data-analysis-checklist.html#follow-up-questions) by Roger D. Peng)
 
@@ -97,7 +98,7 @@ It is a good idea to first have a question such as:
 
 ---
 
-## Read in the Data
+## Read in the Data{.smaller}
 
 There are several ways to read in data (some depend on the type of data you have):
 
@@ -110,7 +111,7 @@ There are several ways to read in data (some depend on the type of data you have
 
 ---
 
-## Read in the Data
+## Read in the Data{.smaller}
 
 There are plenty of ways to do these tasks, but we will focus on base R. 
 
@@ -125,7 +126,7 @@ We specify that the first line contains column names by setting `header = TRUE` 
 
 ---
 
-## Working with `data.frame`s
+## Working with `data.frame`s{.smaller}
 
 This gave as a `data.frame` object, which is a standard R format for cleaned, rectangular data. Each row represents an observation and each column represents a variable.
 
@@ -226,7 +227,7 @@ summary(met$lon)
 
 ---
 
-## Check variables more closely
+## Check variables more closely{.smaller}
 
 We can visualize these distributions with a histogram.
 
@@ -239,7 +240,7 @@ layout(1)
 
 ---
 
-## Check variables more closely
+## Check variables more closely{.smaller}
 
 If we return to our initial question, what weather stations reported the hottest and coldest temperatures, we should take a closer look at our key variable, temperature (`temp`)
 
@@ -294,7 +295,7 @@ summary(met_ss)
 
 ---
 
-## Validate against an external source
+## Validate against an external source{.smaller}
 
 We should check outside sources to make sure that our data makes sense. For example the observation with -40C is suspicious, so we should look up the location of the weather station.
 
@@ -378,13 +379,13 @@ What we've done here is told R to summarize the `met` dataset by the variables `
 
 ---
 
-## Summary Statistics
+## Summary statistics
 
 Before we continue, check the relative sizes of the `met` and `met_daily` objects. Which one is bigger?
 
 ---
 
-## Summary Statistics{.smaller}
+## Summary statistics{.smaller}
 
 Now we will order our new dataset by the average daily temperature, just as we ordered the old one by observed temperature.
 
@@ -481,7 +482,7 @@ boxplot(met_daily$temp, col = "blue")
 
 ---
 
-## Exploratory Graphs
+## Exploratory Graphs{.smaller}
 
 We know that these data come from US weather stations, so we might have some idea what to expect just from plotting the latitude and longitude (note that we fix the aspect ratio at 1:1 with `asp = 1`; this prevents the plot from stretching or shrinking to fit the available plotting area):
 
@@ -574,7 +575,7 @@ leaflet() |>
 
 ---
 
-## Exploratory Graphs
+## Exploratory Graphs{.smaller}
 
 Scatterplots help us look at pairwise relationships. Let's see if there is any trend in temperature with latitude
 

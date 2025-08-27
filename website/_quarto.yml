@@ -7,7 +7,6 @@ website:
     left:
       - href: index.qmd
         text: Home
-    right:
       - syllabus.qmd
       - schedule.qmd
       - references.qmd

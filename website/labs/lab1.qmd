@@ -9,6 +9,8 @@ link-citations: true
 - Appreciate the value of visualization in exploring the relationship between variables.
 - Start using R for building plots and calculating summary statistics.
 
+Note: This lab contains a lot of material to help you get familiar with R and RStudio, but the only materials you need to submit are your responses to the six questions at the end of the lab (in the form of an HTML or PDF file).
+
 # Terminology
 
 We've already thrown around a few new terms, so let's define them before we proceed.
@@ -24,7 +26,7 @@ As the labs progress, you are encouraged to explore beyond what the labs dictate
 
 # Getting started
 
-## 1 Download R
+## Download R
 
 ### If you don't have R installed.
 
@@ -40,7 +42,7 @@ R.version
 
 This should tell you what version of R you are currently using. If your R version is lower then 4.3.0, I would strongly recommend updating. In general, it is a good idea to keep your R version up to date, unless you have a project right now that depends on a specific version of R.
 
-## 1.2 Download RStudio
+## Download RStudio
 
 We recommend using RStudio as your IDE if you don't already have it installed. You can go to the [RStudio](https://posit.co/download/rstudio-desktop/) website to download and install the software. Once it is installed, open RStudio and use it to complete the rest of this lab.
 
@@ -260,11 +262,11 @@ Here is a Quarto [cheatsheet](https://rstudio.github.io/cheatsheets/quarto.pdf) 
 
 
 # Submitting your lab
-Since we have not covered GitHub yet, for this week (and ONLY this week) you may email me a fully rendered PDF or HTML version of your completed lab at kelly(dot)street(at)usc(dot)edu.
+Since we have not covered GitHub yet, for this week (and ONLY this week) you may submit a fully rendered HTML (or PDF) version of your completed lab by emailing it to wenv@usc.edu.
 
 
 
 ---
 
-This set of lab exersices have been adopted from [Mine Çetinkaya-Rundel](https://twitter.com/minebocek)'s class [Introduction to Data Science](https://github.com/ids-s1-19).
+This set of lab excersizes have been adopted from [Mine Çetinkaya-Rundel](https://twitter.com/minebocek)'s class [Introduction to Data Science](https://github.com/ids-s1-19).
 

@@ -5,7 +5,7 @@ link-citations: true
 
 # Due Date
 
-This assignment is due by 11:59pm Pacific Time on September 26th, 2025.
+This assignment is due by 11:59pm Pacific Time on Friday, September 26th, 2025.
 
 # Learning Goals
 - Download, read, and get familiar with an external dataset. 

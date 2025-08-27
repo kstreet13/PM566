@@ -20,7 +20,10 @@ website:
       
 format:
   html:
-    theme: cosmo
+    theme:
+      light: flatly
+      dark: darkly
+    respect-user-color-scheme: true
     css: styles.css
     toc: true
 

@@ -6,7 +6,7 @@ title: "Schedule"
 |:--:|:---:|:-----------------------|:--:|:--:|:--:|
 | 1 | 8/29 | Introduction to Data Science and R | [Slides](slides/week01.qmd) | [Lab](labs/lab1.qmd) |  |
 | 2 | 9/5 | Version Control & Reproducible Research | [Slides](slides/week02.qmd) | [Lab](labs/lab2.qmd) |  |
-| 3 | 9/12 | Exploratory data analysis | [Slides](slides/week03.qmd) | Lab | HW1 |
+| 3 | 9/12 | Exploratory data analysis | [Slides](slides/week03.qmd) | Lab | [HW1](assignments/hw1.qmd) |
 | 4 | 9/19 | Data visualization	 | [Slides](slides/week04.qmd) | Lab |  |
 | 5 | 9/26 | Data Cleaning and Wrangling	 | [Slides](slides/week05.qmd) | Lab | HW2 |
 | 6 | 10/3 | Text Mining & Sentiment Analysis	 | [Slides](slides/week06.qmd) | Lab |  |

@@ -18,5 +18,5 @@ title: "Schedule"
 | 11 | 11/14 | Interactive Visualization & Effective Data Communication II	 | Slides | Lab |  |
 | 12 | 11/21 | Nonparametric Statistics	 | Slides |  | Final |
 |    | 11/28 | NO CLASS - THANKSGIVING	 |  |  |  |
-|    | 12/5 | Final Project Workshop	 |  |  |  |
+| 13 | 12/5 | Final Project Workshop	 |  |  |  |
 

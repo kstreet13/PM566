@@ -14,7 +14,7 @@ Our class meets at 9 AM every Friday.
 Repo overview:
 
  - `data` contains datasets used in lecture slides.
- - `docs` is where the website is built, you shouldn't need to touch this.
+ - `docs` is where the website is built (via `quarto render`), you shouldn't need to manually change anything here.
  - `assignments` contains homework assignments.
  - `labs` contains weekly labs.
  - `slides` contains weekly lecture slides.

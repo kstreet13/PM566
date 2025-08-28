@@ -8,6 +8,13 @@ toc: false
 
 This assignment is due by 11:59pm Pacific Time on Friday, October 10th, 2024.
 
+# Learning Goals
+
+- Practice getting familiar with an external dataset
+- Reinforce good EDA practices
+- Combine related datasets to answer questions
+- Select appropriate data visualizations
+
 # Dataset Description
 
 For this assignment, we will be analyzing data from the `nycflights13` package, which provides information on all flights that left one of New York City's three main airports in 2013.

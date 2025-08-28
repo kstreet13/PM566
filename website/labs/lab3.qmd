@@ -1,13 +1,13 @@
 ---
 title: "Lab 3 - Exploratory Data Analysis"
 link-citations: true
+toc: false
 ---
 
 
 
 ```{r setup, message=FALSE, echo=FALSE, warning=FALSE}
 #install.packages(c("data.table","leaflet"))
-library(data.table)
 library(leaflet)
 library(tidyverse)
 ```
@@ -31,46 +31,34 @@ We will work with the meteorological data presented in lecture. Recall the datas
 
 ### 1. Read in the data
 
-First download and then read in with data.table:fread()
+The data for this lab is available at [https://github.com/USCbiostats/data-science-data/tree/master/02_met](https://github.com/USCbiostats/data-science-data/tree/master/02_met). There's some additional information about the dataset, but the main file you'll need to download is `met_all.gz`.
 
-```{r checking-file, include=FALSE}
-fn <- "https://raw.githubusercontent.com/USCbiostats/data-science-data/master/02_met/met_all.gz"
-if (!file.exists("met_all.gz"))
-  download.file(fn, destfile = "met_all.gz")
-met <- data.table::fread("met_all.gz")
-```
-
+Once you've downloaded the file, you can read it into R with:
 
 ```{r, echo=TRUE, message=FALSE, eval=FALSE}
-download.file(
-  "https://raw.githubusercontent.com/USCbiostats/data-science-data/master/02_met/met_all.gz",
-  destfile = file.path("~", "Downloads", "met_all.gz"),
-  method   = "libcurl",
-  timeout  = 60
-)
-
-met <- data.table::fread(file.path("~", "Downloads", "met_all.gz"))
+met <- read.csv("~/Downloads/met_all.gz")
 ```
 
-### 2. Check the dimensions, headers, footers. How many columns, rows are there?
+### 2. Check the dimensions, headers, footers
 
-```{r}
+ - How many columns, rows are there?
+
+```{r, eval=FALSE}
 dim(met)
 head(met)
 tail(met)
 ```
-There are 2,377,343 rows and 30 columns in the met dataset.
 
 ### 3. Take a look at the variables.
 
-```{r}
+```{r, eval=FALSE}
 str(met)
 ```
 
 
 ### 4. Take a closer look at the key variables. 
 
-```{r}
+```{r, eval=FALSE}
 table(met$year)
 table(met$day)
 table(met$hour)
@@ -79,21 +67,20 @@ summary(met$elev)
 summary(met$wind.sp)
 ```
 
-It looks like the elevation variable has observations with 9999.0, which is probably an indicator for missing. We should take a deeper look at the data dictionary to confirm. The wind speed variable is ok but there are a lot of missing data.
+It looks like the elevation variable has observations with 9999.0, which is probably an indicator for missing. We should take a deeper look at the data dictionary to confirm. The wind speed variable is OK but there are a lot of missing data.
 
 After checking the data we should make the appropriate modifications. Replace elevations with 9999 as `NA`.
 
-```{r}
+```{r, eval=FALSE}
 met[met$elev==9999.0] <- NA
 summary(met$elev)
 ```
-At what elevation is the highest weather station?
 
-- The weather station with highest elevation is 4113 meters. This is after replacing 9999.0 values with the appropriate code for "missing", which is "NA".
+ - At what elevation is the highest weather station?
 
 We also have the issue of the minimum temperature being -40C, so we should remove those observations.
 
-```{r}
+```{r, eval=FALSE}
 met <- met[temp>-40]
 met2 <- met[order(temp)]
 head(met2)
@@ -109,12 +96,13 @@ Google is your friend here.
 
 Fix any problems that arise in your checks.
 
-```{r}
+```{r, eval=FALSE}
 met <- met[temp>-15]
 met2 <- met[order(temp)]
 head(met2)
 ```
- - Summarize that we removed temperatures colder than -15C. The new dataset has minimum temp -3C which is reasonable.
+
+ - Summarize that we removed temperatures colder than -15C. The new dataset has a minimum temp of -3C, which is reasonable.
 
 ### 6. Calculate summary statistics
 
@@ -122,12 +110,12 @@ Remember to keep the initial question in mind. We want to pick out the weather s
 
 Some ideas: select the weather station with maximum elevation; look at the correlation between temperature and wind speed; look at the correlation between temperature and wind speed with hour and day of the month.
 
-```{r}
+```{r, eval=FALSE}
 elev <- met[elev==max(elev), ]
 summary(elev)
 ```
 
-```{r}
+```{r, eval=FALSE}
 cor(elev$temp, elev$wind.sp, use="complete")
 cor(elev$temp, elev$hour, use="complete")
 cor(elev$wind.sp, elev$day, use="complete")
@@ -140,37 +128,41 @@ cor(elev$temp, elev$day, use="complete")
 
 We should look at the distributions of all of the key variables to make sure there are no remaining issues with the data.
 
-```{r }
+```{r, eval=FALSE}
 hist(met$elev, breaks=100)
 hist(met$temp)
 hist(met$wind.sp)
 ```
-One thing we should consider for later analyses is to log transform wind speed and elevation as the are very skewed.
+
+One thing we should consider for later analyses is to log transform wind speed and elevation as they are very skewed.
 
 
 Look at where the weather station with highest elevation is located.
 
-```{r}
+```{r, eval=FALSE}
 leaflet(elev) %>%
   addProviderTiles('OpenStreetMap') %>% 
   addCircles(lat=~lat,lng=~lon, opacity=1, fillOpacity=1, radius=100)
 ```
+
 Look at the time series of temperature and wind speed at this location. For this we will need to create a date-time variable for the x-axis.
 
-```{r message=FALSE}
+```{r message=FALSE, eval=FALSE}
 library(lubridate)
 elev$date <- with(elev, ymd_h(paste(year, month, day, hour, sep= ' ')))
 summary(elev$date)
 elev <- elev[order(date)]
 head(elev)
 ```
+
 With the date-time variable we can plot the time series of temperature and wind speed.
 
-```{r}
+```{r, eval=FALSE}
 plot(elev$date, elev$temp, type='l')
 plot(elev$date, elev$wind.sp, type='l')
 ```
-Summarize any trends that you see in these time series plots.
+
+ - Summarize any trends that you see in these time series plots.
 
 ### 8. Ask questions
 

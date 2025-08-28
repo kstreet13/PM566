@@ -8,6 +8,7 @@ link-citations: true
 This assignment is due by 11:59pm Pacific Time on Friday, September 26th, 2025.
 
 # Learning Goals
+
 - Download, read, and get familiar with an external dataset. 
 - Step through the EDA "checklist" presented in class
 - Practice making exploratory plots

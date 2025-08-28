@@ -1,102 +1,90 @@
 ---
-title: "Assignment 2 - Data Visualization and Wrangling"
+title: "Assignment 2 - Data Wrangling, EDA, and Visualization"
 link-citations: true
+toc: false
 ---
 
 ## Due Date
 
 This assignment is due by 11:59pm Pacific Time on Friday, October 10th, 2024.
 
-For this assignment, we will be analyzing data from USC’s Children’s Health Study.
-The learning objectives are to conduct data wrangling and visualize the data with key questions in mind.
+# Dataset Description
 
-## Data Wrangling
+For this assignment, we will be analyzing data from the `nycflights13` package, which provides information on all flights that left one of New York City's three main airports in 2013.
+You can access this data by installing and loading the package, which provides five data frames: `airlines`, `airports`, `flights`, `planes`, and `weather`.
+These will not automatically populate in your Environment tab in RStudio, but if you want to see them there, you can assign each dataset to a variable of the same name (eg. `airlines <- airlines`).
 
-You will need to download two datasets from https://github.com/USCbiostats/data-science-data. The [individual](https://raw.githubusercontent.com/USCbiostats/data-science-data/master/01_chs/chs_individual.csv)
-and [regional](https://raw.githubusercontent.com/USCbiostats/data-science-data/master/01_chs/chs_regional.csv)
-CHS datasets in `01_chs`.
-The individual data includes personal and health characteristics of children in
-12 communities across Southern California. The regional data include air quality
-measurements at the community level. 
-Once downloaded, you can merge these datasets using the location variable. Once
-combined, you will need to do the following:
+The main data frame is `flights`, which contains information about every flight out of NYC.
+The 4 other data frames contain additional information, much of which would be highly redundant to include in the `flights` dataset (for example, information about JFK airport, or the full name of each airline rather than just the abbreviation).
 
-1. After merging the data, make sure you don’t have any duplicates by counting
-   the number of rows. Make sure it matches.
-   
-   In the case of missing values, impute data using the average amongst 
-   individuals with the same values for the "male" and "hispanic" variables. 
-   For categorical variables, take the mode.
-   If you are interested (and feel adventurous)
-   in the theme of Data Imputation, take a look at this paper on "Multiple 
-   Imputation"
-   using the Amelia R package 
-   [here](https://gking.harvard.edu/files/gking/files/amelia_jss.pdf).
-   
-2. Create a new categorical variable named “obesity_level” using the BMI measurement
-   (underweight BMI<14; normal BMI 14-22; overweight BMI 22-24; obese BMI>24).
-   To make sure the variable is rightly coded, create a summary table that contains
-   the minimum BMI, maximum BMI, and the total number of observations per category.
-   
-3. Create another categorical variable named "smoke_gas_exposure" that summarizes
-   "Second Hand Smoke" and "Gas Stove." The variable should have four categories
-   in total.
-   
-4. Create four summary tables showing the average (or proportion, if binary) and
-   sd of “Forced expiratory volume in 1 second (ml)” (an asthma indicator) by
-   town, sex, obesity level, and "smoke_gas_exposure."
-   
+The relationships between the data frames are summarized in the figure below:
+
+![](https://r4ds.hadley.nz/diagrams/relational.png)
 
 
-## Looking at the Data (EDA)
+# Questions
 
-The primary questions of interest are:
-1. What is the association between BMI and FEV (forced expiratory volume)?
-2. What is the association between smoke and gas exposure and FEV?
-3. What is the association between PM2.5 exposure and FEV?
+1. (7 points) Find the top 10 most popular destinations in the `flights` data. 
+How many flights went to each?
 
+2. (10 points) Create two new categorical variables in `flights` based on the departure time (`dep_time`), and arrival time (`arr_time`).
+These new variables should have four categories: "early morning" for 12am to 6am, "morning" for 6am to 12pm, "afternoon" for 12pm to 6pm, and "evening" for 6pm to 12am.
+Show barplots of both of these new variables.
+What percentage of flights were "red eye" flights?
+We'll define these as flights that depart in "afternoon" or "evening" and arrive in "early morning" or "morning."
 
-Follow the EDA checklist from week 3 and the previous assignment. Be sure to focus on the key variables.
+3. (7 points) Where there any planes that flew for multiple airlines? 
+If so, how many were there and which airlines did they fly for?
 
-## Visualization
+4. (7 points) In the figure above, there is a missing relationship between `weather` and `airports`.
+What is the relationship and how should it appear in the diagram?
 
-Create the following figures and interpret them. Be sure to include easily understandable axes, titles, and legends. 
+For the rest of this assignment, the primary question you should keep in mind is this:
 
+> Which weather phenomena have the most impact on flight delays?
 
-1. Facet plot showing scatterplots with regression lines of  BMI vs FEV by “townname”.
-2. Stacked histograms of FEV by BMI category and FEV by smoke/gas exposure. Use different color schemes than the ggplot default.
-3. Barchart of BMI by smoke/gas exposure.
-4. Statistical summary graphs of FEV by BMI and FEV by smoke/gas exposure category.
-5. A leaflet map showing the concentrations of PM2.5 mass in each of the CHS communities.
-6. Choose a visualization to examine whether PM2.5 mass is associated with FEV.
+Don't try to answer it now, but use this question to guide your exploratory data analysis.
 
+5. (7 points) In order to address our primary question, we want to prepare a tidy dataset (a single data frame).
+This will consist of information from the `flights` and `weather` data.
+The `year`, `month`, `day`, `hour`, and `origin` variables from `weather` provide *almost* enough information to give each observation a unique value.
+Create a new variable in the weather dataset by pasting together those 5 variables, then determine how many duplicated values there are and explain why.
 
+Now merge the `flights` data and the `weather` data so that each flight contains information about the weather at its **departure airport** at the time it was **scheduled** to take off.
+You'll want to use the variables `time_hour` and `origin` in order to do this.
 
-```{r}
-require(nycflights13)
+6. (20 points) On this merged dataset, perform steps 2-5 of the EDA checklist presented in class.
+Remember the context provided by our primary question above.
 
+7. (15 points) Calculate the average departure delay for each **day**
+(Hint: think about which variables you need in order to do this!).
+Which day had the worst average length of delay for departures?
+Now calculate the averages by **day** and **origin**.
+Which airport had the worst single day for delays and when was it?
+Now calculate the averages by **hour** and **origin**.
+Which airport had the worst single hour for delays (and when was it)?
 
-flights <- flights
-airports <- airports
-airlines <- airlines
-weather <- weather
-planes <- planes
+8. (7 points) Compute the average delay by destination, then add that information to the `airports` data frame.
+Make a map showing the spatial distribution of delays (you can make it however you like, but we recommend using either `ggplot` or `leaflet`).
+Use the color of the points to display the average delay for each airport.
 
-
-x <- merge(flights, weather, by="time_hour", all.x=TRUE, all.y=FALSE)
-
-
-# categorical variables for dep_time, sched_dep_time, arr_time, sched_arr_time
-# cut into 4 parts of day
-
-
-# where there any planes that flew for multiple airlines? Describe how you could answer this question and if there are any, tell us how many and which airlines they flew for.
-
-
-# which variables from the weather dataset seem to have the most impact on departure delays?
+9. (20 points) Finally, create as many plots and summary statistics as needed to answer the primary question above.
 
 
 
 
-```
 
+
+
+
+
+
+
+
+
+
+
+
+---
+
+This homework has been adapted from the exercises presented in [Chapter 19](https://r4ds.hadley.nz/joins.html) of [R for Data Science (2e)](https://r4ds.hadley.nz/) by Wickham, Çentinkaya-Rundel, and Grolemund.

@@ -19,7 +19,7 @@ We will work with air pollution data from the U.S. Environmental Protection Agen
 
 A primer on particulate matter air pollution can be found [here](https://www.epa.gov/pm-pollution/particulate-matter-pm-basics).
 
-Your assignment should be completed in Quarto or R Markdown.
+Your assignment should be completed in Quarto or R Markdown and all code should be included.
 
 # Steps
 
@@ -32,7 +32,7 @@ headers, footers, variable names and variable types. Check the distribution of
 the key variable we are analyzing (PM$_{2.5}$). Write up a summary of all of
 your findings.
 
-2. (10 points) Combine the two years of data into one data frame. Use the Date variable to
+2. (10 points) Combine the two years of data into one data frame. Use the `Date` variable to
 create a new column for year, which will serve as an identifier. Change the
 names of the key variables so that they are easier to refer to in your code.
 
@@ -53,8 +53,8 @@ to write up explanations of what you observe in these data.
  - Level 2: County. Examine the primary question for every county in California.
  - Level 3: City. Restrict the data to sites in Los Angeles county and examine the primary question for every site.
 
-Reminder: after you upload your final rendered document to GitHub, make sure
-that it looks right. If you haven't included `embed-resources: true` in the YAML
+Reminder: after you upload your final rendered document to GitHub, you should download it to make sure
+that it looks right! If you haven't included `embed-resources: true` in the YAML
 header, none of your figures will show up!
 
 ---
